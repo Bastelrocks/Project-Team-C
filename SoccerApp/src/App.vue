@@ -15,17 +15,17 @@ import { ref, onMounted } from 'vue'
     getCountries()
   })
 
-  const Player =ref([])
+  const player =ref([])
 
   async function getPlayers(){
-    const{data} = await supabase.from('Player').select()
-    Player.value = data
+    const{data} = await supabase.from('player').select()
+    player.value = data
   }
 
   onMounted(()=>{
     getPlayers()
   })
-  console.log(Player)
+  console.log(player)
 </script>
 
 <template>
@@ -44,7 +44,7 @@ import { ref, onMounted } from 'vue'
       <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
     </ul>
     <ul>
-      <li v-for="item in Player" :key="item.id">{{ Player.LastName }}</li>
+      <li v-for="item in player" :key="item.id">{{ item.lastName }}</li>
     </ul>
   </header>
 
