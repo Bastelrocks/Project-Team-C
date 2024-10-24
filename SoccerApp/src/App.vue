@@ -2,18 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { ref, onMounted } from 'vue'
-  import { supabase } from './lib/supabaseClient'
+import { supabase } from './lib/supabaseClient'
 
-  const countries = ref([])
-
-  async function getCountries() {
-    const { data } = await supabase.from('countries').select()
-    countries.value = data
-  }
-
-  onMounted(() => {
-    getCountries()
-  })
 
   const player =ref([])
 
@@ -40,9 +30,7 @@ import { ref, onMounted } from 'vue'
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-    <ul>
-      <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
-    </ul>
+  
     <ul>
       <li v-for="item in player" :key="item.id">{{ item.lastName }}</li>
     </ul>
