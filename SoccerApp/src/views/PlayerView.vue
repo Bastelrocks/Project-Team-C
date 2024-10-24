@@ -19,11 +19,30 @@ console.log(player)
 <template>
     <div class="soccerfield" :style="{ backgroundImage: `url(${backgroundImage})` }">
         <h1>All Players in our Database</h1>
+        <div class="tablePlayers">
+        <table>
+            <thead class="tablehead">
+                <tr>
+                    <th>Name</th>
+                    <th>Back Number</th>
+                    <th>Position</th>
+                    <th>Born</th>
+                    <th>Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in player" :key="item.id">
+                    <td>{{ item.firstName }} {{ item.lastName }}</td>
+                    <td style="text-align: center;">{{ item.backNumber }}</td>
+                    <td>{{ item.position }}</td>
+                    <td>{{ item.birthDate }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
 
-        <ul>
-            <li v-for="item in player" :key="item.id" >{{ item.lastName }}</li>
-        </ul>
-
+        </table>
+        </div>
+        
     </div>
 
 
@@ -39,5 +58,15 @@ console.log(player)
 h1 {
     text-align: center;
     color: rgb(208, 214, 24);
+}
+.tablePlayers{
+    display:flex;
+    justify-content: center;
+    color: black;
+}
+.tablehead{
+    font-size: 1.4em;
+    text-decoration: underline;
+    font-weight: bold;
 }
 </style>
