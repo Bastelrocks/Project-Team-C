@@ -27,6 +27,10 @@ import { supabase } from './lib/supabaseClient'
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/teams">About</RouterLink>
+        <RouterLink to="/players">Players</RouterLink>
+        <RouterLink to="/transfers">Transfers</RouterLink>
+        <RouterLink to="/Register">Register</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
