@@ -6,9 +6,10 @@ import HelloWorld from './components/HelloWorld.vue'
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+     <h1>Our Amazing Icon</h1>
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="You did it!" class="HelloWorld" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -35,11 +36,18 @@ header {
   margin: 0 auto 2rem;
 }
 
+.HelloWorld{
+  position: absolute;
+  right: 0px;
+}
+
 nav {
   width: 100%;
   font-size: 12px;
-  text-align: center;
+  text-align: left;
   margin-top: 2rem;
+  position: absolute;
+  right: 0px;
 }
 
 nav a.router-link-exact-active {
