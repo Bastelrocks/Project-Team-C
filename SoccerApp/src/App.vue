@@ -1,6 +1,21 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { ref, onMounted } from 'vue'
+import { supabase } from './lib/supabaseClient'
+
+
+  const player =ref([])
+
+  async function getPlayers(){
+    const{data} = await supabase.from('player').select()
+    player.value = data
+  }
+
+  onMounted(()=>{
+    getPlayers()
+  })
+  console.log(player)
 </script>
 
 <template>
@@ -15,6 +30,10 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
+  
+    <ul>
+      <li v-for="item in player" :key="item.id">{{ item.lastName }}</li>
+    </ul>
   </header>
 
   <RouterView />
