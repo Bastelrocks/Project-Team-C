@@ -5,9 +5,9 @@ import LoginForm from './components/LoginForm.vue';
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/soccerAppLogo.svg" width="125" height="125" />
     <LoginForm />
-    <h1>Our Amazing Icon</h1>
+    <h1>Welcome to the home of soccer!</h1>
   </header>
   <div class="wrapper">
     <nav>
