@@ -17,7 +17,7 @@ console.log(player)
 </script>
 
 <template>
-    <div class="soccerfield" :style="{ backgroundImage: `url(${backgroundImage})` }">
+    <div class="soccerfield">
         <h1>All Players in our Database</h1>
         <div class="tablePlayers">
         <table>
@@ -52,12 +52,12 @@ console.log(player)
 </template>
 
 <style scoped>
-.soccerfield {
+/* .soccerfield {
     background-size:auto;
     background-color: green;
     background-repeat: repeat;
 
-}
+} */
 
 h1 {
     text-align: center;
@@ -66,7 +66,7 @@ h1 {
 .tablePlayers{
     display:flex;
     justify-content: center;
-    color: black;
+    color: white;
 }
 .tablehead{
     font-size: 1.4em;
