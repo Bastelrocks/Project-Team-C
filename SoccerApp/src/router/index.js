@@ -34,6 +34,11 @@ const router = createRouter({
       component: Register
     },
     {
+      path: '/players',
+      name: 'player',
+      component: PlayerView
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
