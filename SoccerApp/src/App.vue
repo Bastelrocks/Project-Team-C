@@ -6,19 +6,19 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
     <LoginForm />
-     <h1>Our Amazing Icon</h1>
+    <h1>Our Amazing Icon</h1>
   </header>
-    <div class="wrapper">
-      <nav>
+  <div class="wrapper">
+    <nav>
       <RouterLink to="/"><img src="">Home</RouterLink>
       <RouterLink to="/teams">Teams</RouterLink>
-        <RouterLink to="/players">Players</RouterLink>
-        <RouterLink to="/transfers">Transfers</RouterLink>
-        <RouterLink to="/Register">Register</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <RouterLink to="/players">Players</RouterLink>
+      <RouterLink to="/transfers">Transfers</RouterLink>
+      <RouterLink to="/Register">Register</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
       <RouterView />
-    </div>
+  </div>
 </template>
 
 <style scoped>
