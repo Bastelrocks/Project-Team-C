@@ -17,3 +17,8 @@ function login(){
 </form>
 <button v-if="isAutenticated === true" v-on:click="login">Logout</button>
 </template>
+<style scoped>
+form {
+    padding: 5px;
+}
+</style>
