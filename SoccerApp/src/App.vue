@@ -46,6 +46,7 @@ nav {
   flex-direction: column;
   font-size: 1rem;
   text-align: left;
+  margin: 40px;
   margin-top: 2rem;
   padding: 10px;
   /* position: fixed; */
