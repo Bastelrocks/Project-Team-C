@@ -23,6 +23,7 @@ import LoginForm from './components/LoginForm.vue';
 </template>
 
 <style scoped>
+
 main{
   min-width: 1024px;
 }
