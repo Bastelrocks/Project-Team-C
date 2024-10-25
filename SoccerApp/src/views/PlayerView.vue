@@ -23,6 +23,7 @@ console.log(player)
         <table>
             <thead class="tablehead">
                 <tr>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Back Number</th>
                     <th>Position</th>
@@ -32,6 +33,8 @@ console.log(player)
             </thead>
             <tbody>
                 <tr v-for="item in player" :key="item.id">
+                    <td v-if="item.image" style="text-align: center;"><div class="playerImg"><img :src="item.image" class="playerImage"></div></td>
+                    <td v-else><div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div></td>
                     <td>{{ item.firstName }} {{ item.lastName }}</td>
                     <td style="text-align: center;">{{ item.backNumber }}</td>
                     <td>{{ item.position }}</td>
@@ -50,8 +53,9 @@ console.log(player)
 
 <style scoped>
 .soccerfield {
-    background-size: cover;
+    background-size:auto;
     background-color: green;
+    background-repeat: repeat;
 
 }
 
@@ -68,5 +72,15 @@ h1 {
     font-size: 1.4em;
     text-decoration: underline;
     font-weight: bold;
+}
+.playerImage{
+    width:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.playerImg{
+    display: flex;
+    justify-content: center;
 }
 </style>
