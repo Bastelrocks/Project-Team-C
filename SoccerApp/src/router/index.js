@@ -19,6 +19,11 @@ const router = createRouter({
       component: TeamView
     },
     {
+      path: '/players',
+      name: 'players',
+      component: PlayerView
+    },
+    {
       path: '/transfers',
       name: 'transfers',
       component: TransferList
