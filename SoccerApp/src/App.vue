@@ -1,34 +1,36 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <LoginForm />
      <h1>Our Amazing Icon</h1>
-
+  </header>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" class="HelloWorld" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/teams">About</RouterLink>
+      <RouterLink to="/"><img src="">Home</RouterLink>
+      <RouterLink to="/teams">Teams</RouterLink>
         <RouterLink to="/players">Players</RouterLink>
         <RouterLink to="/transfers">Transfers</RouterLink>
         <RouterLink to="/Register">Register</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
+      <RouterView />
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
+main{
+  min-width: 1024px;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
+  width: 100%;
+  top: 0;
+  background-color: green;
 }
 
 .logo {
@@ -36,18 +38,22 @@ header {
   margin: 0 auto 2rem;
 }
 
-.HelloWorld{
-  position: absolute;
-  right: 0px;
-}
-
 nav {
-  width: 100%;
-  font-size: 12px;
+  display: flex;
+  min-width: auto;
+  flex-direction: column;
+  font-size: 1rem;
   text-align: left;
   margin-top: 2rem;
-  position: absolute;
-  right: 0px;
+  padding: 10px;
+  /* position: fixed; */
+  border: 1px solid hsla(160, 100%, 37%, 1);
+  border-radius: 15%;
+  background-color: white;
+}
+nav:hover{
+  border: 4px solid hsla(160, 100%, 37%, 1);
+  padding: 6px
 }
 
 nav a.router-link-exact-active {
@@ -79,19 +85,13 @@ nav a:first-of-type {
     margin: 0 2rem 0 0;
   }
 
-  header .wrapper {
+  .wrapper {
     display: flex;
+    flex-direction: row;
     place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+    /* flex-wrap: wrap; */
+    min-width: 1024px;
+    min-height: 600px;
   }
 }
 </style>
