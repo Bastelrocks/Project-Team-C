@@ -1,15 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import LoginForm from './components/LoginForm.vue';
-import TransferList from './views/TransferList.vue';
-
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/soccerAppLogo.svg" width="125" height="125" />
     <LoginForm />
-    <h1 @add=title>Our Amazing Icon  {{ title }}</h1>
+    <h1>Welcome to the home of soccer!</h1>
   </header>
   <div class="wrapper">
     <nav>
@@ -25,6 +23,7 @@ import TransferList from './views/TransferList.vue';
 </template>
 
 <style scoped>
+
 main{
   min-width: 1024px;
 }
