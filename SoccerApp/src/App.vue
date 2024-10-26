@@ -1,12 +1,15 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import LoginForm from './components/LoginForm.vue';
+import TransferList from './views/TransferList.vue';
+
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
     <LoginForm />
-    <h1>Our Amazing Icon</h1>
+    <h1 @add=title>Our Amazing Icon  {{ title }}</h1>
   </header>
   <div class="wrapper">
     <nav>
