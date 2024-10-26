@@ -16,7 +16,6 @@
         <input type="email" placeholder="E-mail Adress" />
         <input type="text" placeholder="Your Motivation" />
         <button type="submit">Send Request</button>
-
     </form>
 
     <br />
