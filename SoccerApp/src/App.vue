@@ -48,8 +48,8 @@ header {
 
 nav {
   display: flex;
-  min-width: auto;
-  width: 200px;
+  min-width: 150px;
+  width: auto;
   min-height: auto;
   flex-direction: column;
   font-size: 1rem;
@@ -69,6 +69,7 @@ nav:hover{
 }
 
 nav a.router-link-exact-active {
+  padding: 15px;
   color: var(--color-text);
 }
 
@@ -77,9 +78,10 @@ nav a.router-link-exact-active:hover {
 }
 
 nav a {
+  /* padding: 104px; */
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  /*  border-left: 1px solid var(--color-border); */
 }
 
 nav a:first-of-type {
@@ -102,7 +104,7 @@ nav a:first-of-type {
     flex-direction: row;
     place-items: flex-start;
     /* flex-wrap: wrap; */
-    min-width: 1024px;
+    min-width: 800px;
     min-height: 600px;
   }
 }
