@@ -11,18 +11,23 @@ import LoginForm from './components/LoginForm.vue';
   </header>
   <div class="wrapper">
     <nav>
-      <RouterLink to="/"><img src="">Home</RouterLink>
-      <RouterLink to="/teams">Teams</RouterLink>
-      <RouterLink to="/players">Players</RouterLink>
-      <RouterLink to="/transfers">Transfers</RouterLink>
-      <RouterLink to="/Register">Register</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/"><img src=""><img class="menuLogo" src="@/assets/home.svg">Home</RouterLink>
+      <RouterLink to="/teams"><img class="menuLogo" src="@/assets/team.svg">Teams</RouterLink>
+      <RouterLink to="/players"><img class="menuLogo" src="@/assets/soccer-player.svg">Players</RouterLink>
+      <RouterLink to="/transfers"><img class="menuLogo" src="@/assets/transfer.svg">Transfers</RouterLink>
+      <RouterLink to="/Register"><img class="menuLogo" src="@/assets/register.svg">Register</RouterLink>
+      <RouterLink to="/about"><img class="menuLogo" src="@/assets/about.svg">About</RouterLink>
     </nav>
       <RouterView />
   </div>
 </template>
 
 <style scoped>
+
+.menuLogo{
+  width: 20px;
+  margin-right: 10px;
+}
 
 main{
   min-width: 1024px;
