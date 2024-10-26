@@ -7,7 +7,7 @@ import CreatePlayer from '@/components/CreatePlayer.vue';
 const player = ref([])
 
 async function getPlayers() {
-    const { data } = await supabase.from('player').select()
+    const { data } = await supabase.from('player').select();
     player.value = data;
 }
 
