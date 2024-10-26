@@ -30,7 +30,12 @@ const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
 loginData.email = "victor.martins.1310@hotmail.com";
 loginData.password = "badPassword.1234";
 
-async function logIn(){
+
+/** Funktion zum Einloggen
+ * @param {String} email 
+ * @param {number} password 
+*/
+async function logIn(email, password){
     if (isAutenticated.value === false){
         const {data, error} = await supabase.auth.signInWithPassword(
             {
@@ -54,7 +59,7 @@ async function logOut(){
 </script>
 
 <template>
-    <div class="login">
+    <div class="loginForm">
         <form v-if="isAutenticated === false" v-on:submit.prevent="logIn">
             <input type="email" v-model=loginData.email placeholder="E-mail" required />
             <input type="password" v-model=loginData.password placeholder="Password" required />
@@ -64,7 +69,31 @@ async function logOut(){
     </div>
 </template>
 <style scoped>
-.form {
-    padding: 5px;
+.loginForm {
+    padding: 8px;
+    gap: 20px; /* Not Working */
+
+    /* To positioning on the right corner */
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 1px solid #006800;
 }
+
+.loginForm input{
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.loginForm button{
+    padding: 8px 16px;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.loginForm button:hover {
+    background-color: #006800;
+  }
 </style>

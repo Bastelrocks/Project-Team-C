@@ -132,12 +132,12 @@
   
   
   .login-section {
-    position: absolute;
+    /* position: absolute;
     top: 10px;
-    right: 10px;
+    right: 10px; */
     z-index: 2;
     display: flex;
-    gap: 10px;
+    /* gap: 10px; */
   }
   
   .login-section input {
@@ -146,16 +146,16 @@
     border-radius: 4px;
   }
   
-  .login-section button {
+  /* .login-section button {
     padding: 8px 16px;
     background-color: #008000;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+  } 
   
   .login-section button:hover {
     background-color: #006800;
-  }
+  }*/
   </style>
