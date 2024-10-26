@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { supabase } from '@/lib/supabaseClient.js'
 import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
+import CreatePlayer from '@/components/CreatePlayer.vue';
 const player = ref([])
 
 async function getPlayers() {
@@ -12,13 +13,13 @@ async function getPlayers() {
 onMounted(() => {
     getPlayers()
 })
-console.log(player)
 
 </script>
 
 <template>
     <div class="soccerfield">
         <h1>All Players in our Database</h1>
+        <CreatePlayer></CreatePlayer>
         <div class="tablePlayers">
         <table>
             <thead class="tablehead">
