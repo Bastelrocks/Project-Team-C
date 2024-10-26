@@ -1,17 +1,18 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { supabase } from '@/lib/supabaseClient.js'
+import { supabase } from '@/lib/supabaseClient.js';
 import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
+
 import CreatePlayer from '@/components/CreatePlayer.vue';
 const player = ref([])
 
 async function getPlayers() {
     const { data } = await supabase.from('player').select()
-    player.value = data
+    player.value = data;
 }
 
 onMounted(() => {
-    getPlayers()
+    getPlayers();
 })
 
 </script>
