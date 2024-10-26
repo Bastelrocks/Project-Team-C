@@ -1,5 +1,6 @@
 <script setup>
-
+const title = "Recent Transfers";
+defineEmits([title]);
 </script>
 
 <template>

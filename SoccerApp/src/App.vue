@@ -43,9 +43,12 @@ header {
 nav {
   display: flex;
   min-width: auto;
+  width: 200px;
+  min-height: auto;
   flex-direction: column;
   font-size: 1rem;
   text-align: left;
+  margin: 40px;
   margin-top: 2rem;
   padding: 10px;
   /* position: fixed; */
@@ -55,7 +58,8 @@ nav {
 }
 nav:hover{
   border: 4px solid hsla(160, 100%, 37%, 1);
-  padding: 6px
+  padding: 6px;
+  box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
 }
 
 nav a.router-link-exact-active {
