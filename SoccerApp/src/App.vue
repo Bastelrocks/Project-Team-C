@@ -5,9 +5,9 @@ import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
+  <LoginForm />
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/soccerAppLogo.svg" width="125" height="125" />
-    <LoginForm />
     <h1>Welcome to the home of Soccerapp!</h1>
   </header>
   <div class="wrapper">
@@ -33,6 +33,7 @@ import HomeView from './views/HomeView.vue';
 main{
   min-width: 1024px;
 }
+
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -71,6 +72,8 @@ nav:hover{
 nav a.router-link-exact-active {
   padding: 15px;
   color: var(--color-text);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 nav a.router-link-exact-active:hover {
@@ -81,7 +84,7 @@ nav a {
   /* padding: 104px; */
   display: inline-block;
   padding: 0 1rem;
-  /*  border-left: 1px solid var(--color-border); */
+   /* border-left: 1px solid var(--color-border); that was the border at left side on nav*/
 }
 
 nav a:first-of-type {
@@ -104,8 +107,9 @@ nav a:first-of-type {
     flex-direction: row;
     place-items: flex-start;
     /* flex-wrap: wrap; */
-    min-width: 800px;
-    min-height: 600px;
+    /* min-width: 800px;
+    min-height: 600px; */
+    background-color: azure;
   }
 }
 </style>
