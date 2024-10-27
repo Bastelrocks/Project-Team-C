@@ -33,12 +33,13 @@ import HomeView from './views/HomeView.vue';
 main{
   min-width: 1024px;
 }
+
 header {
   line-height: 1.5;
   max-height: 100vh;
   width: 100%;
   top: 0;
-  background-color: green;
+  background-color: hsla(160, 100%, 37%, 1);
 }
 
 .logo {
@@ -62,6 +63,7 @@ nav {
   border-radius: 15%;
   background-color: white;
 }
+
 nav:hover{
   border: 4px solid hsla(160, 100%, 37%, 1);
   padding: 6px;
@@ -70,7 +72,9 @@ nav:hover{
 
 nav a.router-link-exact-active {
   padding: 15px;
+  background-color: hsla(160, 100%, 37%, 1);
   color: var(--color-text);
+  border-radius: 15%;
 }
 
 nav a.router-link-exact-active:hover {
