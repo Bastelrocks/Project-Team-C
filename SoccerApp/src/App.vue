@@ -39,7 +39,7 @@ header {
   max-height: 100vh;
   width: 100%;
   top: 0;
-  background-color: green;
+  background-color: hsla(160, 100%, 37%, 1);
 }
 
 .logo {
@@ -73,6 +73,7 @@ nav:hover{
 
 nav a.router-link-exact-active {
   padding: 15px;
+  background-color: hsla(160, 100%, 37%, 1);
   color: var(--color-text);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
