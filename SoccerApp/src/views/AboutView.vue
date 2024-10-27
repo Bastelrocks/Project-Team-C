@@ -35,6 +35,12 @@
     flex-direction: column;
   }
 } */
+
+.about {
+  display: flex;
+  flex-direction: column;
+}
+
  h1{
   font-size:2.5em;
   padding:20px;

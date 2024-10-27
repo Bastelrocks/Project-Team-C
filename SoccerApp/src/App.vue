@@ -5,14 +5,14 @@ import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
+  <LoginForm />
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/soccerAppLogo.svg" width="125" height="125" />
-    <LoginForm />
     <h1>Welcome to the home of Soccerapp!</h1>
   </header>
   <div class="wrapper">
     <nav>
-      <RouterLink to="/"><img src=""><img class="menuLogo" src="@/assets/home.svg">Home</RouterLink>
+      <RouterLink to="/"><img class="menuLogo" src="@/assets/home.svg">Home</RouterLink>
       <RouterLink to="/teams"><img class="menuLogo" src="@/assets/team.svg">Teams</RouterLink>
       <RouterLink to="/players"><img class="menuLogo" src="@/assets/soccer-player.svg">Players</RouterLink>
       <RouterLink to="/transfers"><img class="menuLogo" src="@/assets/transfer.svg">Transfers</RouterLink>
@@ -49,7 +49,7 @@ header {
 
 nav {
   display: flex;
-  min-width: 150px;
+  min-width: 200px;
   width: auto;
   min-height: auto;
   flex-direction: column;
@@ -57,16 +57,17 @@ nav {
   text-align: left;
   margin: 40px;
   margin-top: 2rem;
-  padding: 10px;
+  
   /* position: fixed; */
   border: 1px solid hsla(160, 100%, 37%, 1);
   border-radius: 15%;
   background-color: white;
+  /* align-items: center;
+  justify-content: center; */
 }
 
 nav:hover{
-  border: 4px solid hsla(160, 100%, 37%, 1);
-  padding: 6px;
+  /* border: 4px solid hsla(160, 100%, 37%, 1); */
   box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
 }
 
@@ -74,7 +75,8 @@ nav a.router-link-exact-active {
   padding: 15px;
   background-color: hsla(160, 100%, 37%, 1);
   color: var(--color-text);
-  border-radius: 15%;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 nav a.router-link-exact-active:hover {
@@ -82,10 +84,10 @@ nav a.router-link-exact-active:hover {
 }
 
 nav a {
-  /* padding: 104px; */
+  padding: 5px 20px;
   display: inline-block;
-  padding: 0 1rem;
-  /*  border-left: 1px solid var(--color-border); */
+  /* padding: 0 1rem; */
+   /* border-left: 1px solid var(--color-border); that was the border at left side on nav*/
 }
 
 nav a:first-of-type {
@@ -108,8 +110,9 @@ nav a:first-of-type {
     flex-direction: row;
     place-items: flex-start;
     /* flex-wrap: wrap; */
-    min-width: 800px;
-    min-height: 600px;
+    /* min-width: 800px;
+    min-height: 600px; */
+    background-color: azure;
   }
 }
 </style>
