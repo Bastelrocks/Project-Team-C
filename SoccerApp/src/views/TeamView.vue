@@ -12,9 +12,11 @@ let teamList = ref(teams.teamsList);
 
 let countrieID = ref(0);
 
-function getTeams(id){
-    teams.getTeams(id);
-    console.log(teamList.value);
+function getTeams(id) {
+    if (id > 0)
+        teams.getTeams(id);
+    else
+        teams.getTeams()
 }
 
 </script>
