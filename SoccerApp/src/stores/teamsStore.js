@@ -34,5 +34,16 @@ export const teamssStore = defineStore('teamssStore', () => {
             teamsList.value.push(team);
         });
     }
-    return { teamsList, getAllTeams, getTeams };
+
+    async function getTeamName(id){
+        let teamName = ""
+        const { data } = await supabase.from('teams').select("name").eq("idTeam", id);
+        data.forEach(team => {
+            teamName = team;
+        });
+        return teamName;
+    }
+
+
+    return { teamsList, getAllTeams, getTeams, getTeamName };
 })

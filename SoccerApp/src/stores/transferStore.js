@@ -13,7 +13,7 @@ export const transferStore = defineStore('transferStore', () => {
     }
     async function getAllTransfers() {
         clearArray();
-        const { data } = await supabase.from('transfer').select();
+        const { data } = await supabase.from('transfers').select();
         data.forEach(transfer => {
             transferList.value.push(transfer);
         })
