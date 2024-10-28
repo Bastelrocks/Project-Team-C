@@ -4,31 +4,46 @@ import { supabase } from '@/lib/supabaseClient';
 
 export const teamssStore = defineStore('teamssStore', () => {
     let teamsList = ref([]);
+
+    function clearArray() {
+        let arrayLength = teamsList.value.length;
+        if (arrayLength > 0)
+            for (let i = 0; i <= arrayLength; i++) {
+                teamsList.value.pop();
+            }
+    }
+
     /** Get All teams
      * 
      */
-    function clearArray(){
-        console.log("Before " + teamsList.value.length);
-        for (let i = 0; i <= teamsList.value.length; i++){
-            teamsList.value.pop();
-            console.log(teamsList.value.length);
-        }
-    }
-    async function getTeams() {
+    async function getAllTeams() {
+        clearArray();
         const { data } = await supabase.from('teams').select();
-        // return data;
-        // return await supabase.from('teams').select();
+        data.forEach(team => {
+            teamsList.value.push(team);
+        });
     }
+
     /** Function that select Teams by countrie
      * @param {number} id Id of the Countrie 
      */
     async function getTeams(id) {
-        const { data } = await supabase.from('teams').select().eq("countrie_id", id);
         clearArray();
+        const { data } = await supabase.from('teams').select().eq("countrie_id", id);
         data.forEach(team => {
             teamsList.value.push(team);
-        })
-        // return await supabase.from('teams').select().eq("countrie_id", id);
+        });
     }
-    return { getTeams, teamsList }
+
+    async function getTeamName(id){
+        let teamName = ""
+        const { data } = await supabase.from('teams').select("name").eq("idTeam", id);
+        data.forEach(team => {
+            teamName = team;
+        });
+        return teamName;
+    }
+
+
+    return { teamsList, getAllTeams, getTeams, getTeamName };
 })
