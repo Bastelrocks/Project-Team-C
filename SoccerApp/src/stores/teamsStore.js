@@ -3,24 +3,25 @@ import { defineStore } from 'pinia'
 import { supabase } from '@/lib/supabaseClient';
 
 export const teamssStore = defineStore('teamssStore', () => {
+    let teamsList = ref([]);
+
     function clearArray() {
         let arrayLength = teamsList.value.length;
-        for (let i = 0; i <= arrayLength; i++) {
-            teamsList.value.pop();
-        }
+        if (arrayLength > 0)
+            for (let i = 0; i <= arrayLength; i++) {
+                teamsList.value.pop();
+            }
     }
 
-    let teamsList = ref([]);
     /** Get All teams
      * 
      */
-    async function getTeams() {
+    async function getAllTeams() {
         clearArray();
-        const { data } = await supabase.from('teams').select().eq("countrie_id", id);
-        if (data.length > 0)
-            data.forEach(team => {
-                teamsList.value.push(team);
-            })
+        const { data } = await supabase.from('teams').select();
+        data.forEach(team => {
+            teamsList.value.push(team);
+        });
     }
 
     /** Function that select Teams by countrie
@@ -29,11 +30,9 @@ export const teamssStore = defineStore('teamssStore', () => {
     async function getTeams(id) {
         clearArray();
         const { data } = await supabase.from('teams').select().eq("countrie_id", id);
-        if (data.length > 0)
-            data.forEach(team => {
-                teamsList.value.push(team);
-            })
-        // return await supabase.from('teams').select().eq("countrie_id", id);
+        data.forEach(team => {
+            teamsList.value.push(team);
+        });
     }
-    return { getTeams, teamsList }
+    return { teamsList, getAllTeams, getTeams };
 })

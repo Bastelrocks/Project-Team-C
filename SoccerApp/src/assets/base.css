@@ -28,8 +28,7 @@
 :root {
   /* follow line looks a variable for background color
   --color-background: var(--vt-c-white);
-     changed to a new variable in gray
-*/
+     changed to a new variable in gray */
   --color-background: var(--vt-c-gray);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);

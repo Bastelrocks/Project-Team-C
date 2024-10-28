@@ -12,10 +12,10 @@ export const countriesStore = defineStore('countriesStore', () => {
     }
     async function getCountries() {
         clearArray();
-        const {data} = await supabase.from('countries').select();
+        const { data } = await supabase.from('countries').select();
         data.forEach(countrie =>{
             countrieList.value.push(countrie);
         })
     }
-    return { getCountries, countrieList }
+    return { getCountries, countrieList };
 })

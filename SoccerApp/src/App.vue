@@ -73,10 +73,19 @@ nav:hover{
 
 nav a.router-link-exact-active {
   padding: 15px;
-  background-color: hsla(160, 100%, 37%, 1);
+  /* background-color: hsla(160, 100%, 37%, 1); */
   color: var(--color-text);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+}
+
+nav a.router-link-exact-active:first-of-type {
+  border-bottom: 2px solid var(--color-border);
+}
+
+nav a.router-link-exact-active:last-of-type {
+  border: 0;
+  border-top: 2px solid var(--color-border);
 }
 
 nav a.router-link-exact-active:hover {
@@ -110,8 +119,8 @@ nav a:first-of-type {
     flex-direction: row;
     place-items: flex-start;
     /* flex-wrap: wrap; */
-    /* min-width: 800px;
-    min-height: 600px; */
+    min-width: 800px;
+    min-height: 600px;
     background-color: azure;
   }
 }

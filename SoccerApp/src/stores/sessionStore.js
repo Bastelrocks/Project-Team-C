@@ -53,5 +53,5 @@ export const sessionStore = defineStore('sessionStore', () => {
     isAutenticated.value = false;
   }
 
-  return { isAutenticated, logIn, logOut }
+  return { isAutenticated, logIn, logOut };
 })
