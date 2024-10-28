@@ -41,7 +41,7 @@ export const teamssStore = defineStore('teamssStore', () => {
         data.forEach(team => {
             teamName = team;
         });
-        return teamName;
+        return teamName; /* returns the Object t = t.name */
     }
 
 
