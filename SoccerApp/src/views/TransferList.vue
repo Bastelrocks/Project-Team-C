@@ -15,6 +15,6 @@ defineEmits([title]);
 <template>
     <h1>Under Construction</h1>
     <ul>
-        <li v-for="transfer in transferList">{{ transfer.playerID }} - {{ transfer.clubOrigin }} - {{ transfer.clubDestination }}</li>
+        <li v-for="transfer in transferList">{{ transfer.playerID }} - {{ transfer.clubOrigin }} - {{ transfer.clubDestination }} - {{ transfer.value }}</li>
     </ul>
 </template>
