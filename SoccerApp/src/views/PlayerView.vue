@@ -19,6 +19,8 @@ import CreatePlayer from '@/components/CreatePlayer.vue';
 //     getPlayers();
 // })
 
+
+
 </script>
 
 <template>
@@ -45,7 +47,7 @@ import CreatePlayer from '@/components/CreatePlayer.vue';
                     <td style="text-align: center;" class="tableCell">{{ item.backNumber }}</td>
                     <td class="tableCell">{{ item.position }}</td>
                     <td class="tableCell">{{ item.birthDate }}</td>
-                    <td class="tableCell"></td>
+                    <td class="tableCell"> {{ item.teams.name }}</td>
                 </tr>
             </tbody>
 

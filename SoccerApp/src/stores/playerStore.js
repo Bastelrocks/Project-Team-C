@@ -12,13 +12,36 @@ export const usePlayerStore= defineStore('playerStore',()=>{
     const player = ref([]);
 
 async function getPlayers() {
-    const { data } = await supabase.from('player').select();
+    const { data, error } = await supabase
+            .from('player')
+            .select(`
+                *,
+                teams (name)
+            `);
+
+        if (error) {
+            console.error("Error fetching players:", error);
+            return;
+        }
     player.value = data;
 }
 
+// Using Supabase's `.select()` with join
+
+// // const { data, error } = await supabase
+// // .from('player')
+// // .select(`
+// //     *,
+// //     teams: idTeam (name)
+// // `);
+
+// if (error) {
+// console.error("Error fetching players:", error);
+// return;
+// }
+
 onMounted(() => {
     getPlayers();
-
 });
 
 return{player,getPlayers};
