@@ -4,6 +4,7 @@ import TeamView from '@/views/TeamView.vue'
 import TransferList from '@/views/TransferList.vue'
 import Register from '@/views/Register.vue'
 import PlayerView from '@/views/PlayerView.vue'
+import ContactView from '@/views/ContactView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/players',
       name: 'player',
       component: PlayerView
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactView
     },
     {
       path: '/about',
