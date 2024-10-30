@@ -16,7 +16,6 @@ teams.getAllTeams();
  */
 
 //transfer.getAllTransfers();
-let transferList = transfer.transferList;
 /*
 onMounted(() => {
     transfer.getAllTransfers();
@@ -32,10 +31,12 @@ onMounted(() => {
 })
 */
 
-
-
-let loading = ref(true);
-let t;
+let newTransfer = {
+    playerID: 0,
+    clubOrigin: 0,
+    clubDestination: 0,
+    value: 0
+}
 
 async function getTeamName(id) {
     return await teams.getTeamName(id)
@@ -61,27 +62,31 @@ transfer.loadTransfers();
         <tbody>
             <tr v-if="session.isAutenticated">
                 <td>
-                    <select>
-                        <option>Select Player</option>
+                    <select v-model="newTransfer.playerID">
+                        <option value="0">Select Player</option>
                         <!-- <option v-for="club in teams.teamsList">{{ club.name }}</option> -->
                     </select>
                 </td>
                 <td>
-                    <select>
-                        <option>Select Team</option>
+                    <select v-model="newTransfer.clubOrigin">
+                        <option value="0">Select Team</option>
                         <option v-for="club in teams.teamsList">{{ club.name }}</option>
                     </select>
                 </td>
                 <td>
-                    <select>
-                        <option>Select Team</option>
+                    <select  v-model="newTransfer.clubDestination">
+                        <option value="0">Select Team</option>
                         <option v-for="club in teams.teamsList">{{ club.name }}</option>
                     </select>
                 </td>
-                <td><input type="number"></td>
-                <td><button>add Transfer</button></td>
+                <td>
+                    <input type="number"  v-model="newTransfer.value">
+                </td>
+                <td>
+                    <button v-on:click="transfer.addNewTransfer(newTransfer)">add Transfer</button>z
+                </td>
             </tr>
-            <tr v-for="transfer in transferList" v-bind:key="transfer.id">
+            <tr v-for="transfer in transfer.transferList" v-bind:key="transfer.id">
                 <td>{{ transfer.firstName.firstName }} {{ transfer.lastName.lastName }}</td>
                 <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
                 <td>{{ transfer.clubDestination.name || "loading..." }}</td>
