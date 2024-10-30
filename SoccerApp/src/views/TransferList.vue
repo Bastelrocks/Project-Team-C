@@ -10,6 +10,11 @@ let teams = teamssStore();
 let session = sessionStore();
 teams.getAllTeams();
 
+/* TODO:
+ * Add new Transfer in TransferStore
+ * In that don't forget to add the new object in the arrayList
+ */
+
 //transfer.getAllTransfers();
 let transferList = transfer.transferList;
 /*
