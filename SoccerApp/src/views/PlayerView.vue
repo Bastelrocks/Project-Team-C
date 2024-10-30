@@ -2,18 +2,24 @@
 import { ref, onMounted } from 'vue'
 import { supabase } from '@/lib/supabaseClient.js';
 import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
+import { usePlayerStore } from '@/stores/playerStore';
+
+const player=usePlayerStore();
+console.log("Array",player.player);
 
 import CreatePlayer from '@/components/CreatePlayer.vue';
-const player = ref([])
+// const player = ref([])
 
-async function getPlayers() {
-    const { data } = await supabase.from('player').select();
-    player.value = data;
-}
+// async function getPlayers() {
+//     const { data } = await supabase.from('player').select()
+//     player.value = data;
+// }
 
-onMounted(() => {
-    getPlayers();
-})
+// onMounted(() => {
+//     getPlayers();
+// })
+
+
 
 </script>
 
@@ -34,14 +40,14 @@ onMounted(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in player" :key="item.id">
-                    <td v-if="item.image" style="text-align: center;"><div class="playerImg"><img :src="item.image" class="playerImage"></div></td>
-                    <td v-else><div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div></td>
-                    <td>{{ item.firstName }} {{ item.lastName }}</td>
-                    <td style="text-align: center;">{{ item.backNumber }}</td>
-                    <td>{{ item.position }}</td>
-                    <td>{{ item.birthDate }}</td>
-                    <td></td>
+                <tr v-for="item in player.player" :key="item.id">
+                    <td v-if="item.image" style="text-align: center;" class="tableCell"><div class="playerImg"><img :src="item.image" class="playerImage"></div></td>
+                    <td v-else class="tableCell"><div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div></td>
+                    <td class="tableCell">{{ item.firstName }} {{ item.lastName }}</td>
+                    <td style="text-align: center;" class="tableCell">{{ item.backNumber }}</td>
+                    <td class="tableCell">{{ item.position }}</td>
+                    <td class="tableCell">{{ item.birthDate }}</td>
+                    <td class="tableCell"> {{ item.teams.name }}</td>
                 </tr>
             </tbody>
 
@@ -68,7 +74,7 @@ h1 {
 .tablePlayers{
     display:flex;
     justify-content: center;
-    color: white;
+    color: black;
 }
 .tablehead{
     font-size: 1.4em;
@@ -84,5 +90,9 @@ h1 {
 .playerImg{
     display: flex;
     justify-content: center;
+}
+.tableCell{
+    border: 1px solid black;
+    padding: 0 5px;
 }
 </style>

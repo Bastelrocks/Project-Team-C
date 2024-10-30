@@ -43,22 +43,22 @@
 
  h1{
   font-size:2.5em;
-  margin:20px;
+  padding:20px;
   text-align: center;
  }
  h2{
   font-size:2em;
-  margin:20px;
+  padding:20px; 
   text-align: center;
  }
  ul{
-  margin:20px;
+  padding:20px; 
   text-align: center;
   list-style: none;
   font-size: 1.5em;
  }
 p{
-  margin:20px;
+  padding:20px;
   font-size: 1.5em;
   text-align: center;
 }

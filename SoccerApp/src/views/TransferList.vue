@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { transferStore } from '@/stores/transferStore';
 import { teamssStore } from '@/stores/teamsStore';
 
@@ -11,23 +11,21 @@ let transferList = ref(transfer.transferList);
 const title = "Recent Transfers";
 defineEmits([title]);
 
-function getTeamName(id){
-    let teamName = "";
-    teamName = teams.getTeamName(id).then( t => {
-        console.log("T: " + t);
-        console.log("T.Name: " + t.name);
-        return t;
+async function getTeamName(id){
+    let teamName = await teams.getTeamName(id).then( t => {
+        return t.name
     });
-    console.log(teamName);
     return teamName;
 }
 
+console.log(getTeamName(2));
+let originClub;
 
 </script>
 
 <template>
     <h1>Under Construction</h1>
     <ul>
-        <li v-for="transfer in transferList">{{ transfer.playerID }} - {{ getTeamName(transfer.clubOrigin) }} - {{ getTeamName(transfer.clubDestination) }} - {{ transfer.value }}</li>
+        <li v-for="transfer in transferList">{{ transfer.playerID }} - {{  originClub = getTeamName(transfer.clubOrigin)  }} - {{ getTeamName(transfer.clubDestination) }} - {{ transfer.value }}</li>
     </ul>
 </template>
