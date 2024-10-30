@@ -57,7 +57,7 @@ async function addPlayer(newPlayer){
         <input type="url" placeholder="image-url" v-model="newPlayer.image">
         <select name="team" placeholder="Team" v-model="newPlayer.clubID" required>
             <option value=0 selected>Select team</option>
-            <option v-for="item in teams" value="item.idTeam">{{ item.name }}</option>
+            <option v-for="item in teams" :value="item.idTeam">{{ item.name }}</option>
         </select> 
         <button type="submit" @click="addPlayer(newPlayer)">Add player to database</button>
     </form>
