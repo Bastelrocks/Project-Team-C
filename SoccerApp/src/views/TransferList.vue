@@ -8,45 +8,24 @@ let teams = teamssStore();
 
 transfer.getAllTransfers();
 let transferList = ref(transfer.transferList);
-const title = ref("Recent Transfers");
+const title = "Recent Transfers";
+defineEmits([title]);
 
-let teamNames = ref({}); // Reactive map to store team names by ID
+async function getTeamName(id){
+    let teamName = await teams.getTeamName(id).then( t => {
+        return t.name
+    });
+    return teamName;
+}
 
-const getTeamName = async (id) => {
-    try {
-        // Await the Promise to resolve and get the actual value
-        const t = await teams.getTeamName(id);
-        return t.name;
-    } catch (error) {
-        console.error('Error fetching team name:', error);
-        return null;
-    }
-};
+console.log(getTeamName(2));
+let originClub;
 
-const populateTeamNames = async () => {
-    for (let transfer of transferList.value) {
-        if (!teamNames.value[transfer.clubOrigin]) {
-            teamNames.value[transfer.clubOrigin] = await getTeamName(transfer.clubOrigin);
-        }
-        if (!teamNames.value[transfer.clubDestination]) {
-            teamNames.value[transfer.clubDestination] = await getTeamName(transfer.clubDestination);
-        }
-    }
-};
-
-onMounted(async () => {
-    await populateTeamNames();
-});
 </script>
 
 <template>
-    <h1>{{ title }}</h1>
+    <h1>Under Construction</h1>
     <ul>
-        <li v-for="transfer in transferList" :key="transfer.uniqueID">
-            {{ transfer.playerID }} - 
-            {{ teamNames[transfer.clubOrigin] || 'Loading...' }} - 
-            {{ teamNames[transfer.clubDestination] || 'Loading...' }} - 
-            {{ transfer.value }}
-        </li>
+        <li v-for="transfer in transferList">{{ transfer.playerID }} - {{  originClub = getTeamName(transfer.clubOrigin)  }} - {{ getTeamName(transfer.clubDestination) }} - {{ transfer.value }}</li>
     </ul>
 </template>
