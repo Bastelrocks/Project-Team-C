@@ -47,16 +47,16 @@ async function addPlayer(newPlayer){
         <label for="birthdate">Birthdate:</label>
         <input type="date" placeholder="birthdate" v-model="newPlayer.birthDate" required>
         <br>
-        <select name="position" placeholder="Position" v-model="newPlayer.position" required>
-            <option value=0 selected>Select Position</option>
+        <select name="position" v-model="newPlayer.position" required>
+            <option value="" selected>Select Position</option>
             <option value="goalkeeper">Goalkeeper</option>
             <option value="defense">Defense</option>
             <option value="midfield">Midfield</option>
             <option value="offense">Offense</option>
         </select>
         <input type="url" placeholder="image-url" v-model="newPlayer.image">
-        <select name="team" placeholder="Team" v-model="newPlayer.clubID" required>
-            <option value=0 selected>Select team</option>
+        <select name="team" v-model="newPlayer.clubID" required>
+            <option value="" selected>Select team</option>
             <option v-for="item in teams" :value="item.idTeam">{{ item.name }}</option>
         </select> 
         <button type="submit" @click="addPlayer(newPlayer)">Add player to database</button>
@@ -84,7 +84,7 @@ button {
   border-radius: 5px;
   border: 1px solid #ccc;
   accent-color: brown;
-}
+} 
 
 button {
   background-color: white;
