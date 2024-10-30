@@ -74,7 +74,7 @@ h1 {
 .tablePlayers{
     display:flex;
     justify-content: center;
-    color: black;
+    color: hsla(160, 100%, 37%, 1);
 }
 .tablehead{
     font-size: 1.4em;
@@ -92,7 +92,7 @@ h1 {
     justify-content: center;
 }
 .tableCell{
-    border: 1px solid black;
+    border: 1px solid hsla(160, 100%, 37%, 1);;
     padding: 0 5px;
 }
 </style>
