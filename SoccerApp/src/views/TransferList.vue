@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, ref } from 'vue';
 import { transferStore } from '@/stores/transferStore';
 import { teamssStore } from '@/stores/teamsStore';
 import { sessionStore } from '@/stores/sessionStore';
@@ -8,28 +7,11 @@ let transfer = transferStore();
 let teams = teamssStore();
 
 let session = sessionStore();
-teams.getAllTeams();
 
 /* TODO:
  * Add new Transfer in TransferStore
  * In that don't forget to add the new object in the arrayList
  */
-
-//transfer.getAllTransfers();
-/*
-onMounted(() => {
-    transfer.getAllTransfers();
-    //teamList = ref(teams.getAllTeams());
-    transferList.forEach(transfer => {
-        let clubOriginID = transfer.clubOrigin;
-        let clubDestinationID = transfer.clubDestination;
-        transfer.clubOrigin = getTeamName(clubOriginID);
-        transfer.clubDestination = getTeamName(clubDestinationID)
-        console.log(transfer);
-     //   teamList.value.push(data);
-    })
-})
-*/
 
 let newTransfer = {
     playerID: 0,
@@ -38,13 +20,7 @@ let newTransfer = {
     value: 0
 }
 
-async function getTeamName(id) {
-    return await teams.getTeamName(id)
-        .then(({ t }) => { console.log(t); return t; });
-}
-
 transfer.loadTransfers();
-
 
 </script>
 
