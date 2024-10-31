@@ -4,15 +4,6 @@ import { sessionStore } from '@/stores/sessionStore';
 
 let session = sessionStore();
 
-let loginData = {
-    email: "",
-    password: ""
-};
-
-/* To remove at the End */
-loginData.email = "victor.martins.1310@hotmail.com";
-loginData.password = "badPassword.1234";
-
 </script>
 
 <template>
@@ -20,12 +11,12 @@ loginData.password = "badPassword.1234";
         <form v-if="session.isAutenticated === false"
             v-on:submit.prevent="session.logIn(loginData.email, loginData.password)">
             <label for="email">E-mail</label>
-            <input name="email" type="email" v-model=loginData.email placeholder="E-mail" required />
+            <input name="email" type="email" v-model=session.loginData.email placeholder="E-mail" required />
             <label for="password">Password</label>
-            <input name="password" type="password" v-model=loginData.password placeholder="Password" required />
+            <input name="password" type="password" v-model=session.loginData.password placeholder="Password" required />
             <button type="submit">Log me in</button>
         </form>
-        <button v-if="session.isAutenticated === true" v-on:click="session.logOut">Logout</button>
+        <button v-if="session.isAutenticated === true" v-on:click="session.logOut()">Logout</button>
     </div>
 </template>
 

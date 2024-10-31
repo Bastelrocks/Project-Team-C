@@ -31,6 +31,15 @@ function getPlayersByClub(id){
     players.getPlayersByClub(id);
 }
 
+function onChangePlayer(id){
+    let p = players.getPlayer(id).then(play => {
+        newTransfer.value = play.value;
+    });
+    
+    p.finally(console.log(p.market_value) )
+    //
+}
+
 </script>
 
 <template>
@@ -57,7 +66,7 @@ function getPlayersByClub(id){
                     <select v-if="players.playerList.length === 0" v-model="newTransfer.playerID" disabled>
                         <option value="0" disabled selected>No Players to Select</option>
                     </select>
-                    <select v-else v-model="newTransfer.playerID">
+                    <select v-else v-model="newTransfer.playerID" v-on:change="onChangePlayer()">
                         <option value="0">Select Player</option>
                         <option v-for="player in players.playerList" v-bind:value="player.id">{{ player.firstName + " " + player.lastName || "loading..." }}</option>
                     </select>
