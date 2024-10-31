@@ -8,18 +8,13 @@ export const sessionStore = defineStore('sessionStore', () => {
 
   /* Not Sure if we need this */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
-    if (event === 'INITIAL_SESSION') {
-//      isAutenticated.value = false;
-      console.log(event);
-      console.log(session);
+    if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
+      //isAutenticated.value = false;
+      console.log("Only on start?");
     } else if (event === 'SIGNED_IN') {
       isAutenticated.value = true;
-      console.log(event);
-      console.log(session);
     } else if (event === 'SIGNED_OUT') {
       isAutenticated.value = false;
-      console.log(event);
-      console.log(session);
     }
     // else if (event === 'PASSWORD_RECOVERY') {
     //   console.log(event, session)
@@ -38,8 +33,6 @@ export const sessionStore = defineStore('sessionStore', () => {
    * @param {String} password 
   */
   async function logIn(email, password) {
-    console.log(email);
-    console.log(password);
     if (isAutenticated.value === false) {
       const { data, error } = await supabase.auth.signInWithPassword(
         {
@@ -47,16 +40,11 @@ export const sessionStore = defineStore('sessionStore', () => {
           password: password
         }
       )
-      console.log(data);
-      console.error(error);
     }
-  //  isAutenticated.value = true;
-    //console.log(sessionData);
   }
 
   async function logOut() {
     await supabase.auth.signOut();
-//      isAutenticated.value = false;
   }
 
   return { isAutenticated, logIn, logOut };

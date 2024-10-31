@@ -1,8 +1,8 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 import { supabase } from '@/lib/supabaseClient';
 
-export const teamssStore = defineStore('teamssStore', () => {
+export const teamsStore = defineStore('teamsStore', () => {
     let teamsList = ref([]);
 
     function clearArray() {
