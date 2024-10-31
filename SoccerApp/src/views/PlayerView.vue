@@ -68,7 +68,7 @@ h1 {
 .tablePlayers{
     display:flex;
     justify-content: center;
-    color: white;
+    color: black;
 }
 .tablehead{
     font-size: 1.4em;
