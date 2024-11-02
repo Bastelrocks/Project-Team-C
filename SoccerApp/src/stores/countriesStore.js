@@ -4,6 +4,8 @@ import { supabase } from '@/lib/supabaseClient';
 
 export const countriesStore = defineStore('countriesStore', () => {
     let countrieList = ref([]);
+    const tableName = "countries";
+
     function clearArray() {
         let arrayLength = countrieList.value.length;
         for (let i = 0; i <= arrayLength; i++) {
@@ -12,7 +14,7 @@ export const countriesStore = defineStore('countriesStore', () => {
     }
     async function getCountries() {
         clearArray();
-        const { data } = await supabase.from('countries').select();
+        const { data } = await supabase.from(tableName).select();
         data.forEach(countrie =>{
             countrieList.value.push(countrie);
         })

@@ -1,15 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { teamssStore } from '@/stores/teamsStore';
+import { teamsStore } from '@/stores/teamsStore';
 import { countriesStore } from '@/stores/countriesStore';
 
-let teams = teamssStore();
+let teams = teamsStore();
 let countries = countriesStore();
 
 // Variables Definition
 let countrieID = ref(0);
-let countrieList = countries.countrieList;
-let teamList = teams.teamsList;
 
 // Functions Section
 /** Getting the Clubs per Countrie
@@ -27,10 +25,10 @@ teams.getAllTeams();
 <template>
     <h1>all Teams</h1>
     <select v-model="countrieID" v-on:change="getTeams(countrieID)">
-        <option value=0 selected>Select Countrie</option>
-        <option v-for="countrie in countrieList" v-bind:value=countrie.id>{{ countrie.id }} - {{ countrie.name }}</option>
+        <option value="0" selected>Select Countrie</option>
+        <option v-for="countrie in countries.countrieList" v-bind:value=countrie.id>{{ countrie.name }}</option>
     </select>
     <ul>
-        <li v-for="team in teamList">{{ team.name }}</li>
+        <li v-for="team in teams.teamsList">{{ team.name }}</li>
     </ul>
 </template>
