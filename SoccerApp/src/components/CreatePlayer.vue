@@ -38,6 +38,7 @@ async function addPlayer(newPlayer){
 </script>
 
 <template>
+    <h1>Create a new player</h1>
     <form v-on:submit.prevent="submit" class="createPlayer">
         <input type="text" placeholder="First Name" v-model="newPlayer.firstName" required>
         <br>
@@ -64,6 +65,9 @@ async function addPlayer(newPlayer){
 </template>
 
 <style scoped>
+h1{
+  text-align: center;
+}
 form {
   display: flex;
   flex-direction: column;

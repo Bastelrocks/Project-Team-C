@@ -22,6 +22,7 @@ let players = playerStore();
     <div class="soccerfield">
         <h1>All Players in our Database</h1>
         <CreatePlayer v-if="session.isAutenticated"></CreatePlayer>
+        <p v-else>Log in to create new players</p>
         <div class="tablePlayers">
         <table>
             <thead class="tablehead">
@@ -61,7 +62,9 @@ let players = playerStore();
     background-repeat: repeat;
 
 } */
-
+p{
+    text-align: center;
+}
 h1 {
     text-align: center;
     color: rgb(208, 214, 24);

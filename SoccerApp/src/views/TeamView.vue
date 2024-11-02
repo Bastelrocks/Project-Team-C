@@ -3,6 +3,10 @@ import { ref, onMounted } from 'vue';
 import { teamsStore } from '@/stores/teamsStore';
 import { countriesStore } from '@/stores/countriesStore';
 import { playerStore } from '@/stores/playerStore';
+import { sessionStore } from '@/stores/sessionStore';
+import CreateTeam from '@/components/CreateTeam.vue';
+
+let session = sessionStore();
 
 let teams = teamsStore();
 let countries = countriesStore();
@@ -35,6 +39,9 @@ async function fetchSquadSize(teamId) {
 
 <template>
     <div>
+        <CreateTeam v-if="session.isAutenticated"></CreateTeam>
+        <p v-else>Log in to create new teams</p>
+        
     <div class="selectButton">
         <select v-model="countryID" @change="getTeams(countryID)">
         <option value=0 selected>All Teams</option>
@@ -56,7 +63,7 @@ async function fetchSquadSize(teamId) {
                     <div class="playerImg"><img :src="team.image" class="playerImage"></div>
                 </td>
                 <td v-else class="tableCell">
-                    <div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div>
+                    <div class="playerImg"><img src="@/assets/clublogo2.svg" class="playerImage"></div>
                 </td>
                 <td class="tableCell">{{ team.name }}</td>
                 <td style="text-align: center;" class="tableCell">{{ team.foundationYear }}</td>
@@ -68,6 +75,9 @@ async function fetchSquadSize(teamId) {
 </template>
 
 <style scoped>
+p{
+    text-align: center;
+}
 table{
     min-width: 500px;
 }
