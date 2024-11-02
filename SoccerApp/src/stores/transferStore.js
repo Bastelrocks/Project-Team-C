@@ -57,7 +57,6 @@ export const transferStore = defineStore('transferStore', () => {
             id,
             transferDate,
             value`).eq("id", id);
-        //;
         data.forEach(transfer => {
             transferList.value.push(transfer);
         })
@@ -67,10 +66,10 @@ export const transferStore = defineStore('transferStore', () => {
         data.forEach(transfer => {
             getTransfer(transfer.id);
         })
-       // console.log(data.id);
-        //await getTransfer(data.id);
-        // updatePlayer(data.id, data.clubDestination, data.value);
-        // transferList.value.push(data);
+       console.log(data.id);
+        await getTransfer(data.id);
+        updatePlayer(data.id, data.clubDestination, data.value);
+        transferList.value.push(data);
     }
     return { transferList, getAllTransfers, loadTransfers, addNewTransfer };
 })
