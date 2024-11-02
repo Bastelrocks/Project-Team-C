@@ -37,6 +37,7 @@ export const playerStore = defineStore('playerStore', () => {
         //     playerList.value.push(player);
         // })
         playerList.value = data;
+        return data.length;
     }
     return { getPlayers, getPlayersByClub, getPlayer, playerList };
 })

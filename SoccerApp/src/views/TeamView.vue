@@ -1,57 +1,69 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { teamsStore } from '@/stores/teamsStore';
 import { countriesStore } from '@/stores/countriesStore';
+import { playerStore } from '@/stores/playerStore';
 
 let teams = teamsStore();
 let countries = countriesStore();
+let players = playerStore();
 
-// Variables Definition
 let countryID = ref(0);
 let countryList = countries.countrieList;
 let teamList = teams.teamsList;
+let squadSizes = ref({});
 
-// Functions Section
-/** Getting the Clubs per Countrie
- * @param {Number} id the id selected in DropDown Menu
- */
+// Load countries and teams initially
+onMounted(() => {
+    countries.getCountries();
+    teams.getAllTeams();
+});
+
+// Functions
 function getTeams(id) {
-    if (parseInt(id) === 0) teams.getAllTeams();
-    else teams.getTeams(id);
+  if (parseInt(id) === 0) teams.getAllTeams();
+  else teams.getTeams(id);
+  squadSizes.value = {}; // Reset squad sizes when loading new teams
 }
 
-countries.getCountries();
-teams.getAllTeams();
+async function fetchSquadSize(teamId) {
+  const size = await players.getPlayersByClub(teamId); // Assuming this returns a number indicating squad size
+  squadSizes.value[teamId] = size;
+}
+
 </script>
 
 <template>
     <div>
     <div class="selectButton">
-        <select v-model="countryID" v-on:change="getTeams(countryID)">
+        <select v-model="countryID" @change="getTeams(countryID)">
         <option value=0 selected>All Teams</option>
-        <option v-for="country in countryList" v-bind:value=country.id>Teams in {{ country.name }}</option>
+        <option v-for="country in countryList" :value="country.id">Teams in {{ country.name }}</option>
     </select>
     </div>
     <table>
-            <thead class="tablehead">
-                <tr>
-                    <th>Logo</th>
-                    <th>Name</th>
-                    <th>Founded in</th>
-                    <th>Link to Players</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="team in teamList">
-                    <td v-if="team.image" style="text-align: center;" class="tableCell"><div class="playerImg"><img :src="item.image" class="playerImage"></div></td>
-                    <td v-else class="tableCell"><div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div></td>
-                    <td class="tableCell">{{ team.name }}</td>
-                    <td style="text-align: center;" class="tableCell">{{ team.foundationYear }}</td>
-                    <td class="tableCell"></td>
-                </tr>
-            </tbody>
-
-        </table>
+        <thead class="tablehead">
+            <tr>
+                <th>Logo</th>
+                <th>Name</th>
+                <th>Founded in</th>
+                <th>Squad Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="team in teamList" :key="team.idTeam" @mouseenter="fetchSquadSize(team.idTeam)">
+                <td v-if="team.image" style="text-align: center;" class="tableCell">
+                    <div class="playerImg"><img :src="team.image" class="playerImage"></div>
+                </td>
+                <td v-else class="tableCell">
+                    <div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div>
+                </td>
+                <td class="tableCell">{{ team.name }}</td>
+                <td style="text-align: center;" class="tableCell">{{ team.foundationYear }}</td>
+                <td class="tableCell">{{ squadSizes[team.idTeam] || 'Loading...' }}</td>
+            </tr>
+        </tbody>
+    </table>
     </div>
 </template>
 
