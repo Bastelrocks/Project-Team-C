@@ -4,7 +4,9 @@ import { supabase } from '@/lib/supabaseClient.js';
 import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
 import { playerStore } from '@/stores/playerStore';
 import CreatePlayer from '@/components/CreatePlayer.vue';
+import { sessionStore } from '@/stores/sessionStore';
 
+let session = sessionStore();
 const player=playerStore();
 
 let players = playerStore();
@@ -19,7 +21,8 @@ let players = playerStore();
 <template>
     <div class="soccerfield">
         <h1>All Players in our Database</h1>
-        <CreatePlayer></CreatePlayer>
+        <CreatePlayer v-if="session.isAutenticated"></CreatePlayer>
+        <p v-else>Log in to create new players</p>
         <div class="tablePlayers">
         <table>
             <thead class="tablehead">
@@ -59,7 +62,9 @@ let players = playerStore();
     background-repeat: repeat;
 
 } */
-
+p{
+    text-align: center;
+}
 h1 {
     text-align: center;
     color: rgb(208, 214, 24);
@@ -67,7 +72,7 @@ h1 {
 .tablePlayers{
     display:flex;
     justify-content: center;
-    color: black;
+    color: hsla(160, 100%, 37%, 1);
 }
 .tablehead{
     font-size: 1.4em;
@@ -85,7 +90,7 @@ h1 {
     justify-content: center;
 }
 .tableCell{
-    border: 1px solid black;
+    border: 1px solid hsla(160, 100%, 37%, 1);;
     padding: 0 5px;
 }
 </style>
