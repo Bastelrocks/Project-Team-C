@@ -1,26 +1,13 @@
 <script setup>
-import { supabase } from '@/lib/supabaseClient';
+import { sessionStore } from '@/stores/sessionStore';
 
-let signUpData = {
-    email: "Victor.Martins.1310@gmail.com",
-    password: "tesT.hAHa-124"
-}
-
-async function doSignUp(){
-    const { data, error } = await supabase.auth.signUp({
-        email: signUpData.email,
-        password: signUpData.password
-    }
-)
-console.log(error);
-console.log(data);
-}
+let session = sessionStore();
 
 </script>
 <template>
-<form v-on:submit.prevent=doSignUp>
-    <input type="email" placeholder="E-mail" v-model=signUpData.email required />
-    <input type="password" v-model=signUpData.password required />
-    <button type="submit">Sign Up!</button>
+<form v-on:submit.prevent="session.doSignUp(session.loginData.email, session.loginData.password)">
+    <input type="email" placeholder="E-mail" v-model=session.loginData.email required />
+    <input type="password" v-model=session.loginData.password required />
+    <button type="submit" disabled>Sign Up!</button>
 </form>    
 </template>

@@ -120,7 +120,10 @@ nav a:first-of-type {
     flex-direction: row;
     place-items: flex-start;
     /* flex-wrap: wrap; */
-    min-width: 800px;
+    min-width: 1024px;
+    width: 85vw;
+    margin-left: 5vw;
+    max-width: 2048px;
     min-height: 600px;
     background-color: azure;
   }

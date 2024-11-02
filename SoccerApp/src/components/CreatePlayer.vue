@@ -6,7 +6,7 @@ const newPlayer = reactive({
     id: '',
     firstName: '',
     backNumber: '1',
-    lasName: '',
+    lastName: '',
     clubID: '',
     birthDate: '',
     position:'',
@@ -26,37 +26,48 @@ onMounted(() => {
 })
 
 
-function addPlayer(){
+async function addPlayer(newPlayer){
     console.log("Button add Player clicked")
+    console.log(newPlayer);
+    const { error } = await supabase
+    .from('player')
+    .insert({ firstName: newPlayer.firstName, backNumber: newPlayer.backNumber, lastName: newPlayer.lastName, clubID: newPlayer.clubID, birthDate: newPlayer.birthDate, position: newPlayer.position, image: newPlayer.image })
 }
     
     
 </script>
 
 <template>
+    <h1>Create a new player</h1>
     <form v-on:submit.prevent="submit" class="createPlayer">
         <input type="text" placeholder="First Name" v-model="newPlayer.firstName" required>
         <br>
         <input type="text" placeholder="Last Name" v-model="newPlayer.lastName" required>
+        <label for="Back Number">Back Number:</label>
         <input type="number" placeholder="Back Number"v-model="newPlayer.backNumber" required>
         <label for="birthdate">Birthdate:</label>
         <input type="date" placeholder="birthdate" v-model="newPlayer.birthDate" required>
         <br>
-        <select name="position" placeholder="Position" v-model="newPlayer.position" required>
+        <select name="position" v-model="newPlayer.position" required>
+            <option value="" selected>Select Position</option>
             <option value="goalkeeper">Goalkeeper</option>
             <option value="defense">Defense</option>
             <option value="midfield">Midfield</option>
             <option value="offense">Offense</option>
         </select>
-        <input type="url" placeholder="image-url">
-        <select name="team" placeholder="Team" v-model="newPlayer.id" required>
-            <option v-for="item in teams" :id="item.idTeam">{{ item.name }}</option>
+        <input type="url" placeholder="image-url" v-model="newPlayer.image">
+        <select name="team" v-model="newPlayer.clubID" required>
+            <option value="" selected>Select team</option>
+            <option v-for="item in teams" :value="item.idTeam">{{ item.name }}</option>
         </select> 
-        <button type="submit" @click="addPlayer">Add player to database</button>
+        <button type="submit" @click="addPlayer(newPlayer)">Add player to database</button>
     </form>
 </template>
 
 <style scoped>
+h1{
+  text-align: center;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -77,16 +88,17 @@ button {
   border-radius: 5px;
   border: 1px solid #ccc;
   accent-color: brown;
-}
+} 
 
 button {
-  background-color: #ff6347;
-  color: white;
+  background-color: white;
+  color: hsla(160, 100%, 37%, 1);
   cursor: pointer;
-  border: none;
+  border: 1px solid hsla(160, 100%, 37%, 1);
 }
 
 button:hover {
-  background-color: #e5533d;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
 }
 </style>
