@@ -37,7 +37,6 @@ function onChangePlayer(id){
     });
     
     p.finally(console.log(p.market_value) )
-    //
 }
 
 </script>
@@ -84,7 +83,7 @@ function onChangePlayer(id){
                     <input type="date" v-model="newTransfer.transferDate"/>
                 </td>
                 <td>
-                    <input type="number" v-model="newTransfer.value">
+                    <input class="transfervalue" type="number" v-model="newTransfer.value">
                 </td>
                 <td>
                     <button v-on:click="transfer.addNewTransfer(newTransfer)">add Transfer</button>
@@ -103,5 +102,10 @@ function onChangePlayer(id){
 <style scoped>
 input{
     min-width: 150px;
+}
+.transfervalue {
+    min-width: 60px;
+    max-width: fit-content;
+    field-sizing: content;
 }
 </style>

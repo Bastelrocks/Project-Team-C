@@ -9,7 +9,7 @@ let session = sessionStore();
 <template>
     <div class="loginForm">
         <form v-if="session.isAutenticated === false"
-            v-on:submit.prevent="session.logIn(loginData.email, loginData.password)">
+            v-on:submit.prevent="session.logIn(session.loginData.email, session.loginData.password)">
             <label for="email">E-mail</label>
             <input name="email" type="email" v-model=session.loginData.email placeholder="E-mail" required />
             <label for="password">Password</label>
