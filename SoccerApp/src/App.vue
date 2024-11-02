@@ -7,7 +7,7 @@ import HomeView from './views/HomeView.vue';
 <template>
   <LoginForm />
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/soccerAppLogo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/soccerappLogo.svg" width="125" height="125" />
     <h1>Welcome to the home of Soccerapp!</h1>
   </header>
   <div class="wrapper">
