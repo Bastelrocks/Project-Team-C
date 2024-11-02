@@ -25,7 +25,6 @@ onMounted(() => {
     getTeams()
 })
 
-console.log(teams)
 
 function addPlayer(){
     console.log("Button add Player clicked")

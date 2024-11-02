@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { transferStore } from '@/stores/transferStore';
 import { teamsStore } from '@/stores/teamsStore';
 import { sessionStore } from '@/stores/sessionStore';

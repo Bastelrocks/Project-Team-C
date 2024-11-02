@@ -18,6 +18,7 @@ import HomeView from './views/HomeView.vue';
       <RouterLink to="/transfers"><img class="menuLogo" src="@/assets/transfer.svg">Transfers</RouterLink>
       <RouterLink to="/Register"><img class="menuLogo" src="@/assets/register.svg">Register</RouterLink>
       <RouterLink to="/about"><img class="menuLogo" src="@/assets/about.svg">About</RouterLink>
+      <RouterLink to="/contact"><img class="menuLogo" src="@/assets/contact-phone.svg">Contact Us</RouterLink>
     </nav>
       <RouterView />
   </div>
@@ -32,7 +33,7 @@ import HomeView from './views/HomeView.vue';
 
 main{
   min-width: 1024px;
-}
+  }
 
 header {
   line-height: 1.5;
