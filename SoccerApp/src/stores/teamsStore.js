@@ -1,9 +1,10 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 import { supabase } from '@/lib/supabaseClient';
 
-export const teamssStore = defineStore('teamssStore', () => {
+export const teamsStore = defineStore('teamsStore', () => {
     let teamsList = ref([]);
+    const tableName = "teams";
 
     function clearArray() {
         let arrayLength = teamsList.value.length;
@@ -18,7 +19,7 @@ export const teamssStore = defineStore('teamssStore', () => {
      */
     async function getAllTeams() {
         clearArray();
-        const { data } = await supabase.from('teams').select();
+        const { data } = await supabase.from(tableName).select();
         data.forEach(team => {
             teamsList.value.push(team);
         });
@@ -29,21 +30,25 @@ export const teamssStore = defineStore('teamssStore', () => {
      */
     async function getTeams(id) {
         clearArray();
-        const { data } = await supabase.from('teams').select().eq("countrie_id", id);
+        const { data } = await supabase.from(tableName).select().eq("countrie_id", id);
         data.forEach(team => {
             teamsList.value.push(team);
         });
     }
 
     async function getTeamName(id){
-        let teamName = ""
-        const { data } = await supabase.from('teams').select("name").eq("idTeam", id);
+        let teamName = "";
+        const { data } = await supabase.from(tableName).select("name").eq("idTeam", id);
         data.forEach(team => {
             teamName = team;
         });
-        return teamName;
+        return teamName; /* returns the Object t = t.name */
+    }
+    
+    async function addNewTeam(newTeam){
+        const { data, error } = await supabase.from(tableName).insert(newTeam).select();
+        console.log(error);
     }
 
-
-    return { teamsList, getAllTeams, getTeams, getTeamName };
+    return { teamsList, getAllTeams, getTeams, getTeamName, addNewTeam };
 })

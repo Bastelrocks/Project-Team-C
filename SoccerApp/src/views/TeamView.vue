@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { teamssStore } from '@/stores/teamsStore';
+import { teamsStore } from '@/stores/teamsStore';
 import { countriesStore } from '@/stores/countriesStore';
 
-let teams = teamssStore();
+let teams = teamsStore();
 let countries = countriesStore();
 
 // Variables Definition

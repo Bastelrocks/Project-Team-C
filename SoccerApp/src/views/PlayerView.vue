@@ -2,25 +2,18 @@
 import { ref, onMounted } from 'vue'
 import { supabase } from '@/lib/supabaseClient.js';
 import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
-import { usePlayerStore } from '@/stores/playerStore';
-
-const player=usePlayerStore();
-console.log("Array",player.player);
-
+import { playerStore } from '@/stores/playerStore';
 import CreatePlayer from '@/components/CreatePlayer.vue';
-// const player = ref([])
 
-// async function getPlayers() {
-//     const { data } = await supabase.from('player').select()
-//     player.value = data;
-// }
+const player=playerStore();
 
-// onMounted(() => {
-//     getPlayers();
-// })
+let players = playerStore();
 
+    onMounted(() => {
+        players.getPlayers();
+    });
 
-
+    console.log("Array",player.playerList);
 </script>
 
 <template>
@@ -40,7 +33,7 @@ import CreatePlayer from '@/components/CreatePlayer.vue';
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in player.player" :key="item.id">
+                <tr v-for="item in player.playerList" :key="item.id">
                     <td v-if="item.image" style="text-align: center;" class="tableCell"><div class="playerImg"><img :src="item.image" class="playerImage"></div></td>
                     <td v-else class="tableCell"><div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div></td>
                     <td class="tableCell">{{ item.firstName }} {{ item.lastName }}</td>
