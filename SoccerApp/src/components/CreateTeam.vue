@@ -37,7 +37,7 @@ async function addTeam(newTeam){
         <input type="text" placeholder="Team Name" v-model="newTeam.name" required>
         <br>
         <label for="foundationYear">Founded in:</label>
-        <input type="number" placeholder="Foundation Year" v-model="newTeam.foundationYear" required>
+        <input type="number" placeholder="1800" min="1800" max="2024" v-model="newTeam.foundationYear" required>
         <br>
         <select name="country" v-model="newTeam.countrie_id" required>
             <option value="" selected>Select country</option>
