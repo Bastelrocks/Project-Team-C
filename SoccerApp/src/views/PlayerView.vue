@@ -5,6 +5,7 @@ import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
 import { playerStore } from '@/stores/playerStore';
 import CreatePlayer from '@/components/CreatePlayer.vue';
 import { sessionStore } from '@/stores/sessionStore';
+import DeletePlayer from '@/components/DeletePlayer.vue';
 
 let session = sessionStore();
 const player=playerStore();
@@ -23,6 +24,8 @@ let players = playerStore();
         <h1>All Players in our Database</h1>
         <CreatePlayer v-if="session.isAutenticated"></CreatePlayer>
         <p v-else>Log in to create new players</p>
+        <DeletePlayer v-if="session.isAutenticated"></DeletePlayer>
+        <p v-else>Log in to delete players</p>
         <div class="tablePlayers">
         <table>
             <thead class="tablehead">
