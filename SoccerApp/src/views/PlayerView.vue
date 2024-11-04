@@ -10,29 +10,15 @@ import DeletePlayer from "@/components/DeletePlayer.vue";
 let session = sessionStore();
 const player = playerStore();
 
-let players = playerStore();
+ let players = playerStore();
 
 onMounted(() => {
-  players.getPlayers();
-});
+    players.getPlayers();
+  });
 
 console.log("Array", player.playerList);
 
-async function setActive(id) {
-  console.log("Change Status for player with id", id, "clicked");
-  const { error } = await supabase
-    .from("player")
-    .update({ active: "TRUE" })
-    .eq("id", id);
-}
 
-async function setRetired(id) {
-  console.log("Change Status for player with id", id, "clicked");
-  const { error } = await supabase
-    .from("player")
-    .update({ active: "FALSE" })
-    .eq("id", id);
-}
 </script>
 
 <template>
@@ -78,10 +64,10 @@ async function setRetired(id) {
             <td v-if="item.active" class="tableCell">Active</td>
             <td v-else class="tableCell">Retired</td>
             <td v-if="session.isAutenticated & item.active" class="tableCell">
-              <button @click="setRetired(item.id)">Set retired</button>
+              <button @click="player.setRetired(item.id)">Set retired</button>
             </td>
             <td v-if="session.isAutenticated & !item.active" class="tableCell">
-              <button @click="setActive(item.id)">Set active</button>
+              <button @click="player.setActive(item.id)">Set active</button>
             </td>
           </tr>
         </tbody>
