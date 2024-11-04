@@ -10,15 +10,11 @@ import DeletePlayer from "@/components/DeletePlayer.vue";
 let session = sessionStore();
 const player = playerStore();
 
- let players = playerStore();
-
 onMounted(() => {
-    players.getPlayers();
-  });
+  player.getPlayers();
+});
 
 console.log("Array", player.playerList);
-
-
 </script>
 
 <template>
