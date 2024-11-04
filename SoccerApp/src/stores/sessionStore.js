@@ -15,7 +15,7 @@ export const sessionStore = defineStore('sessionStore', () => {
   /* Not Sure if we need this */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
-      //isAutenticated.value = false;
+      // isAutenticated.value = false;
       console.log("Only on start?");
     }
     else if (event === 'SIGNED_IN')  { isAutenticated.value = true; }
