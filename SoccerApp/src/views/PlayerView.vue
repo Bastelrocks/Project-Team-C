@@ -1,61 +1,93 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { supabase } from '@/lib/supabaseClient.js';
-import backgroundImage from '@/assets/soccerfieldverticalgreen.svg'
-import { playerStore } from '@/stores/playerStore';
-import CreatePlayer from '@/components/CreatePlayer.vue';
-import { sessionStore } from '@/stores/sessionStore';
-import DeletePlayer from '@/components/DeletePlayer.vue';
+import { ref, onMounted } from "vue";
+import { supabase } from "@/lib/supabaseClient.js";
+import backgroundImage from "@/assets/soccerfieldverticalgreen.svg";
+import { playerStore } from "@/stores/playerStore";
+import CreatePlayer from "@/components/CreatePlayer.vue";
+import { sessionStore } from "@/stores/sessionStore";
+import DeletePlayer from "@/components/DeletePlayer.vue";
 
 let session = sessionStore();
-const player=playerStore();
+const player = playerStore();
 
 let players = playerStore();
 
-    onMounted(() => {
-        players.getPlayers();
-    });
+onMounted(() => {
+  players.getPlayers();
+});
 
-    console.log("Array",player.playerList);
+console.log("Array", player.playerList);
+
+async function setActive(id) {
+  console.log("Change Status for player with id", id, "clicked");
+  const { error } = await supabase
+    .from("player")
+    .update({ active: "TRUE" })
+    .eq("id", id);
+}
+
+async function setRetired(id) {
+  console.log("Change Status for player with id", id, "clicked");
+  const { error } = await supabase
+    .from("player")
+    .update({ active: "FALSE" })
+    .eq("id", id);
+}
 </script>
 
 <template>
-    <div class="soccerfield">
-        <h1>All Players in our Database</h1>
-        <CreatePlayer v-if="session.isAutenticated"></CreatePlayer>
-        <p v-else>Log in to create new players</p>
-        <DeletePlayer v-if="session.isAutenticated"></DeletePlayer>
-        <p v-else>Log in to delete players</p>
-        <div class="tablePlayers">
-        <table>
-            <thead class="tablehead">
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Back Number</th>
-                    <th>Position</th>
-                    <th>Born</th>
-                    <th>Team</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in player.playerList" :key="item.id">
-                    <td v-if="item.image" style="text-align: center;" class="tableCell"><div class="playerImg"><img :src="item.image" class="playerImage"></div></td>
-                    <td v-else class="tableCell"><div class="playerImg"><img src="@/assets/football-player.svg" class="playerImage"></div></td>
-                    <td class="tableCell">{{ item.firstName }} {{ item.lastName }}</td>
-                    <td style="text-align: center;" class="tableCell">{{ item.backNumber }}</td>
-                    <td class="tableCell">{{ item.position }}</td>
-                    <td class="tableCell">{{ item.birthDate }}</td>
-                    <td class="tableCell"> {{ item.teams.name }}</td>
-                </tr>
-            </tbody>
-
-        </table>
-        </div>
-        
+  <div class="soccerfield">
+    <h1>All Players in our Database</h1>
+    <CreatePlayer v-if="session.isAutenticated"></CreatePlayer>
+    <p v-else>Log in to create new players</p>
+    <DeletePlayer v-if="session.isAutenticated"></DeletePlayer>
+    <p v-else>Log in to delete players</p>
+    <div class="tablePlayers">
+      <table>
+        <thead class="tablehead">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Back Number</th>
+            <th>Position</th>
+            <th>Born</th>
+            <th>Team</th>
+            <th>Active</th>
+            <th v-if="session.isAutenticated">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in player.playerList" :key="item.id">
+            <td v-if="item.image" style="text-align: center" class="tableCell">
+              <div class="playerImg">
+                <img :src="item.image" class="playerImage" />
+              </div>
+            </td>
+            <td v-else class="tableCell">
+              <div class="playerImg">
+                <img src="@/assets/football-player.svg" class="playerImage" />
+              </div>
+            </td>
+            <td class="tableCell">{{ item.firstName }} {{ item.lastName }}</td>
+            <td style="text-align: center" class="tableCell">
+              {{ item.backNumber }}
+            </td>
+            <td class="tableCell">{{ item.position }}</td>
+            <td class="tableCell">{{ item.birthDate }}</td>
+            <td class="tableCell">{{ item.teams.name }}</td>
+            <td v-if="item.active" class="tableCell">Active</td>
+            <td v-else class="tableCell">Retired</td>
+            <td v-if="session.isAutenticated & item.active" class="tableCell">
+              <button @click="setRetired(item.id)">Set retired</button>
+            </td>
+            <td v-if="session.isAutenticated & !item.active" class="tableCell">
+              <button @click="setActive(item.id)">Set active</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-
+  </div>
 </template>
 
 <style scoped>
@@ -65,35 +97,35 @@ let players = playerStore();
     background-repeat: repeat;
 
 } */
-p{
-    text-align: center;
+p {
+  text-align: center;
 }
 h1 {
-    text-align: center;
-    color: rgb(208, 214, 24);
+  text-align: center;
+  color: rgb(208, 214, 24);
 }
-.tablePlayers{
-    display:flex;
-    justify-content: center;
-    color: hsla(160, 100%, 37%, 1);
+.tablePlayers {
+  display: flex;
+  justify-content: center;
+  color: hsla(160, 100%, 37%, 1);
 }
-.tablehead{
-    font-size: 1.4em;
-    text-decoration: underline;
-    font-weight: bold;
+.tablehead {
+  font-size: 1.4em;
+  text-decoration: underline;
+  font-weight: bold;
 }
-.playerImage{
-    width:30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.playerImage {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.playerImg{
-    display: flex;
-    justify-content: center;
+.playerImg {
+  display: flex;
+  justify-content: center;
 }
-.tableCell{
-    border: 1px solid hsla(160, 100%, 37%, 1);;
-    padding: 0 5px;
+.tableCell {
+  border: 1px solid hsla(160, 100%, 37%, 1);
+  padding: 0 5px;
 }
 </style>
