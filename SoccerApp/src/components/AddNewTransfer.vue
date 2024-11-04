@@ -14,7 +14,7 @@ let newTransfer = ref({
     clubOrigin: 0,
     clubDestination: 0,
     transferDate: new Date().toISOString().substring(0, 10),
-    marketValue: 0
+    marketValue: 0.25
 })
 
 teams.getAllTeams();
@@ -25,26 +25,33 @@ function getPlayersByClub(clubID) {
 }
 
 function onChangePlayer(playerID) {
-    let newValue = 0;
-    newValue = players.getPlayer(playerID).then(
+    players.getPlayer(playerID).then(
         pl => {
-            newValue = pl.market_value;
             newTransfer.value.marketValue = pl.market_value;
-            return newValue;
         }
     )
+}
+
+function addNewTransfer(){
+    if (newTransfer.value.playerID === 0
+    && newTransfer.value.clubOrigin === 0
+    && newTransfer.value.clubDestination === 0) alert("Error Fill all Fiels");
+    else {
+        transfer.addNewTransfer(newTransfer.value);
+        newTransfer.value = 
+        {
+            playerID: 0,
+            clubOrigin: 0,
+            clubDestination: 0,
+            transferDate: new Date().toISOString().substring(0, 10),
+            marketValue: 0.25
+        }
+    }
 }
 
 </script>
 <template>
     <tr>
-        <td>
-            <select v-model="newTransfer.clubOrigin" v-on:change="getPlayersByClub(newTransfer.clubOrigin)">
-                <option value="0">Select Team</option>
-                <option v-for="club in teams.teamsList" v-bind:value="club.idTeam">{{ club.name || "loading..." }}
-                </option>
-            </select>
-        </td>
         <td>
             <select v-if="players.playerList.length === 0" v-model="newTransfer.playerID" disabled>
                 <option value="0" disabled selected>No Players to Select</option>
@@ -53,6 +60,13 @@ function onChangePlayer(playerID) {
                 <option value="0">Select Player</option>
                 <option v-for="player in players.playerList" v-bind:value="player.id">{{ player.firstName + " " +
                     player.lastName || "loading..." }}</option>
+            </select>
+        </td>
+        <td>
+            <select v-model="newTransfer.clubOrigin" v-on:change="getPlayersByClub(newTransfer.clubOrigin)">
+                <option value="0">Select Team</option>
+                <option v-for="club in teams.teamsList" v-bind:value="club.idTeam">{{ club.name || "loading..." }}
+                </option>
             </select>
         </td>
         <td>
@@ -70,17 +84,17 @@ function onChangePlayer(playerID) {
             <input type="date" v-model="newTransfer.transferDate" />
         </td>
         <td>
-            <input class="transfervalue" type="number" v-model="newTransfer.marketValue"> M €
+            <input class="transfervalue" type="number" min="0.00" step="0.25" v-model="newTransfer.marketValue"> M €
         </td>
         <td>
-            <button v-on:click="transfer.addNewTransfer(newTransfer)">add Transfer</button>
+            <button v-on:click="addNewTransfer()">add Transfer</button>
         </td>
     </tr>
 </template>
 
 <style scoped>
 .transfervalue {
-    min-width: 30px;
+    min-width: 60px;
     /* max-width: fit-content; */
     field-sizing: content;
     /*works only on chrome*/

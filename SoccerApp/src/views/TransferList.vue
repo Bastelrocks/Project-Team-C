@@ -34,8 +34,8 @@ function viewTransfer(){
     <table>
         <thead>
             <tr>
-                <th>Club origin</th>
                 <th>Name</th>
+                <th>Club origin</th>
                 <th>Club Destination</th>
                 <th>Transfer Date</th>
                 <th>Transfer Value<br />In Millions €</th>
@@ -48,8 +48,8 @@ function viewTransfer(){
                 <td colspan="6">No Transfer available</td>
             </tr>
             <tr v-for="transfer in transfer.transferList.slice(firstTransfer.value, lastTransfer.value)" v-bind:key="transfer.id">
-                <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
                 <td>{{ transfer.firstName.firstName + " " + transfer.lastName.lastName }}</td>
+                <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
                 <td>{{ transfer.clubDestination.name || "loading..." }}</td>
                 <td>{{ transfer.transferDate }}</td>
                 <td>{{ transfer.marketValue }}M €</td>
@@ -58,8 +58,11 @@ function viewTransfer(){
                     <button>Edit 2</button>
                 </td>
             </tr>
+            <tr v-for="number in (quantityPerSite - transfer.transferList.length)">
+                <td colspan="6"></td>
+            </tr>
         </tbody>
-        <tfoot>
+        <tfoot v-if="transfer.transferList.length > quantityPerSite">
             <tr>
                 <td v-if="page > 1" v-on:click="viewTransfer(page--)">back</td>
                 <td v-if="page > 1" colspan="3"></td>
@@ -85,5 +88,8 @@ td{
     border-radius: 4px;
     text-align: center;
     padding: 3px;
+    min-height: 28px;
+    height: auto;
 }
+
 </style>
