@@ -38,7 +38,6 @@ function viewTransfer() {
                 <th>Club Destination</th>
                 <th>Transfer Date</th>
                 <th>Transfer Value<br />In Millions €</th>
-                <!-- <th v-if="session.isAutenticated">Actions</th> -->
             </tr>
         </thead>
         <tbody>
@@ -56,10 +55,6 @@ function viewTransfer() {
                 <td>{{ transfer.clubDestination.name || "loading..." }}</td>
                 <td>{{ transfer.transferDate }}</td>
                 <td class="marketValue">{{ transfer.marketValue }}M €</td>
-                <!-- <td v-if="session.isAutenticated">
-                    <button>Edit 1</button>
-                    <button>Edit 2</button>
-                </td> -->
             </tr>
             <tr>
                 <td class="no-border" v-if="session.isAutenticated" colspan="5"></td>
@@ -92,7 +87,7 @@ td {
 }
 
 td.navPage:hover {
-    background-color: green;
+    background-color: hsla(160, 100%, 37%, 1);
     cursor: pointer;
 }
 

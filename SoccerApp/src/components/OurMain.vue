@@ -84,12 +84,10 @@ nav a:first-of-type {
     display: flex;
     flex-direction: row;
     place-items: flex-start;
-    /* flex-wrap: wrap; */
     min-width: 1024px;
     width: 60vw;
-    /* margin-left: 5vw; */
+    padding-top: 10vh; /* This padding is for every view, it will create a gap on the top 10% */
     min-height: 100vh;
-    /* height:100%; */
     background-color: rgba(255, 255, 255, 0.80);
   }
 }

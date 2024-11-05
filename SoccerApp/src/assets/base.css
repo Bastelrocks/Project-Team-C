@@ -91,5 +91,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("https://cdn.mos.cms.futurecdn.net/v92f8pvXTjqHSGeiDAXxN7-1200-80.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
+  background-size: 100vw 100vh;
 }
