@@ -1,15 +1,19 @@
+<script setup></script>
 <template>
-  <div class="background-container"></div>
+  <div class="content">
+    <img alt="Soccer logo" class="logo" src="@/assets/soccerappLogo.svg" width="125" height="125" />
+    <h1>Welcome to the home of Soccerpage!</h1>
+  </div>
 </template>
 
-<script setup></script>
-
 <style scoped>
-.background-container {
-  background-image: url("https://cdn.mos.cms.futurecdn.net/v92f8pvXTjqHSGeiDAXxN7-1200-80.jpg");
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+.content {
+  margin-top: 15%;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
 }
 
 </style>
