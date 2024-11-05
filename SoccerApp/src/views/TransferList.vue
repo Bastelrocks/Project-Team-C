@@ -13,18 +13,17 @@ let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite - 1);
 
 onMounted(() => {
     transfer.loadTransfers();
-    if (transfer.transferList.length < quantityPerSite)
+    }
+);
+if (transfer.transferList.length > quantityPerSite)
         lastTransfer.value = transfer.transferList.length;
-
-    });
+console.log(firstTransfer.value + " " + lastTransfer.value);
 
 function viewTransfer(){
     if (page !== 0){
         firstTransfer.value = (page-1)*quantityPerSite;
         lastTransfer.value = (page*quantityPerSite) - 1;
-        console.log("Page: " + page)
-        console.log("First Element: " + firstTransfer.value);
-        console.log("Last Element: " + lastTransfer.value);
+        console.log("Page: " + page + " First Element: " + firstTransfer.value + " Last Element: " + lastTransfer.value);
     }
 }
 
@@ -34,8 +33,8 @@ function viewTransfer(){
     <table>
         <thead>
             <tr>
-                <th>Club origin</th>
                 <th>Name</th>
+                <th>Club origin</th>
                 <th>Club Destination</th>
                 <th>Transfer Date</th>
                 <th>Transfer Value<br />In Millions €</th>
@@ -47,9 +46,9 @@ function viewTransfer(){
             <tr v-if="transfer.transferList.length === 0">
                 <td colspan="6">No Transfer available</td>
             </tr>
-            <tr v-for="transfer in transfer.transferList.slice(firstTransfer.value, lastTransfer.value)" v-bind:key="transfer.id">
-                <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
+            <tr v-for="(transfer, index) in transfer.transferList.slice(firstTransfer, lastTransfer)" v-bind:key="transfer.id">
                 <td>{{ transfer.firstName.firstName + " " + transfer.lastName.lastName }}</td>
+                <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
                 <td>{{ transfer.clubDestination.name || "loading..." }}</td>
                 <td>{{ transfer.transferDate }}</td>
                 <td>{{ transfer.marketValue }}M €</td>
@@ -59,7 +58,7 @@ function viewTransfer(){
                 </td>
             </tr>
         </tbody>
-        <tfoot>
+        <tfoot v-if="transfer.transferList.length > quantityPerSite">
             <tr>
                 <td v-if="page > 1" v-on:click="viewTransfer(page--)">back</td>
                 <td v-if="page > 1" colspan="3"></td>
@@ -85,5 +84,8 @@ td{
     border-radius: 4px;
     text-align: center;
     padding: 3px;
+    min-height: 28px;
+    height: auto;
 }
+
 </style>

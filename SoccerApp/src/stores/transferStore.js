@@ -43,9 +43,7 @@ export const transferStore = defineStore('transferStore', () => {
             clubID: clubID,
             market_value: value
         };
-        console.log("playerID: " + playerID + " clubID: ", clubID + " marketValue: " + value + "M€");
         const { data } = await supabase.from("player").update(obj).eq("id", playerID).select();
-        console.table(data);
     }
 
     async function getTransfer(id) {
@@ -58,16 +56,15 @@ export const transferStore = defineStore('transferStore', () => {
             transferDate,
             marketValue`).eq("id", id);
         data.forEach(transfer => {
-            console.table(transfer);
             transferList.value.push(transfer);
         })
     }
 
     async function addNewTransfer(transferObj) {
-        // console.table(transferObj);
+        console.table(transferObj);
         const { data, error } = await supabase.from(tableName).insert(transferObj).select();
         updatePlayer(data[0].playerID, data[0].clubDestination, data[0].marketValue);
-        transferList.value.push(data);
+        getTransfer(data[0].id);
     }
     return { transferList, getAllTransfers, loadTransfers, addNewTransfer };
 })
