@@ -21,8 +21,11 @@ export const teamsStore = defineStore('teamsStore', () => {
             }
     }
 
-    /** Get All teams
-     * 
+    /** 
+     * @description It will put all Teams in the TeamList array  
+     * In first step it will clear the array teamList   
+     * it will call the select function from Supabase with all fields from the "teams" Table.  
+     * the pretended data will be puted in the teamList array
      */
     async function getAllTeams() {
         clearArrays();
