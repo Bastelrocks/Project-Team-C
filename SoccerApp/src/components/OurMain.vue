@@ -30,23 +30,19 @@ nav {
   width: auto;
   max-height: max-content;
   flex-direction: column;
-  font-size: 2rem;
+  font-size: 1rem;
   text-align: left;
   margin-right: 40px;
   margin-left: 40px;
   margin-bottom: auto;
   margin-top: 10rem;
   
-  /* position: fixed; */
   border: 1px solid hsla(160, 100%, 37%, 1);
   border-radius: 15%;
   background-color: white;
-  /* align-items: center;
-  justify-content: center; */
 }
 
 nav:hover{
-  /* border: 4px solid hsla(160, 100%, 37%, 1); */
   box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
 }
 

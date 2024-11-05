@@ -33,7 +33,7 @@ function addManager() {
             of the Page or You are <a href="#ManagerForm" v-on:click="managerForm = true; adminForm = false">Manager</a>
             from a Club?</h1>
 
-        <h2>signUp</h2>
+        <h2>signUp Just Club</h2>
 
         <form id="AdminForm" v-if="adminForm">
             <h2>I want help as Admin</h2>
