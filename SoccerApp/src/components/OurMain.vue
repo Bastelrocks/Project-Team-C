@@ -30,7 +30,7 @@ nav {
   width: auto;
   max-height: max-content;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 2rem;
   text-align: left;
   margin-right: 40px;
   margin-left: 40px;
