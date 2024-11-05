@@ -11,20 +11,15 @@ import OurMain from './components/OurMain.vue';
     <h1>Welcome to the home of Soccerapp!</h1>
     <LoginForm />
   </header>
-  <div class="OurMain">
-    <!-- <OurMain class="OurMain" /> -->
+  <div class="ourMain">
     <OurMain />
   </div>
 </template>
 
 <style scoped>
-.OurMain {
+.ourMain {
   display: flex;
   flex-direction: row;
-}
-
-main {
-  min-width: 1024px;
 }
 
 header {
@@ -40,7 +35,6 @@ header {
   margin: 0 auto 2rem;
 }
 
-
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -50,18 +44,6 @@ header {
 
   .logo {
     margin: 0 2rem 0 0;
-  }
-
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-    place-items: flex-start;
-    /* flex-wrap: wrap; */
-    min-width: 1024px;
-    width: 85vw;
-    /* margin-left: 5vw; */
-    min-height: 600px;
-    background-color: azure;
   }
 }
 </style>

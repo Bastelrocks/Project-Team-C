@@ -13,18 +13,17 @@ let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite - 1);
 
 onMounted(() => {
     transfer.loadTransfers();
-    if (transfer.transferList.length < quantityPerSite)
+    }
+);
+if (transfer.transferList.length > quantityPerSite)
         lastTransfer.value = transfer.transferList.length;
-
-    });
+console.log(firstTransfer.value + " " + lastTransfer.value);
 
 function viewTransfer(){
     if (page !== 0){
         firstTransfer.value = (page-1)*quantityPerSite;
         lastTransfer.value = (page*quantityPerSite) - 1;
-        console.log("Page: " + page)
-        console.log("First Element: " + firstTransfer.value);
-        console.log("Last Element: " + lastTransfer.value);
+        console.log("Page: " + page + " First Element: " + firstTransfer.value + " Last Element: " + lastTransfer.value);
     }
 }
 
@@ -47,7 +46,7 @@ function viewTransfer(){
             <tr v-if="transfer.transferList.length === 0">
                 <td colspan="6">No Transfer available</td>
             </tr>
-            <tr v-for="transfer in transfer.transferList.slice(firstTransfer.value, lastTransfer.value)" v-bind:key="transfer.id">
+            <tr v-for="(transfer, index) in transfer.transferList.slice(firstTransfer, lastTransfer)" v-bind:key="transfer.id">
                 <td>{{ transfer.firstName.firstName + " " + transfer.lastName.lastName }}</td>
                 <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
                 <td>{{ transfer.clubDestination.name || "loading..." }}</td>
@@ -57,9 +56,6 @@ function viewTransfer(){
                     <button>Edit 1</button>
                     <button>Edit 2</button>
                 </td>
-            </tr>
-            <tr v-for="number in (quantityPerSite - transfer.transferList.length)">
-                <td colspan="6"></td>
             </tr>
         </tbody>
         <tfoot v-if="transfer.transferList.length > quantityPerSite">
