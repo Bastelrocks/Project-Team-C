@@ -39,5 +39,21 @@ export const playerStore = defineStore('playerStore', () => {
         playerList.value = data;
         return data.length;
     }
-    return { getPlayers, getPlayersByClub, getPlayer, playerList };
+
+    async function setActive(id) {
+        console.log("Change Status for player with id", id, "clicked");
+        const { error } = await supabase
+          .from("player")
+          .update({ active: "TRUE" })
+          .eq("id", id);
+      }
+      
+      async function setRetired(id) {
+        console.log("Change Status for player with id", id, "clicked");
+        const { error } = await supabase
+          .from("player")
+          .update({ active: "FALSE" })
+          .eq("id", id);
+      }
+    return { getPlayers, getPlayersByClub, getPlayer, playerList, setActive, setRetired };
 })

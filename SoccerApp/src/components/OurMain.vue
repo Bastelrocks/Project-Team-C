@@ -35,7 +35,8 @@ nav {
   margin-right: 40px;
   margin-left: 40px;
   margin-bottom: auto;
-  margin-top: 10rem;
+  margin-top: 40vh;
+  
   
   border: 1px solid hsla(160, 100%, 37%, 1);
   border-radius: 15%;
@@ -85,9 +86,10 @@ nav a:first-of-type {
     place-items: flex-start;
     /* flex-wrap: wrap; */
     min-width: 1024px;
-    width: 85vw;
+    width: 60vw;
     /* margin-left: 5vw; */
-    min-height: 630px;
+    min-height: 100vh;
+    /* height:100%; */
     background-color: rgba(255, 255, 255, 0.80);
   }
 }

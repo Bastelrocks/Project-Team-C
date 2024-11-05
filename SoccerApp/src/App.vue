@@ -18,6 +18,9 @@ import OurMain from './components/OurMain.vue';
 .ourMain {
   display: flex;
   flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 /* header {
