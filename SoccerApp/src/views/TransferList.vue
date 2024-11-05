@@ -117,7 +117,7 @@ table {
     /* border-collapse: collapse; */
     padding: 5px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 10%;
     border: 1px solid black;
     border-radius: 4px;
 }

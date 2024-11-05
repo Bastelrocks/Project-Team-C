@@ -18,7 +18,9 @@ import OurMain from './components/OurMain.vue';
 .ourMain {
   display: flex;
   flex-direction: row;
-  background-image: url("https://cdn.mos.cms.futurecdn.net/v92f8pvXTjqHSGeiDAXxN7-1200-80.jpg");
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 /* header {
