@@ -23,7 +23,6 @@ let session = sessionStore();
 <style scoped>
 .loginForm {
     padding: 20px;
-    gap: 20px; /* Not Working */
 
     /* To positioning on the right corner */
     position: absolute;
