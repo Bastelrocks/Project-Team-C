@@ -20,6 +20,7 @@ let newTransfer = ref({
 teams.getAllTeams();
 
 function getPlayersByClub(clubID) {
+    newTransfer.value.playerID = 0;
     players.getPlayersByClub(clubID);
     teams.getTeamsWithout(clubID);
 }

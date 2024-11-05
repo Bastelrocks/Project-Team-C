@@ -7,8 +7,6 @@ import OurMain from './components/OurMain.vue';
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/soccerappLogo.svg" width="125" height="125" />
-    <h1>Welcome to the home of Soccerapp!</h1>
     <LoginForm />
   </header>
   <div class="ourMain">
@@ -20,20 +18,16 @@ import OurMain from './components/OurMain.vue';
 .ourMain {
   display: flex;
   flex-direction: row;
+  background-image: url("https://cdn.mos.cms.futurecdn.net/v92f8pvXTjqHSGeiDAXxN7-1200-80.jpg");
 }
 
-header {
+/* header {
   line-height: 1.5;
   max-height: 100vh;
   width: 100%;
   top: 0;
   background-color: hsla(160, 100%, 37%, 1);
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+} */
 
 @media (min-width: 1024px) {
   header {

@@ -32,8 +32,10 @@ nav {
   flex-direction: column;
   font-size: 1rem;
   text-align: left;
-  margin: 40px;
-  margin-top: 2rem;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: auto;
+  margin-top: 10rem;
   
   /* position: fixed; */
   border: 1px solid hsla(160, 100%, 37%, 1);
@@ -89,8 +91,8 @@ nav a:first-of-type {
     min-width: 1024px;
     width: 85vw;
     /* margin-left: 5vw; */
-    min-height: 600px;
-    background-color: azure;
+    min-height: 630px;
+    background-color: rgba(255, 255, 255, 0.80);
   }
 }
 </style>

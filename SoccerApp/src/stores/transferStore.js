@@ -60,8 +60,14 @@ export const transferStore = defineStore('transferStore', () => {
         })
     }
 
+    /** 
+     * @description This function will add a new Transfer in Database  
+     * 1 - will insert the data passed by transfer  
+     * 2 - Update the player, in this case the field clubID and 
+     * @param {object} transferObj Object where the data is stored
+     * transferObj:  playerID, clubOrigin, clubDestination, transferDate, marketValue.
+     */
     async function addNewTransfer(transferObj) {
-        console.table(transferObj);
         const { data, error } = await supabase.from(tableName).insert(transferObj).select();
         updatePlayer(data[0].playerID, data[0].clubDestination, data[0].marketValue);
         getTransfer(data[0].id);
