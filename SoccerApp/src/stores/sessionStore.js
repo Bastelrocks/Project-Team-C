@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabaseClient';
 /* Maybe at this place we will conect the database */
 export const sessionStore = defineStore('sessionStore', () => {
   let isAutenticated = ref(false);
+
   /* To remove at the End */
   let loginData = ref(
     {
@@ -15,10 +16,11 @@ export const sessionStore = defineStore('sessionStore', () => {
   /* Not Sure if we need this */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
-      // isAutenticated.value = false;
-      console.log("Only on start?");
+      if (session) isAutenticated.value = true;
+      else isAutenticated.value = false;
     }
-    else if (event === 'SIGNED_IN')  { isAutenticated.value = true; }
+    else if (event === 'SIGNED_IN')  {
+      isAutenticated.value = true; }
     else if (event === 'SIGNED_OUT') { isAutenticated.value = false; }
  // else if (event === 'PASSWORD_RECOVERY') { console.log(event, session) } 
  // else if (event === 'TOKEN_REFRESHED')   { console.log(event, session) }
@@ -43,13 +45,15 @@ export const sessionStore = defineStore('sessionStore', () => {
   }
 
 
-  async function doSignUp(email, pwd) {
+  async function doSignUp(email, pwd, profileData) {
     const { data, error } = await supabase.auth.signUp(
       {
         email: email,
-        password: pwd
+        password: pwd,
       }
-    )
+    );
+    console.table(data);
+    console.table(profileData);
   }
 
   async function logOut() {
