@@ -70,9 +70,12 @@ export const teamsStore = defineStore('teamsStore', () => {
         return teamName; /* returns the Object t = t.name */
     }
 
+    /**
+     * 
+     * @param {object} newTeam 
+     */
     async function addNewTeam(newTeam) {
         const { data, error } = await supabase.from(tableName).insert(newTeam).select();
-        console.log(error);
     }
 
     return { teamsList, teamDestinationList, getAllTeams, getTeams, getTeamName, addNewTeam, getTeamsWithout };

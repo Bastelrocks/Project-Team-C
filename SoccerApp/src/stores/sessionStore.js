@@ -51,6 +51,7 @@ export const sessionStore = defineStore('sessionStore', () => {
         password: pwd,
       }
     );
+    return error;
   }
 
   async function logOut() {
