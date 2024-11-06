@@ -44,16 +44,13 @@ export const sessionStore = defineStore('sessionStore', () => {
     }
   }
 
-
-  async function doSignUp(email, pwd, profileData) {
+  async function doSignUp(email, pwd) {
     const { data, error } = await supabase.auth.signUp(
       {
         email: email,
         password: pwd,
       }
     );
-    console.table(data);
-    console.table(profileData);
   }
 
   async function logOut() {
