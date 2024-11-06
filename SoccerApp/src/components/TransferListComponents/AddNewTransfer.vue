@@ -8,7 +8,6 @@ let teams = teamsStore();
 let players = playerStore();
 let transfer = transferStore();
 
-//let today = new Date().toISOString().substring(0,10);
 let newTransfer = ref({
     playerID: 0,
     clubOrigin: 0,
@@ -33,13 +32,13 @@ function onChangePlayer(playerID) {
     )
 }
 
-function addNewTransfer(){
+function addNewTransfer() {
     if (newTransfer.value.playerID === 0
-    && newTransfer.value.clubOrigin === 0
-    && newTransfer.value.clubDestination === 0) alert("Error Fill all Fiels");
+        && newTransfer.value.clubOrigin === 0
+        && newTransfer.value.clubDestination === 0) alert("Error Fill all Fiels");
     else {
         transfer.addNewTransfer(newTransfer.value);
-        newTransfer.value = 
+        newTransfer.value =
         {
             playerID: 0,
             clubOrigin: 0,
@@ -87,8 +86,13 @@ function addNewTransfer(){
         <td>
             <input class="transfervalue" type="number" min="0.00" step="0.25" v-model="newTransfer.marketValue"> M €
         </td>
-        <td>
-            <button v-on:click="addNewTransfer()">add Transfer</button>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center;">
+            <button style="padding: 6px" v-on:click="addNewTransfer()">Add this Transfer</button>
         </td>
     </tr>
 </template>
@@ -96,8 +100,6 @@ function addNewTransfer(){
 <style scoped>
 .transfervalue {
     min-width: 60px;
-    /* max-width: fit-content; */
     field-sizing: content;
-    /*works only on chrome*/
 }
 </style>

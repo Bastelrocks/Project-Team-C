@@ -1,12 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import SignUp from '@/components/Forms/SignUp.vue';
+import { sessionStore } from '@/stores/sessionStore';
 import { countriesStore } from '@/stores/countriesStore';
 import { teamsStore } from '@/stores/teamsStore';
 
-let adminForm = ref(false);
-let managerForm = ref(true);
-
+let session = sessionStore();
 let countries = countriesStore();
 let teams = teamsStore();
 countries.getCountries();
@@ -20,8 +18,17 @@ let newClub = ref(
         countrie_id: 0
     })
 
+let profileData = ref(
+    {
+        full_name: "Victor F Martins",
+    }
+)
+
 function addManager() {
-    teams.addNewTeam(newClub.value);
+    console.table(newClub.value);
+    console.table(profileData.value);
+    if (newClub.value.countrie_id === 0) alert("Please Select a Countrie")
+    //teams.addNewTeam(newClub.value);
 }
 
 </script>
@@ -33,68 +40,46 @@ function addManager() {
             of the Page or You are <a href="#ManagerForm" v-on:click="managerForm = true; adminForm = false">Manager</a>
             from a Club?</h1>
 
-        <h2>signUp</h2>
-
-        <form id="AdminForm" v-if="adminForm">
-            <h2>I want help as Admin</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td><input type="text" placeholder="First Name" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="text" placeholder="Last Name" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="email" placeholder="E-mail Adress" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="text" placeholder="Your Motivation" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><button type="submit">Send Request</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <SignUp />
-        </form>
-
-        <form id="ManagerForm" v-if="managerForm" v-on:submit.prevent="addManager()">
+        <h2>signUp Just Club</h2>
+        <form id="ManagerForm" v-on:submit.prevent="addManager()">
             <h2>Register a Club</h2>
             <table>
                 <tbody>
                     <tr>
-                        <td><label>Countrie: </label></td>
+                        <td><label for="countrie">Countrie: </label></td>
                         <td>
-                            <select v-model="newClub.countrie_id" required>
-                                <option value="0" selected>Select Countrie</option>
-                                <option v-bind:value="countrie.id" v-for="countrie in countries.countrieList">{{
-                                    countrie.name }}</option>
+                            <select name="countrie" v-model="newClub.countrie_id" required>
+                                <option value=0 selected>Select Countrie</option>
+                                <option v-bind:value="countrie.id" v-for="countrie in countries.countrieList">
+                                    {{ countrie.name }}</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Club: </label></td>
+                        <td><label for="club">Club: </label></td>
                         <td>
-                            <input type="text" placeholder="Club Name" v-model="newClub.name" required />
+                            <input name="club" type="text" placeholder="Club Name" v-model="newClub.name" required />
                         </td>
                     </tr>
                     <tr>
-                        <td>Year: </td>
+                        <td><label for="foundationYear">Year: </label></td>
                         <td>
-                            <input class="year" type="number" v-bind:min="actualYear - 250" v-bind:max="actualYear"
+                            <input name="foundationYear" class="year" type="number" v-bind:min="actualYear - 250" v-bind:max="actualYear"
                                 v-model="newClub.foundationYear" required />
-                            <button type="submit">Register My Club</button>
+                        </td>
+                    </tr>
+                    <tr><td>
+                        <label for="email">Email: </label>
+                        <input name="email" type="email" placeholder="E-mail" v-model=session.loginData.email required />
+                        <label for="password">Password: </label>
+                        <input name="password" type="password" v-model=session.loginData.password required />
+                        <label for="fullName">Full Name: </label>
+                        <input name="fullName" type="text" v-model="profileData.full_name" />
+                        <button type="submit">Sign Up!</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <SignUp />
         </form>
     </div>
 </template>

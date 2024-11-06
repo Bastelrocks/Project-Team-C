@@ -30,7 +30,7 @@ nav {
   width: auto;
   max-height: max-content;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 2rem;
   text-align: left;
   margin-right: 40px;
   margin-left: 40px;
@@ -38,16 +38,12 @@ nav {
   margin-top: 40vh;
   
   
-  /* position: fixed; */
   border: 1px solid hsla(160, 100%, 37%, 1);
   border-radius: 15%;
   background-color: white;
-  /* align-items: center;
-  justify-content: center; */
 }
 
 nav:hover{
-  /* border: 4px solid hsla(160, 100%, 37%, 1); */
   box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
 }
 
@@ -88,12 +84,10 @@ nav a:first-of-type {
     display: flex;
     flex-direction: row;
     place-items: flex-start;
-    /* flex-wrap: wrap; */
     min-width: 1024px;
     width: 60vw;
-    /* margin-left: 5vw; */
+    padding-top: 10vh; /* This padding is for every view, it will create a gap on the top 10% */
     min-height: 100vh;
-    /* height:100%; */
     background-color: rgba(255, 255, 255, 0.80);
   }
 }

@@ -10,9 +10,27 @@ import DeletePlayer from "@/components/DeletePlayer.vue";
 let session = sessionStore();
 const player = playerStore();
 
+const quantityPerSite = 15;
+let page = 1;
+let firstPlayer = ref(0), lastPlayer = ref(quantityPerSite - 1);
+
+
+if (player.playerList.length > quantityPerSite)
+    lastPlayer.value = player.playerList.length;
+console.log(firstPlayer.value + " " + lastPlayer.value);
+
+
 onMounted(() => {
   player.getPlayers();
 });
+
+function viewPlayer() {
+    if (page !== 0) {
+        firstPlayer.value = (page - 1) * quantityPerSite;
+        lastPlayer.value = (page * quantityPerSite) - 1;
+        console.log("Page: " + page + " First Element: " + firstPlayer.value + " Last Element: " + lastPlayer.value);
+    }
+}
 
 console.log("Array", player.playerList);
 </script>
@@ -39,7 +57,7 @@ console.log("Array", player.playerList);
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in player.playerList" :key="item.id">
+          <tr v-for="item in player.playerList.slice(firstPlayer, lastPlayer)" :key="item.id">
             <td v-if="item.image" style="text-align: center" class="tableCell">
               <div class="playerImg">
                 <img :src="item.image" class="playerImage" />
@@ -67,6 +85,18 @@ console.log("Array", player.playerList);
             </td>
           </tr>
         </tbody>
+        <tfoot v-if="player.playerList.length > quantityPerSite">
+            <tr>
+                <td class="navPage" v-if="page > 1" v-on:click="viewPlayer(page--)">back</td>
+                <td v-else>back</td>
+
+                <td class="no-border" colspan="4"></td>
+
+                <td class="navPage" v-if="player.playerList.length > (page * quantityPerSite)"
+                    v-on:click="viewPlayer(page++)">next</td>
+                <td v-else>next</td>
+            </tr>
+        </tfoot>
       </table>
     </div>
   </div>
