@@ -74,17 +74,17 @@ nav a.router-link-exact-active {
   padding: 15px;
   /* background-color: hsla(160, 100%, 37%, 1); */
   color: var(--color-text);
-  border-top: 2px solid var(--color-border);
-  border-bottom: 2px solid var(--color-border);
+  border-right: 2px solid var(--color-border);
+  border-left: 2px solid var(--color-border);
 }
 
 nav a.router-link-exact-active:first-of-type {
-  border-bottom: 2px solid var(--color-border);
+  border-right: 2px solid var(--color-border);
 }
 
 nav a.router-link-exact-active:last-of-type {
   border: 0;
-  border-top: 2px solid var(--color-border);
+  border-left: 2px solid var(--color-border);
 }
 
 nav a.router-link-exact-active:hover {
@@ -105,15 +105,6 @@ nav a:first-of-type {
   border: 0;
 }
 
-
-/* header {
-  line-height: 1.5;
-  max-height: 100vh; 
-  width: 100%;
-  top: 0;
-  background-color: hsla(160, 100%, 37%, 1);
-}  */
-
 header {
   line-height: 1.5;
   min-height: 10vh;
@@ -127,9 +118,17 @@ header {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    /* place-items: center; */
+    place-items: center;
+    line-height: 1.5;
     padding-right: calc(var(--section-gap) / 2);
   }
+
+  /* header {
+  max-height: 100vh; 
+  width: 100%;
+  top: 0;
+  background-color: hsla(160, 100%, 37%, 1);
+}  */
 
   .logo {
     margin: 0 2rem 0 0;
