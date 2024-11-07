@@ -101,7 +101,6 @@ function addNewTransfer() {
     field-sizing: content;
 }
 
-
 button {
     border: 1px solid black;
     border-radius: 4px;
