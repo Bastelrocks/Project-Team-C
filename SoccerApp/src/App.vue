@@ -1,16 +1,30 @@
 <script setup>
 import LoginForm from './components/LoginForm.vue';
-import HomeView from './views/HomeView.vue';
-import OurMain from './components/OurMain.vue';
+import { RouterLink, RouterView } from 'vue-router'
+import { sessionStore } from '@/stores/sessionStore';
+let session = sessionStore();
 
 </script>
 
 <template>
-  <header>
-    <LoginForm />
-  </header>
   <div class="ourMain">
-    <OurMain />
+    <header>
+      <LoginForm />
+      <nav>
+      <RouterLink to="/"><img class="menuLogo" src="@/assets/home.svg">Home</RouterLink>
+      <RouterLink to="/teams"><img class="menuLogo" src="@/assets/team.svg">Teams</RouterLink>
+      <RouterLink to="/players"><img class="menuLogo" src="@/assets/soccer-player.svg">Players</RouterLink>
+      <RouterLink to="/transfers"><img class="menuLogo" src="@/assets/transfer.svg">Transfers</RouterLink>
+      <RouterLink v-if="!session.isAutenticated" to="/Register">
+        <img class="menuLogo" src="@/assets/register.svg">Register
+      </RouterLink>
+      <RouterLink to="/about"><img class="menuLogo" src="@/assets/about.svg">About</RouterLink>
+      <RouterLink to="/contact"><img class="menuLogo" src="@/assets/contact-phone.svg">Contact Us</RouterLink>
+    </nav>
+    </header>
+    <div class="wrapper">
+      <RouterView />
+    </div>
   </div>
 </template>
 
@@ -18,28 +32,128 @@ import OurMain from './components/OurMain.vue';
 .ourMain {
   display: flex;
   flex-direction: row;
-  margin-left: auto;
-  margin-right: auto;
-
+  width: 100vh;
+  min-height: 100vh;
+  /* background-color: rgba(255, 255, 255, 0.80); */
 }
+
+.menuLogo{
+  width: 20px;
+  margin-right: 10px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  min-width: 200px;
+  /* width: auto; */
+  /* width: min-content; */
+
+  max-width: 50vw;
+  /* max-height: max-content; */
+  height: max-content;
+  max-height: 10vh;
+  font-size: 1rem;
+  text-align: left;
+  /* margin-right: auto;
+  margin-left: auto; */
+  margin-bottom: auto;
+  margin-top: auto;
+  
+  
+  border: 1px solid hsla(160, 100%, 37%, 1);
+  border-radius: 15px;
+  background-color: white;
+}
+
+nav:hover{
+  box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
+}
+
+nav a.router-link-exact-active {
+  padding: 15px;
+  /* background-color: hsla(160, 100%, 37%, 1); */
+  color: var(--color-text);
+  border-top: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+}
+
+nav a.router-link-exact-active:first-of-type {
+  border-bottom: 2px solid var(--color-border);
+}
+
+nav a.router-link-exact-active:last-of-type {
+  border: 0;
+  border-top: 2px solid var(--color-border);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  padding: 5px 20px;
+  display: inline-block;
+  /* padding: 0 1rem; */
+  padding: 0;
+  /* border-left: 1px solid var(--color-border); that was the border at left side on nav */
+  justify-content: center;
+  align-items: center;
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
 
 /* header {
   line-height: 1.5;
-  max-height: 100vh;
+  max-height: 100vh; 
   width: 100%;
   top: 0;
   background-color: hsla(160, 100%, 37%, 1);
-} */
+}  */
+
+header {
+  line-height: 1.5;
+  min-height: 10vh;
+  max-height: 12.5vh; 
+  width: 100vw;
+  top: 0;
+  /* background-color: hsla(160, 100%, 37%, 1); */
+} 
+
 
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
+    /* place-items: center; */
     padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {
     margin: 0 2rem 0 0;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute; 
+    margin-left: 10vw;
+    margin-top: 12.5vh;
+    /* right: 0; */
+    width: 80vw;
+
+    min-height: 100vh;
+    height: max-content;
+    padding: 10px;
+
+    border: 1px solid #000;
+    border-radius: 15px;
+    /* max-width: 80vw;
+    /* padding-top: 10vh; This padding is for every view, it will create a gap on the top 10% */
+    /* min-height: 90vh; */
+    background-color: rgba(255, 255, 255, 0.70);
   }
 }
 </style>

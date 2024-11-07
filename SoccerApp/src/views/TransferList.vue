@@ -18,13 +18,11 @@ onMounted(() => {
 
 if (transfer.transferList.length > quantityPerSite)
     lastTransfer.value = transfer.transferList.length;
-console.log(firstTransfer.value + " " + lastTransfer.value);
 
 function viewTransfer() {
     if (page !== 0) {
         firstTransfer.value = (page - 1) * quantityPerSite;
         lastTransfer.value = (page * quantityPerSite) - 1;
-        console.log("Page: " + page + " First Element: " + firstTransfer.value + " Last Element: " + lastTransfer.value);
     }
 }
 

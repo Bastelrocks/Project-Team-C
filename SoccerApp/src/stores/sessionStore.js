@@ -32,6 +32,7 @@ export const sessionStore = defineStore('sessionStore', () => {
   /** Function to do SignIn
    * @param {String} email Valid E-mail address
    * @param {String} password 
+   * @returns {error} it will return a error in case if is not possible do the Login
   */
   async function logIn(email, password) {
     if (isAutenticated.value === false) {
@@ -42,8 +43,13 @@ export const sessionStore = defineStore('sessionStore', () => {
         }
       )
     }
+    return error;
   }
 
+  /**
+   * This Function will signUp In our case register a new User  
+   * It will return a error case something happen wrong.
+   */
   async function doSignUp(email, pwd) {
     const { data, error } = await supabase.auth.signUp(
       {
@@ -51,8 +57,11 @@ export const sessionStore = defineStore('sessionStore', () => {
         password: pwd,
       }
     );
+    return error;
   }
-
+  /**
+   * Do the Logout of the User
+   */
   async function logOut() {
     await supabase.auth.signOut();
   }
