@@ -53,32 +53,33 @@ function addNewTransfer() {
 <template>
     <tr>
         <td>
-            <select v-if="players.playerList.length === 0" v-model="newTransfer.playerID" disabled>
-                <option value="0" disabled selected>No Players to Select</option>
-            </select>
-            <select v-else v-model="newTransfer.playerID" v-on:change="onChangePlayer(newTransfer.playerID)">
-                <option value="0">Select Player</option>
-                <option v-for="player in players.playerList" v-bind:value="player.id">{{ player.firstName + " " +
+            <select v-if="newTransfer.clubOrigin > 0 && players.playerList.length > 0" v-model="newTransfer.playerID" v-on:change="onChangePlayer(newTransfer.playerID)">
+                <option :value=0>Select Player</option>
+                <option v-for="player in players.playerList" v-bind:value=player.id>{{ player.firstName + " " +
                     player.lastName || "loading..." }}</option>
+            </select>
+            <select v-else v-model="newTransfer.playerID" disabled>
+                <option :value=0 disabled selected>No Players to Select</option>
             </select>
         </td>
         <td>
             <select v-model="newTransfer.clubOrigin" v-on:change="getPlayersByClub(newTransfer.clubOrigin)">
-                <option value="0">Select Team</option>
-                <option v-for="club in teams.teamsList" v-bind:value="club.idTeam">{{ club.name || "loading..." }}
+                <option :value=0>Select Team</option>
+                <option v-for="club in teams.teamsList" v-bind:value=club.idTeam>{{ club.name || "loading..." }}
                 </option>
             </select>
         </td>
         <td>
-            <select v-if="newTransfer.clubOrigin > 0" v-model="newTransfer.clubDestination">
-                <option value="0">Select Team</option>
-                <option v-for="club in teams.teamDestinationList" v-bind:value="club.idTeam">{{ club.name ||
+            <select v-if="newTransfer.playerID > 0 && newTransfer.clubOrigin > 0" v-model="newTransfer.clubDestination">
+                <option :value=0>Select Team</option>
+                <option v-for="club in teams.teamDestinationList" v-bind:value=club.idTeam>{{ club.name ||
                     "loading..." }}</option>
             </select>
-
             <select v-else v-model="newTransfer.clubDestination" disabled>
-                <option value="0" selected>Select Team</option>
+                <option :value=0 selected>No Teams to Select</option>
             </select>
+
+
         </td>
         <td>
             <input type="date" v-model="newTransfer.transferDate" />
@@ -86,9 +87,6 @@ function addNewTransfer() {
         <td>
             <input class="transfervalue" type="number" min="0.00" step="0.25" v-model="newTransfer.marketValue"> M €
         </td>
-    </tr>
-    <tr>
-        <td colspan="5"></td>
     </tr>
     <tr>
         <td colspan="5" style="text-align: center;">
@@ -102,7 +100,19 @@ function addNewTransfer() {
     min-width: 60px;
     field-sizing: content;
 }
-button:hover{
+
+
+button {
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: center;
+    padding: 3px;
+    min-height: 28px;
+    min-width: 120px;
+    height: auto;
+}
+
+button:hover {
     background-color: hsla(160, 100%, 37%, 1);
     cursor: pointer;
 }

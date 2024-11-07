@@ -7,25 +7,47 @@ import AddNewTransfer from '@/components/TransferListComponents/AddNewTransfer.v
 let session = sessionStore();
 let transfer = transferStore();
 
-const quantityPerSite = 15;
+// const quantityPerSite = 15;
+let quantityPerSite = ref(15);
 let page = 1;
-let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite - 1);
+// let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite - 1);
+let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite.value);
 
-onMounted(() => {
-    transfer.loadTransfers();
+
+function maxPages(){
+    return parseInt(transfer.transferList.length/quantityPerSite.value) + 1;
 }
-);
+
+transfer.loadTransfers();
 
 if (transfer.transferList.length > quantityPerSite)
     lastTransfer.value = transfer.transferList.length;
 
 function viewTransfer() {
     if (page !== 0) {
-        firstTransfer.value = (page - 1) * quantityPerSite;
-        lastTransfer.value = (page * quantityPerSite) - 1;
+        firstTransfer.value = (page - 1) * quantityPerSite.value;
+        // lastTransfer.value = (page * quantityPerSite) - 1;
+        lastTransfer.value = (page * quantityPerSite.value);
     }
+    viewLogs();
 }
 
+function onchangeQuant(){
+    firstTransfer.value = (page - 1) * quantityPerSite.value;
+        // lastTransfer.value = (page * quantityPerSite) - 1;
+        if (transfer.transferList.length > quantityPerSite)
+            lastTransfer.value = transfer.transferList.length;
+        lastTransfer.value = (page * quantityPerSite.value);
+        viewLogs();
+}
+
+function viewLogs(){
+    console.log("Quantatiy per site: " + quantityPerSite.value);
+    console.log("First: " + firstTransfer.value + " Last: " + lastTransfer.value);
+    console.log("TransferList length: " + transfer.transferList.length);
+    console.log(maxPages());
+}
+viewLogs();
 </script>
 <template>
     <div>
@@ -41,9 +63,9 @@ function viewTransfer() {
         </thead>
         <tbody>
             <AddNewTransfer v-if="session.isAutenticated" />
-            <tr>
+            <!-- <tr>
                 <td class="no-border" colspan="5"></td>
-            </tr>
+            </tr> -->
             <tr v-if="transfer.transferList.length === 0">
                 <td colspan="5">No Transfer available</td>
             </tr>
@@ -55,21 +77,24 @@ function viewTransfer() {
                 <td>{{ transfer.transferDate }}</td>
                 <td class="marketValue">{{ transfer.marketValue }}M €</td>
             </tr>
-            <tr>
-                <td class="no-border" v-if="session.isAutenticated" colspan="5"></td>
-                <td class="no-border" v-else colspan="4"></td>
-            </tr>
         </tbody>
-        <tfoot v-if="transfer.transferList.length > quantityPerSite">
+        <tfoot>
             <tr>
-                <td class="navPage" v-if="page > 1" v-on:click="viewTransfer(page--)">back</td>
-                <td v-else>back</td>
+                <td>
+                    <button v-if="page > 1" v-on:click="viewTransfer(page--)" class="navPage">Back</button>
+                </td>
 
-                <td class="no-border" colspan="3"></td>
-
-                <td class="navPage" v-if="transfer.transferList.length > (page * quantityPerSite)"
-                    v-on:click="viewTransfer(page++)">next</td>
-                <td v-else>next</td>
+                <td class="no-border" colspan="3">
+                    Quantity per page    
+                    <select v-model="quantityPerSite" v-on:change="onchangeQuant()">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </td>
+                <td>
+                    <button v-if="maxPages() > 1 && page < maxPages()" v-on:click="viewTransfer(page++)" class="navPage">Next</button>
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -80,7 +105,8 @@ div{
     margin-left: auto;
     margin-right: auto;
 }
-/* td {
+
+button.navPage {
     border: 1px solid black;
     border-radius: 4px;
     text-align: center;
@@ -88,9 +114,9 @@ div{
     min-height: 28px;
     min-width: 120px;
     height: auto;
-} */
+}
 
-td.navPage:hover {
+button.navPage:hover {
     background-color: hsla(160, 100%, 37%, 1);
     cursor: pointer;
 }
@@ -101,7 +127,7 @@ table {
 }
 
 td.no-border {
-    border: 0px;
+    text-align: center;
 }
 
 td.marketValue {
