@@ -44,8 +44,8 @@ console.table(player.playerList);
     <DeletePlayer v-if="session.isAutenticated"></DeletePlayer>
     <p v-else>Log in to delete players</p>
     <div class="tablePlayers">
-      <table>
-        <thead class="tablehead">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
             <th>Image</th>
             <th>Name</th>
@@ -59,28 +59,28 @@ console.table(player.playerList);
         </thead>
         <tbody>
           <tr v-for="item in player.playerList.slice(firstPlayer, lastPlayer)" :key="item.id">
-            <td v-if="item.image" style="text-align: center" class="tableCell">
+            <td v-if="item.image" style="text-align: center">
               <div class="playerImg">
                 <img :src="item.image" class="playerImage" />
               </div>
             </td>
-            <td v-else class="tableCell">
+            <td v-else>
               <div class="playerImg">
                 <img src="@/assets/football-player.svg" class="playerImage" />
               </div>
             </td>
-            <td class="tableCell">{{ item.firstName }} {{ item.lastName }}</td>
-            <td style="text-align: center" class="tableCell">{{ item.backNumber }}</td>
-            <td class="tableCell">{{ item.position }}</td>
-            <td class="tableCell">{{ item.birthDate }}</td>
-            <td class="tableCell">{{ item.teams.name }}</td>
-            <td v-if="item.active" class="tableCell">Active</td>
-            <td v-else class="tableCell">Retired</td>
-            <td v-if="session.isAutenticated & item.active" class="tableCell">
-              <button @click="player.setRetired(item.id)">Set retired</button>
+            <td >{{ item.firstName }} {{ item.lastName }}</td>
+            <td style="text-align: center">{{ item.backNumber }}</td>
+            <td >{{ item.position }}</td>
+            <td >{{ item.birthDate }}</td>
+            <td >{{ item.teams.name }}</td>
+            <td v-if="item.active" >Active</td>
+            <td v-else >Retired</td>
+            <td v-if="session.isAutenticated & item.active" >
+              <button class="statusBtn" @click="player.setRetired(item.id)">Set retired</button>
             </td>
-            <td v-if="session.isAutenticated & !item.active" class="tableCell">
-              <button @click="player.setActive(item.id)">Set active</button>
+            <td v-if="session.isAutenticated & !item.active" >
+              <button class="statusBtn" @click="player.setActive(item.id)">Set active</button>
             </td>
           </tr>
         </tbody>
@@ -89,7 +89,8 @@ console.table(player.playerList);
                 <td class="navPage" v-if="page > 1" v-on:click="viewPlayer(page--)">back</td>
                 <td v-else>back</td>
 
-                <td class="no-border" colspan="5"></td>
+                <td v-if="session.isAutenticated" class="no-border" colspan="6"></td>
+                <td v-else class="no-border" colspan="5"></td>
 
                 <td class="navPage" v-if="player.playerList.length > (page * quantityPerSite)"
                     v-on:click="viewPlayer(page++)">next</td>
@@ -102,6 +103,9 @@ console.table(player.playerList);
 </template>
 
 <style scoped>
+.table-dark{
+  font-weight: bold;
+}
 .soccerfield {
   /* background-size:auto;
   background-color: green;
@@ -114,7 +118,7 @@ p {
 }
 h1 {
   text-align: center;
-  color: rgb(208, 214, 24);
+  color: black;
 }
 .tablePlayers {
   display: flex;
@@ -139,5 +143,14 @@ h1 {
 .tableCell {
   border: 1px solid hsla(160, 100%, 37%, 1);
   padding: 0 5px;
+}
+td.navPage:hover {
+    background-color: hsla(160, 100%, 37%, 1);
+    cursor: pointer;
+}
+
+.statusBtn:hover{
+  background-color: hsla(160, 100%, 37%, 1);
+    cursor: pointer;
 }
 </style>

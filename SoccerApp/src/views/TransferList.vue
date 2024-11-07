@@ -28,8 +28,9 @@ function viewTransfer() {
 
 </script>
 <template>
-    <table>
-        <thead>
+    <div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>Name</th>
                 <th>Club origin</th>
@@ -72,9 +73,14 @@ function viewTransfer() {
             </tr>
         </tfoot>
     </table>
+    </div>
 </template>
 <style scoped>
-td {
+div{
+    margin-left: auto;
+    margin-right: auto;
+}
+/* td {
     border: 1px solid black;
     border-radius: 4px;
     text-align: center;
@@ -82,7 +88,7 @@ td {
     min-height: 28px;
     min-width: 120px;
     height: auto;
-}
+} */
 
 td.navPage:hover {
     background-color: hsla(160, 100%, 37%, 1);
@@ -90,12 +96,8 @@ td.navPage:hover {
 }
 
 table {
-    background-color: white;
-    padding: 5px;
-    margin: auto;
     margin-top: 10vh;
-    border: 1px solid black;
-    border-radius: 4px;
+    
 }
 
 td.no-border {
