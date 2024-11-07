@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { transferStore } from '@/stores/transferStore';
 import { sessionStore } from '@/stores/sessionStore';
-import AddNewTransfer from '@/components/TransferListComponents/AddNewTransfer.vue';
+import AddNewTransfer from '@/components/AddNewTransfer.vue';
 
 let session = sessionStore();
 let transfer = transferStore();
