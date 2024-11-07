@@ -77,7 +77,7 @@ async function fetchSquadSize(teamId) {
           </div>
         </td>
         <td>{{ team.name }}</td>
-        <td style="text-align: center">{{ team.foundationYear }}</td>
+        <td>{{ team.foundationYear }}</td>
         <td>{{ squadSizes[team.idTeam] || "Loading..." }}</td>
       </tr>
     </tbody>
