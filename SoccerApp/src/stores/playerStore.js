@@ -49,8 +49,8 @@ export const playerStore = defineStore('playerStore', () => {
     }
 
     /**
-     * This function will set the player 
-     * @param {number} id 
+     * This function will set the retired player to active 
+     * @param {number} id is the playerID
      */
     async function setActive(id) {
         console.log("Change Status for player with id", id, "clicked");
@@ -60,8 +60,8 @@ export const playerStore = defineStore('playerStore', () => {
           .eq("id", id);
       }
       /**
-       * 
-       * @param {number} id 
+       * This function will set the player to retired 
+       * @param {number} id is the playerID
        */
       async function setRetired(id) {
         console.log("Change Status for player with id", id, "clicked");
