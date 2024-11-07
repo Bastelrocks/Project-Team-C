@@ -9,6 +9,7 @@ let countries = countriesStore();
 
 countries.getCountries();
 
+const registeredSucessfull = ref(false);
 let actualYear = new Date().getFullYear();
 
 let newClub = ref(
@@ -21,14 +22,14 @@ let newClub = ref(
 )
 
 function addManager() {
-    // console.table(newClub.value);
-    // console.table(profileData.value);
     if (newClub.value.countrie_id === 0) alert("Please Select a Countrie");
     else{
-        //session.doSignUp(session.loginData.email, session.loginData.password);
+        if(!session.doSignUp(session.loginData.email, session.loginData.password))
+            alert("Something happen wrong");
 
         let teams = teamsStore();
         teams.addNewTeam(newClub.value);
+        registeredSucessfull.value = true;
     }
 }
 
@@ -68,9 +69,7 @@ function addManager() {
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="email">Email: </label>
-                        </td>
+                        <td><label for="email">Email: </label></td>
                         <td>
                             <input id="email" type="email" placeholder="E-mail" v-model=session.loginData.email
                                 required />
@@ -98,6 +97,11 @@ function addManager() {
                         </td>
                     </tr>
                 </tbody>
+                <tfoot v-if="registeredSucessfull">
+                    <tr>
+                        <td colspan="2">You Registered your team Sucessfull</td>
+                    </tr>
+                </tfoot>
             </table>
         </form>
     </div>
@@ -117,5 +121,9 @@ function addManager() {
 
 form {
     margin: auto;
+}
+
+tfoot tr td{
+    color: hsla(160, 100%, 37%, 1);
 }
 </style>

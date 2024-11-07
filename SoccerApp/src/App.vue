@@ -47,19 +47,22 @@ nav {
   flex-direction: row;
   min-width: 200px;
   /* width: auto; */
+  /* width: min-content; */
+
   max-width: 50vw;
   /* max-height: max-content; */
+  height: max-content;
   max-height: 10vh;
   font-size: 1rem;
   text-align: left;
   /* margin-right: auto;
-  margin-left: auto;
+  margin-left: auto; */
   margin-bottom: auto;
-  margin-top: auto; */
+  margin-top: auto;
   
   
   border: 1px solid hsla(160, 100%, 37%, 1);
-  border-radius: 15%;
+  border-radius: 15px;
   background-color: white;
 }
 
@@ -92,7 +95,10 @@ nav a {
   padding: 5px 20px;
   display: inline-block;
   /* padding: 0 1rem; */
-   /* border-left: 1px solid var(--color-border); that was the border at left side on nav*/
+  padding: 0;
+  /* border-left: 1px solid var(--color-border); that was the border at left side on nav */
+  justify-content: center;
+  align-items: center;
 }
 
 nav a:first-of-type {
@@ -110,8 +116,9 @@ nav a:first-of-type {
 
 header {
   line-height: 1.5;
+  min-height: 10vh;
   max-height: 12.5vh; 
-  width: 100%;
+  width: 100vw;
   top: 0;
   /* background-color: hsla(160, 100%, 37%, 1); */
 } 
@@ -129,8 +136,8 @@ header {
   }
 
   .wrapper {
-    /* display: flex;
-    flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
     position: absolute; 
     margin-left: 10vw;
     margin-top: 12.5vh;
@@ -140,7 +147,10 @@ header {
     min-height: 100vh;
     height: max-content;
     padding: 10px;
-    /* max-width: 80vw; */
+
+    border: 1px solid #000;
+    border-radius: 15px;
+    /* max-width: 80vw;
     /* padding-top: 10vh; This padding is for every view, it will create a gap on the top 10% */
     /* min-height: 90vh; */
     background-color: rgba(255, 255, 255, 0.70);

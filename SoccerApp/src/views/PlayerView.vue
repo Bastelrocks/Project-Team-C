@@ -17,7 +17,7 @@ let firstPlayer = ref(0), lastPlayer = ref(quantityPerSite - 1);
 
 if (player.playerList.length > quantityPerSite)
     lastPlayer.value = player.playerList.length;
-console.log(firstPlayer.value + " " + lastPlayer.value);
+console.log("FirstPlayer Elemente: " + firstPlayer.value + " LastPlayerElement: " + lastPlayer.value);
 
 
 onMounted(() => {
@@ -32,7 +32,8 @@ function viewPlayer() {
     }
 }
 
-console.log("Array", player.playerList);
+console.log("Array: ")
+console.table(player.playerList);
 </script>
 
 <template>
@@ -69,9 +70,7 @@ console.log("Array", player.playerList);
               </div>
             </td>
             <td class="tableCell">{{ item.firstName }} {{ item.lastName }}</td>
-            <td style="text-align: center" class="tableCell">
-              {{ item.backNumber }}
-            </td>
+            <td style="text-align: center" class="tableCell">{{ item.backNumber }}</td>
             <td class="tableCell">{{ item.position }}</td>
             <td class="tableCell">{{ item.birthDate }}</td>
             <td class="tableCell">{{ item.teams.name }}</td>
@@ -90,7 +89,7 @@ console.log("Array", player.playerList);
                 <td class="navPage" v-if="page > 1" v-on:click="viewPlayer(page--)">back</td>
                 <td v-else>back</td>
 
-                <td class="no-border" colspan="4"></td>
+                <td class="no-border" colspan="5"></td>
 
                 <td class="navPage" v-if="player.playerList.length > (page * quantityPerSite)"
                     v-on:click="viewPlayer(page++)">next</td>
@@ -103,12 +102,13 @@ console.log("Array", player.playerList);
 </template>
 
 <style scoped>
-/* .soccerfield {
-    background-size:auto;
-    background-color: green;
-    background-repeat: repeat;
-
-} */
+.soccerfield {
+  /* background-size:auto;
+  background-color: green;
+  background-repeat: repeat; */
+  margin-left: auto;
+  margin-right: auto;
+}
 p {
   text-align: center;
 }
