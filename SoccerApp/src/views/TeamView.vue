@@ -48,26 +48,26 @@ async function fetchSquadSize(teamId) {
         <option v-for="country in countryList" :value="country.id">Teams in {{ country.name }}</option>
     </select>
     </div>
-    <table>
-        <thead class="tablehead">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
-                <th>Logo</th>
-                <th>Name</th>
-                <th>Founded in</th>
-                <th>Squad Size</th>
+                <th scope="col">Logo</th>
+                <th scope="col">Team Name</th>
+                <th scope="col">Founded in</th>
+                <th scope="col">Squad Size</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="team in teamList" :key="team.idTeam" @mouseenter="fetchSquadSize(team.idTeam)">
-                <td v-if="team.image" style="text-align: center;" class="tableCell">
+                <td v-if="team.image" style="text-align: center;">
                     <div class="playerImg"><img :src="team.image" class="playerImage"></div>
                 </td>
-                <td v-else class="tableCell">
+                <td v-else>
                     <div class="playerImg"><img src="@/assets/clublogo2.svg" class="playerImage"></div>
                 </td>
-                <td class="tableCell">{{ team.name }}</td>
-                <td style="text-align: center;" class="tableCell">{{ team.foundationYear }}</td>
-                <td class="tableCell">{{ squadSizes[team.idTeam] || 'Loading...' }}</td>
+                <td >{{ team.name }}</td>
+                <td style="text-align: center;" >{{ team.foundationYear }}</td>
+                <td >{{ squadSizes[team.idTeam] || 'Loading...' }}</td>
             </tr>
         </tbody>
     </table>
@@ -75,6 +75,10 @@ async function fetchSquadSize(teamId) {
 </template>
 
 <style scoped>
+div{
+    margin-left: auto;
+    margin-right: auto;
+}
 p{
     text-align: center;
 }

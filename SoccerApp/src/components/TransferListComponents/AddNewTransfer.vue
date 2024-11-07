@@ -102,4 +102,8 @@ function addNewTransfer() {
     min-width: 60px;
     field-sizing: content;
 }
+button:hover{
+    background-color: hsla(160, 100%, 37%, 1);
+    cursor: pointer;
+}
 </style>
