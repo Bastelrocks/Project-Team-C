@@ -32,7 +32,7 @@ let session = sessionStore();
 .ourMain {
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 100vh;
   min-height: 100vh;
   /* background-color: rgba(255, 255, 255, 0.80); */
 }
@@ -120,22 +120,26 @@ header {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
+    /* place-items: center; */
     padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {
     margin: 0 2rem 0 0;
   }
+
   .wrapper {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
+    /* display: flex;
+    flex-direction: column;*/
+    position: absolute; 
+    margin-left: 10vw;
     margin-top: 12.5vh;
-    right: 0;
-    min-width: 100vw;
+    /* right: 0; */
+    width: 80vw;
+
     min-height: 100vh;
-    height: 87.5vh;
+    height: max-content;
+    padding: 10px;
     /* max-width: 80vw; */
     /* padding-top: 10vh; This padding is for every view, it will create a gap on the top 10% */
     /* min-height: 90vh; */
