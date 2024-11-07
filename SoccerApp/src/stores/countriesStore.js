@@ -11,6 +11,7 @@ export const countriesStore = defineStore('countriesStore', () => {
      * That array need to be ref for changes be visible in the website
      */
     function clearArray() {
+        let arrayLength = countrieList.value.length;
         if (countrieList.value.length > 0)
             for (let i = 0; i <= arrayLength; i++)
                 countrieList.value.pop();
