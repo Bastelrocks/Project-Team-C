@@ -1,8 +1,7 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '@/lib/supabaseClient';
 
-/* Maybe at this place we will conect the database */
 export const sessionStore = defineStore('sessionStore', () => {
   let isAutenticated = ref(false);
 
@@ -13,7 +12,9 @@ export const sessionStore = defineStore('sessionStore', () => {
       password: "badPassword.1234"
     });
 
-  /* Not Sure if we need this */
+  /**
+   * this function will reco
+   */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
       if (session) isAutenticated.value = true;
