@@ -57,7 +57,7 @@ function viewTransfer() {
             </tr>
             <tr>
                 <td class="no-border" v-if="session.isAutenticated" colspan="5"></td>
-                <td class="no-border" v-else colspan="4"></td>
+                <td class="no-border" v-else colspan="5"></td>
             </tr>
         </tbody>
         <tfoot v-if="transfer.transferList.length > quantityPerSite">
