@@ -10,30 +10,35 @@ import DeletePlayer from "@/components/DeletePlayer.vue";
 let session = sessionStore();
 const player = playerStore();
 
-const quantityPerSite = 15;
+const quantityPerSite = ref(15);
 let page = 1;
-let firstPlayer = ref(0), lastPlayer = ref(quantityPerSite - 1);
+let firstPlayer = ref(0), lastPlayer = ref(quantityPerSite.value);
 
+
+function maxPages() {
+  return parseInt(player.playerList.length / quantityPerSite.value) + 1;
+}
 
 if (player.playerList.length > quantityPerSite)
-    lastPlayer.value = player.playerList.length;
-console.log("FirstPlayer Elemente: " + firstPlayer.value + " LastPlayerElement: " + lastPlayer.value);
-
+  lastPlayer.value = player.playerList.length;
 
 onMounted(() => {
   player.getPlayers();
 });
 
 function viewPlayer() {
-    if (page !== 0) {
-        firstPlayer.value = (page - 1) * quantityPerSite;
-        lastPlayer.value = (page * quantityPerSite) - 1;
-        console.log("Page: " + page + " First Element: " + firstPlayer.value + " Last Element: " + lastPlayer.value);
-    }
+  if (page !== 0) {
+    firstPlayer.value = (page - 1) * quantityPerSite.value;
+    lastPlayer.value = (page * quantityPerSite.value);
+  }
+}
+function onchangeQuant() {
+  firstPlayer.value = (page - 1) * quantityPerSite.value;
+  if (player.playerList.length > quantityPerSite)
+    lastPlayer.value = player.playerList.length;
+  lastPlayer.value = (page * quantityPerSite.value);
 }
 
-console.log("Array: ")
-console.table(player.playerList);
 </script>
 
 <template>
@@ -69,33 +74,40 @@ console.table(player.playerList);
                 <img src="@/assets/football-player.svg" class="playerImage" />
               </div>
             </td>
-            <td >{{ item.firstName }} {{ item.lastName }}</td>
+            <td>{{ item.firstName }} {{ item.lastName }}</td>
             <td style="text-align: center">{{ item.backNumber }}</td>
-            <td >{{ item.position }}</td>
-            <td >{{ item.birthDate }}</td>
-            <td >{{ item.teams.name }}</td>
-            <td v-if="item.active" >Active</td>
-            <td v-else >Retired</td>
-            <td v-if="session.isAutenticated & item.active" >
+            <td>{{ item.position }}</td>
+            <td>{{ item.birthDate }}</td>
+            <td>{{ item.teams.name }}</td>
+            <td v-if="item.active">Active</td>
+            <td v-else>Retired</td>
+            <td v-if="session.isAutenticated & item.active">
               <button class="statusBtn" @click="player.setRetired(item.id)">Set retired</button>
             </td>
-            <td v-if="session.isAutenticated & !item.active" >
+            <td v-if="session.isAutenticated & !item.active">
               <button class="statusBtn" @click="player.setActive(item.id)">Set active</button>
             </td>
           </tr>
         </tbody>
-        <tfoot v-if="player.playerList.length > quantityPerSite">
-            <tr>
-                <td class="navPage" v-if="page > 1" v-on:click="viewPlayer(page--)">back</td>
-                <td v-else>back</td>
+        <tfoot>
+          <tr>
+            <td>
+              <button v-if="page > 1" v-on:click="viewPlayer(page--)" class="navPage">Back</button>
+            </td>
+            <td class="quantPage" colspan="5">
+              Quantity per page
+              <select v-model="quantityPerSite" v-on:change="onchangeQuant()">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
 
-                <td v-if="session.isAutenticated" class="no-border" colspan="6"></td>
-                <td v-else class="no-border" colspan="5"></td>
-
-                <td class="navPage" v-if="player.playerList.length > (page * quantityPerSite)"
-                    v-on:click="viewPlayer(page++)">next</td>
-                <td v-else>next</td>
-            </tr>
+            <td>
+              <button v-if="maxPages() > 1 && page < maxPages()" v-on:click="viewPlayer(page++)"
+                class="navPage">Next</button>
+            </td>
+          </tr>
         </tfoot>
       </table>
     </div>
@@ -103,9 +115,10 @@ console.table(player.playerList);
 </template>
 
 <style scoped>
-.table-dark{
+.table-dark {
   font-weight: bold;
 }
+
 .soccerfield {
   /* background-size:auto;
   background-color: green;
@@ -113,44 +126,66 @@ console.table(player.playerList);
   margin-left: auto;
   margin-right: auto;
 }
+
 p {
   text-align: center;
 }
+
 h1 {
   text-align: center;
   color: black;
 }
+
 .tablePlayers {
   display: flex;
   justify-content: center;
   color: hsla(160, 100%, 37%, 1);
 }
+
 .tablehead {
   font-size: 1.4em;
   text-decoration: underline;
   font-weight: bold;
 }
+
 .playerImage {
   width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .playerImg {
   display: flex;
   justify-content: center;
 }
+
 .tableCell {
   border: 1px solid hsla(160, 100%, 37%, 1);
   padding: 0 5px;
 }
-td.navPage:hover {
-    background-color: hsla(160, 100%, 37%, 1);
-    cursor: pointer;
+
+button.navPage {
+  border: 1px solid black;
+  border-radius: 4px;
+  text-align: center;
+  padding: 3px;
+  min-height: 28px;
+  min-width: 120px;
+  height: auto;
 }
 
-.statusBtn:hover{
+button.navPage:hover {
   background-color: hsla(160, 100%, 37%, 1);
-    cursor: pointer;
+  cursor: pointer;
+}
+
+td.quantPage {
+  text-align: center;
+}
+
+.statusBtn:hover {
+  background-color: hsla(160, 100%, 37%, 1);
+  cursor: pointer;
 }
 </style>

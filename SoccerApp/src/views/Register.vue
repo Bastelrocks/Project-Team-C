@@ -28,14 +28,15 @@ let newClub = ref(
  */
 function addManager() {
     if (newClub.value.countrie_id === 0) alert("Please Select a Countrie");
-    else{
-        if(!session.doSignUp(session.loginData.email, session.loginData.password))
+    else {
+        if (!session.doSignUp(session.loginData.email, session.loginData.password))
             alert("Something happen wrong");
-
-        let teams = teamsStore();
-        teams.addNewTeam(newClub.value);
-        registeredSucessfull.value = true;
-        router.push({name: "home"}); /* This function is for redirecting to home */
+        else {
+            let teams = teamsStore();
+            teams.addNewTeam(newClub.value);
+            registeredSucessfull.value = true;
+            router.push({ name: "home" }); /* This function is for redirecting to home */
+        }
     }
 }
 
@@ -79,7 +80,7 @@ function addManager() {
                             <label for="fullName">Full Name: </label>
                         </td>
                         <td>
-                            <input id="fullName" type="text" v-model="newClub.full_name" required/>
+                            <input id="fullName" type="text" v-model="newClub.full_name" required />
                         </td>
                     </tr>
                     <tr>
@@ -129,7 +130,7 @@ form {
     margin: auto;
 }
 
-tfoot tr td{
+tfoot tr td {
     color: hsla(160, 100%, 37%, 1);
 }
 </style>

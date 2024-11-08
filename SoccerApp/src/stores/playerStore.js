@@ -2,8 +2,6 @@ import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 import { supabase } from '@/lib/supabaseClient.js';
 
-//Define the player store
-
 export const playerStore = defineStore('playerStore', () => {
     const playerList = ref([]);
     let tableName = "player";
@@ -54,7 +52,6 @@ export const playerStore = defineStore('playerStore', () => {
      * @param {number} id is the playerID
      */
     async function setActive(id) {
-        console.log("Change Status for player with id", id, "clicked");
         const { error } = await supabase
           .from("player")
           .update({ active: "TRUE" })
@@ -65,7 +62,6 @@ export const playerStore = defineStore('playerStore', () => {
        * @param {number} id is the playerID
        */
       async function setRetired(id) {
-        console.log("Change Status for player with id", id, "clicked");
         const { error } = await supabase
           .from("player")
           .update({ active: "FALSE" })

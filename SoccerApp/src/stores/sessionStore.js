@@ -5,27 +5,27 @@ import { supabase } from '@/lib/supabaseClient';
 export const sessionStore = defineStore('sessionStore', () => {
   let isAutenticated = ref(false);
 
-  /* To remove at the End */
   let loginData = ref(
     {
-      email: "victor.martins.1310@hotmail.com",
-      password: "badPassword.1234"
+      email: "",
+      password: ""
     });
 
   /**
-   * this function will reco
+   * this function will recognize if exist a session or if someone logged out
    */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
-    if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
+    if (event === 'INITIAL_SESSION') { // verifies if exist a session
       if (session) isAutenticated.value = true;
       else isAutenticated.value = false;
     }
-    else if (event === 'SIGNED_IN')  {
-      isAutenticated.value = true; }
+    else if (event === 'SIGNED_IN') {
+      isAutenticated.value = true;
+    }
     else if (event === 'SIGNED_OUT') { isAutenticated.value = false; }
- // else if (event === 'PASSWORD_RECOVERY') { console.log(event, session) } 
- // else if (event === 'TOKEN_REFRESHED')   { console.log(event, session) }
- // else if (event === 'USER_UPDATED')      { console.log(event, session) }
+    // else if (event === 'PASSWORD_RECOVERY') { console.log(event, session) } 
+    // else if (event === 'TOKEN_REFRESHED')   { console.log(event, session) }
+    // else if (event === 'USER_UPDATED')      { console.log(event, session) }
   })
   // call unsubscribe to remove the callback
   //  sessionData.subscription.unsubscribe();
@@ -36,14 +36,12 @@ export const sessionStore = defineStore('sessionStore', () => {
    * @returns {error} it will return a error in case if is not possible do the Login
   */
   async function logIn(email, password) {
-    if (isAutenticated.value === false) {
-      const { data, error } = await supabase.auth.signInWithPassword(
-        {
-          email: email,
-          password: password
-        }
-      )
-    }
+    const { data, error } = await supabase.auth.signInWithPassword(
+      {
+        email: email,
+        password: password
+      }
+    )
     return error;
   }
 
@@ -52,6 +50,7 @@ export const sessionStore = defineStore('sessionStore', () => {
    * It will return a error case something happen wrong.
    */
   async function doSignUp(email, pwd) {
+    // console.log("Email: " + email + " Password: " + pwd);
     const { data, error } = await supabase.auth.signUp(
       {
         email: email,

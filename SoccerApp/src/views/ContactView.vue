@@ -1,4 +1,19 @@
 <script setup>
+import { supabase } from '@/lib/supabaseClient';
+
+
+let contactRequest = {
+    full_name: "",
+    email: "",
+    message: ""
+}
+
+async function sendRequest(){
+    const { data, error } = await supabase.from("contact_requests").insert(contactRequest);
+    contactRequest.full_name = "";
+    contactRequest.email = "";
+    contactRequest.message = "";
+}
 
 </script>
 
@@ -7,15 +22,15 @@
     <h2>Contact Us</h2>
     <p>If you have any questions, feedback, or suggestions, feel free to reach out to us. We’d love to hear from you!</p>
     
-    <form id="contactForm">
+    <form id="contactForm" v-on:submit.prevent="sendRequest()">
         <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+        <input v-model="contactRequest.full_name" type="text" id="name" name="name" placeholder="Your Full Name" required>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+        <input v-model="contactRequest.email" type="email" id="email" name="email" placeholder="Your Email Address" required>
 
         <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" placeholder="Write your message here" required></textarea>
+        <textarea v-model="contactRequest.message" id="message" name="message" rows="4" placeholder="Write your message here" required></textarea>
         
         <button type="submit">Send Message</button>
     </form>
