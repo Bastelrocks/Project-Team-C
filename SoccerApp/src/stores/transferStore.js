@@ -31,7 +31,7 @@ export const transferStore = defineStore('transferStore', () => {
             clubDestination: teams!clubDestination (name),
             id,
             transferDate,
-            marketValue`);
+            marketValue`).order('transferDate', {ascending: false});
         if (error) {
             console.error(error);
         }
@@ -46,20 +46,6 @@ export const transferStore = defineStore('transferStore', () => {
         const { data } = await supabase.from("player").update(obj).eq("id", playerID).select();
     }
 
-    async function getTransfer(id) {
-        const { data } = await supabase.from(tableName).select(`
-            firstName: player!playerID (firstName),
-            lastName: player!playerID (lastName),
-            clubOrigin: teams!clubOrigin (name),
-            clubDestination: teams!clubDestination (name),
-            id,
-            transferDate,
-            marketValue`).eq("id", id);
-        data.forEach(transfer => {
-            transferList.value.push(transfer);
-        })
-    }
-
     /** 
      * @description This function will add a new Transfer in Database  
      * 1 - will insert the data passed by transfer  
@@ -70,7 +56,7 @@ export const transferStore = defineStore('transferStore', () => {
     async function addNewTransfer(transferObj) {
         const { data, error } = await supabase.from(tableName).insert(transferObj).select();
         updatePlayer(data[0].playerID, data[0].clubDestination, data[0].marketValue);
-        getTransfer(data[0].id);
+        loadTransfers();
     }
     return { transferList, getAllTransfers, loadTransfers, addNewTransfer };
 })
