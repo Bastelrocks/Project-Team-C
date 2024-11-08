@@ -5,6 +5,8 @@ import TransferList from '@/views/TransferList.vue'
 import Register from '@/views/Register.vue'
 import PlayerView from '@/views/PlayerView.vue'
 import ContactView from '@/views/ContactView.vue'
+import NotFound from '../components/NotFound.vue'; // استيراد المكوّن NotFound
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +15,16 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/AboutView.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound,
     },
     {
       path: '/teams',
@@ -53,6 +65,6 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
-})
+});
 
-export default router
+export default router;
