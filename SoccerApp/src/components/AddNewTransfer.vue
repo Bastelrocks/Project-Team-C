@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { teamsStore } from '@/stores/teamsStore';
 import { playerStore } from '@/stores/playerStore';
 import { transferStore } from '@/stores/transferStore';
@@ -16,8 +16,14 @@ let newTransfer = ref({
     marketValue: 0.25
 })
 
-teams.getAllTeams();
+onMounted(() => {
+    teams.getAllTeams();
+})
 
+/**
+ * It will get the players by
+ * @param {number} clubID the id that passed selected select menu
+ */
 function getPlayersByClub(clubID) {
     newTransfer.value.playerID = 0;
     players.getPlayersByClub(clubID);
@@ -25,13 +31,22 @@ function getPlayersByClub(clubID) {
 }
 
 function onChangePlayer(playerID) {
-    players.getPlayer(playerID).then(
-        pl => {
-            newTransfer.value.marketValue = pl.market_value;
-        }
-    )
+    if (playerID > 0){
+        players.getPlayer(playerID).then(
+            pl => {
+                newTransfer.value.marketValue = pl.market_value;
+            }
+        )
+    }else newTransfer.value.marketValue = 0;
 }
 
+/**
+ * This will add add a new Transfer
+ * Firstly it verify if all fields are filled  
+ * In case not it will give a alert message
+ * If all fields are filled then it calls the addNewTransfer function where in fact the date will be stored 
+ * It will reset all values
+ */
 function addNewTransfer() {
     if (newTransfer.value.playerID === 0
         && newTransfer.value.clubOrigin === 0
@@ -78,8 +93,6 @@ function addNewTransfer() {
             <select v-else v-model="newTransfer.clubDestination" disabled>
                 <option :value=0 selected>No Teams to Select</option>
             </select>
-
-
         </td>
         <td>
             <input type="date" v-model="newTransfer.transferDate" />
@@ -100,7 +113,6 @@ function addNewTransfer() {
     min-width: 60px;
     field-sizing: content;
 }
-
 
 button {
     border: 1px solid black;

@@ -14,13 +14,16 @@ let players = playerStore();
 
 let countryID = ref(0);
 let countryList = countries.countrieList;
-let teamList = teams.teamsList;
+// let teamList = teams.teamsList;
 let squadSizes = ref({});
 
 // Load countries and teams initially
 onMounted(() => {
     countries.getCountries();
     teams.getAllTeams();
+    // teams.teamsList.forEach(team => {
+    //     fetchSquadSize(team.idTeam);
+    // })
 });
 
 // Functions
@@ -58,16 +61,17 @@ async function fetchSquadSize(teamId) {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="team in teamList" :key="team.idTeam" @mouseenter="fetchSquadSize(team.idTeam)">
+            <tr v-for="team in teams.teamsList" :key="team.idTeam" @mouseenter="fetchSquadSize(team.idTeam)">
                 <td v-if="team.image" style="text-align: center;">
                     <div class="playerImg"><img :src="team.image" class="playerImage"></div>
                 </td>
                 <td v-else>
                     <div class="playerImg"><img src="@/assets/clublogo2.svg" class="playerImage"></div>
                 </td>
-                <td >{{ team.name }}</td>
-                <td style="text-align: center;" >{{ team.foundationYear }}</td>
-                <td >{{ squadSizes[team.idTeam] || 'Loading...' }}</td>
+                <td>{{ team.name }}</td>
+                <td style="text-align: center;">{{ team.foundationYear }}</td>
+                <td v-if="squadSizes[team.idTeam] === 0" style="text-align: center;">{{ 0 }}</td>
+                <td v-else style="text-align: center;">{{ squadSizes[team.idTeam] || 'Loading...' }}</td>
             </tr>
         </tbody>
     </table>

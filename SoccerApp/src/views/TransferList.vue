@@ -2,17 +2,14 @@
 import { onMounted, ref } from 'vue';
 import { transferStore } from '@/stores/transferStore';
 import { sessionStore } from '@/stores/sessionStore';
-import AddNewTransfer from '@/components/TransferListComponents/AddNewTransfer.vue';
+import AddNewTransfer from '@/components/AddNewTransfer.vue';
 
 let session = sessionStore();
 let transfer = transferStore();
 
-// const quantityPerSite = 15;
 let quantityPerSite = ref(15);
 let page = 1;
-// let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite - 1);
 let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite.value);
-
 
 function maxPages(){
     return parseInt(transfer.transferList.length/quantityPerSite.value) + 1;
@@ -26,7 +23,6 @@ if (transfer.transferList.length > quantityPerSite)
 function viewTransfer() {
     if (page !== 0) {
         firstTransfer.value = (page - 1) * quantityPerSite.value;
-        // lastTransfer.value = (page * quantityPerSite) - 1;
         lastTransfer.value = (page * quantityPerSite.value);
     }
     viewLogs();
@@ -34,20 +30,10 @@ function viewTransfer() {
 
 function onchangeQuant(){
     firstTransfer.value = (page - 1) * quantityPerSite.value;
-        // lastTransfer.value = (page * quantityPerSite) - 1;
         if (transfer.transferList.length > quantityPerSite)
             lastTransfer.value = transfer.transferList.length;
         lastTransfer.value = (page * quantityPerSite.value);
-        viewLogs();
 }
-
-function viewLogs(){
-    console.log("Quantatiy per site: " + quantityPerSite.value);
-    console.log("First: " + firstTransfer.value + " Last: " + lastTransfer.value);
-    console.log("TransferList length: " + transfer.transferList.length);
-    console.log(maxPages());
-}
-viewLogs();
 </script>
 <template>
     <div>
@@ -63,9 +49,6 @@ viewLogs();
         </thead>
         <tbody>
             <AddNewTransfer v-if="session.isAutenticated" />
-            <!-- <tr>
-                <td class="no-border" colspan="5"></td>
-            </tr> -->
             <tr v-if="transfer.transferList.length === 0">
                 <td colspan="5">No Transfer available</td>
             </tr>
@@ -123,7 +106,6 @@ button.navPage:hover {
 
 table {
     margin-top: 10vh;
-    
 }
 
 td.no-border {
