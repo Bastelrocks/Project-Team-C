@@ -33,7 +33,7 @@ let session = sessionStore();
   display: flex;
   flex-direction: row;
   width: 100vh;
-  min-height: 100vh;
+  min-height: 90vh;
   /* background-color: rgba(255, 255, 255, 0.80); */
 }
 
@@ -56,7 +56,6 @@ nav {
   max-height: 10vh;
   font-size: 1rem;
   text-align: left;
-  margin: auto;
   border: 1px solid hsla(160, 100%, 37%, 1);
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.95);
@@ -88,11 +87,12 @@ nav a.router-link-exact-active:hover {
 
 nav a {
   padding: 20px 5px;
-  /* display: inline-block; */
+  text-align: center;
+  justify-content: center;
+  align-items: center; 
+  display: inline-block;
   /* padding: 0 1rem; */
   /* border-left: 1px solid var(--color-border); that was the border at left side on nav */
-  /* justify-content: center; */
-  /* align-items: center;  */
 }
 
 nav a:first-of-type {
@@ -101,7 +101,8 @@ nav a:first-of-type {
 
 header {
   line-height: 1.5;
-  min-height: 10vh;
+  min-height: 85px;
+  height: fit-content;
   max-height: 12.5vh; 
   width: 100vw;
   top: 0;
@@ -134,9 +135,10 @@ header {
     position: absolute; 
     margin-left: 10vw;
     margin-top: 12.5vh;
+    margin-top: 100px;
     width: 80vw;
 
-    min-height: 100vh;
+    min-height: 90vh;
     height: max-content;
     padding: 10px;
 

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { sessionStore } from '@/stores/sessionStore';
 import { countriesStore } from '@/stores/countriesStore';
 import { teamsStore } from '@/stores/teamsStore';
+import router from '@/router';
 
 let session = sessionStore();
 let countries = countriesStore();
@@ -17,10 +18,14 @@ let newClub = ref(
         name: "",
         foundationYear: actualYear,
         countrie_id: 0,
-        full_name: "Victor F Martins",
+        full_name: "",
     }
 )
-
+/**
+ * This function will Add a new Club, its called AddManager because we a registering a Manager  
+ * Mandatory is Name, ClubName, foundation Year.
+ * At the End will redirect tou our Home
+ */
 function addManager() {
     if (newClub.value.countrie_id === 0) alert("Please Select a Countrie");
     else{
@@ -30,6 +35,7 @@ function addManager() {
         let teams = teamsStore();
         teams.addNewTeam(newClub.value);
         registeredSucessfull.value = true;
+        router.push({name: "home"}); /* This function is for redirecting to home */
     }
 }
 
@@ -69,6 +75,14 @@ function addManager() {
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="fullName">Full Name: </label>
+                        </td>
+                        <td>
+                            <input id="fullName" type="text" v-model="newClub.full_name" required/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><label for="email">Email: </label></td>
                         <td>
                             <input id="email" type="email" placeholder="E-mail" v-model=session.loginData.email
@@ -81,14 +95,6 @@ function addManager() {
                         </td>
                         <td>
                             <input id="password" type="password" v-model=session.loginData.password required />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="fullName">Full Name: </label>
-                        </td>
-                        <td>
-                            <input id="fullName" type="text" v-model="newClub.full_name" />
                         </td>
                     </tr>
                     <tr>
