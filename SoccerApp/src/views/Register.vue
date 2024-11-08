@@ -27,7 +27,7 @@ let newClub = ref(
  * At the End will redirect tou our Home
  */
 function addManager() {
-    if (newClub.value.countrie_id === 0) alert("Please Select a Countrie");
+    if (newClub.value.countrie_id === 0) alert("Please Select a Country");
     else {
         if (!session.doSignUp(session.loginData.email, session.loginData.password))
             alert("Something happen wrong");
@@ -51,10 +51,10 @@ function addManager() {
             <table>
                 <tbody>
                     <tr>
-                        <td><label for="countrie">Countrie: </label></td>
+                        <td><label for="countrie">Country: </label></td>
                         <td>
                             <select id="countrie" v-model="newClub.countrie_id" required>
-                                <option value=0 selected>Select Countrie</option>
+                                <option value=0 selected>Select Country</option>
                                 <option v-bind:value="countrie.id" v-for="countrie in countries.countrieList">
                                     {{ countrie.name }}</option>
                             </select>
