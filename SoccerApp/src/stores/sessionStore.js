@@ -5,18 +5,17 @@ import { supabase } from '@/lib/supabaseClient';
 export const sessionStore = defineStore('sessionStore', () => {
   let isAutenticated = ref(false);
 
-  /* To remove at the End */
   let loginData = ref(
     {
-      email: "victor.martins.1310@hotmail.com",
-      password: "badPassword.1234"
+      email: "",
+      password: ""
     });
 
   /**
-   * this function will reco
+   * this function will recognize if exist a session or if someone logged out
    */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
-    if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
+    if (event === 'INITIAL_SESSION') { // verifies if exist a session
       if (session) isAutenticated.value = true;
       else isAutenticated.value = false;
     }
