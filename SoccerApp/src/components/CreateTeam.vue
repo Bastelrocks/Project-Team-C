@@ -9,7 +9,9 @@ const newTeam = reactive({
     countrie_id: '',
   });
 
-
+/**
+ * get countries
+ */
 async function getCountries() {
     const { data } = await supabase.from('countries').select();
     countries.value = data;

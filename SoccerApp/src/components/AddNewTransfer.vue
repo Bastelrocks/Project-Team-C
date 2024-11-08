@@ -21,7 +21,7 @@ onMounted(() => {
 })
 
 /**
- * It will get the players by
+ * It will get the players from determinated club. 
  * @param {number} clubID the id that passed selected select menu
  */
 function getPlayersByClub(clubID) {
@@ -30,6 +30,10 @@ function getPlayersByClub(clubID) {
     teams.getTeamsWithout(clubID);
 }
 
+/**
+ * This function is destinated only for getting the actual market Value of determinated Player
+ * @param playerID the ID of the player
+ */
 function onChangePlayer(playerID) {
     if (playerID > 0){
         players.getPlayer(playerID).then(
