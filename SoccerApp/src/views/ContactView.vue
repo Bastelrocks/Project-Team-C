@@ -8,8 +8,13 @@ let contactRequest = {
     message: ""
 }
 
-async function sendRequest(){
-    const { data, error } = await supabase.from("contact_requests").insert(contactRequest);
+async function sendRequest(name, email, message){
+    let request = {
+        full_name: name,
+        email: email,
+        message: message
+    }
+    const { data, error } = await supabase.from("contact_requests").insert(request);
  
 }
 
@@ -20,7 +25,7 @@ async function sendRequest(){
     <h2>Contact Us</h2>
     <p>If you have any questions, feedback, or suggestions, feel free to reach out to us. We’d love to hear from you!</p>
     
-    <form id="contactForm" v-on:submit="sendRequest()">
+    <form id="contactForm" v-on:submit.prevent="sendRequest(contactRequest.full_name, contactRequest.email, contactRequest.message)">
         <label for="name">Full Name:</label>
         <input v-model="contactRequest.full_name" type="text" id="name" name="name" placeholder="Your Full Name" required>
 
