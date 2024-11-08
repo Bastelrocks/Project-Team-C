@@ -61,6 +61,7 @@ async function fetchSquadSize(teamId) {
             </tr>
         </thead>
         <tbody>
+        <!-- Loool -->
             <tr v-for="team in teams.teamsList" :key="team.idTeam" @mouseenter="fetchSquadSize(team.idTeam)">
                 <td v-if="team.image" style="text-align: center;">
                     <div class="playerImg"><img :src="team.image" class="playerImage"></div>
