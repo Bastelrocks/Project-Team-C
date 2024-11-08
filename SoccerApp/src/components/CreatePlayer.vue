@@ -15,7 +15,6 @@ const newPlayer = reactive({
 
 });
 
-
 async function getTeams() {
     const { data } = await supabase.from('teams').select();
     teams.value = data;
@@ -24,7 +23,6 @@ async function getTeams() {
 onMounted(() => {
     getTeams()
 })
-
 
 async function addPlayer(newPlayer){
     console.log("Button add Player clicked")

@@ -27,8 +27,7 @@ async function addTeam(newTeam){
     .from('teams')
     .insert({ name: newTeam.name, foundationYear: newTeam.foundationYear, countrie_id: newTeam.countrie_id })
 }
-    
-    
+
 </script>
 
 <template>

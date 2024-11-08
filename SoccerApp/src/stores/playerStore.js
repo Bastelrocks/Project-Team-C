@@ -39,13 +39,14 @@ export const playerStore = defineStore('playerStore', () => {
      * @returns the size of the Club (in that case the number of team players)
      */
     async function getPlayersByClub(id) {
+        let size = 0;
         const { data } = await supabase.from(tableName).select().eq("clubID", id);
-        // data.forEach(player => {
-        //     playerList.value.push(player);
-        // })
+        data.forEach(player => {
+            playerList.value.push(player);
+            size++;
+        })
         playerList.value = data;
-        // return data.length;
-        return playerList.value.length;
+        return size;
     }
 
     /**

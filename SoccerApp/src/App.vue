@@ -46,33 +46,28 @@ nav {
   display: flex;
   flex-direction: row;
   min-width: 200px;
-  /* width: auto; */
+  width: auto;
   /* width: min-content; */
 
   max-width: 50vw;
+  margin: auto;
   /* max-height: max-content; */
   height: max-content;
   max-height: 10vh;
   font-size: 1rem;
   text-align: left;
-  /* margin-right: auto;
-  margin-left: auto; */
-  margin-bottom: auto;
-  margin-top: auto;
-  
-  
+  margin: auto;
   border: 1px solid hsla(160, 100%, 37%, 1);
   border-radius: 15px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 nav:hover{
+  background-color: rgba(255, 255, 255, 0.98);
   box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
 }
 
 nav a.router-link-exact-active {
-  padding: 15px;
-  /* background-color: hsla(160, 100%, 37%, 1); */
   color: var(--color-text);
   border-right: 2px solid var(--color-border);
   border-left: 2px solid var(--color-border);
@@ -92,13 +87,12 @@ nav a.router-link-exact-active:hover {
 }
 
 nav a {
-  padding: 5px 20px;
-  display: inline-block;
+  padding: 20px 5px;
+  /* display: inline-block; */
   /* padding: 0 1rem; */
-  padding: 0;
   /* border-left: 1px solid var(--color-border); that was the border at left side on nav */
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center;  */
 }
 
 nav a:first-of-type {
@@ -118,9 +112,9 @@ header {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
+    /* place-items: center; */
     line-height: 1.5;
-    padding-right: calc(var(--section-gap) / 2);
+    /* padding-right: calc(var(--section-gap) / 2); */
   }
 
   /* header {
@@ -140,7 +134,6 @@ header {
     position: absolute; 
     margin-left: 10vw;
     margin-top: 12.5vh;
-    /* right: 0; */
     width: 80vw;
 
     min-height: 100vh;
