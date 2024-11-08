@@ -3,7 +3,9 @@ import { ref, reactive, onMounted } from "vue";
 import { supabase } from "@/lib/supabaseClient.js";
 import { playerStore } from "@/stores/playerStore";
 const teams = ref([]);
-const player = ref(playerStore());
+// const player = ref(playerStore());
+
+const player = playerStore();
 
 async function getTeams() {
   const { data } = await supabase.from("teams").select();
@@ -18,6 +20,8 @@ async function deletePlayer(id) {
   console.log("Button delete Player clicked");
   console.log(id);
   const response = await supabase.from("player").delete().eq("id", id);
+  // const { data } = await supabase.from("player").select();
+  // player.playerList.value = data;
 }
 </script>
 

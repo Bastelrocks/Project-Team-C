@@ -1,10 +1,10 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '@/lib/supabaseClient';
 
-/* Maybe at this place we will conect the database */
 export const sessionStore = defineStore('sessionStore', () => {
   let isAutenticated = ref(false);
+
   /* To remove at the End */
   let loginData = ref(
     {
@@ -12,13 +12,16 @@ export const sessionStore = defineStore('sessionStore', () => {
       password: "badPassword.1234"
     });
 
-  /* Not Sure if we need this */
+  /**
+   * this function will reco
+   */
   const { sessionData } = supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'INITIAL_SESSION') { // Discover what exactly that it is
-      // isAutenticated.value = false;
-      console.log("Only on start?");
+      if (session) isAutenticated.value = true;
+      else isAutenticated.value = false;
     }
-    else if (event === 'SIGNED_IN')  { isAutenticated.value = true; }
+    else if (event === 'SIGNED_IN')  {
+      isAutenticated.value = true; }
     else if (event === 'SIGNED_OUT') { isAutenticated.value = false; }
  // else if (event === 'PASSWORD_RECOVERY') { console.log(event, session) } 
  // else if (event === 'TOKEN_REFRESHED')   { console.log(event, session) }
@@ -30,6 +33,7 @@ export const sessionStore = defineStore('sessionStore', () => {
   /** Function to do SignIn
    * @param {String} email Valid E-mail address
    * @param {String} password 
+   * @returns {error} it will return a error in case if is not possible do the Login
   */
   async function logIn(email, password) {
     if (isAutenticated.value === false) {
@@ -40,18 +44,25 @@ export const sessionStore = defineStore('sessionStore', () => {
         }
       )
     }
+    return error;
   }
 
-
+  /**
+   * This Function will signUp In our case register a new User  
+   * It will return a error case something happen wrong.
+   */
   async function doSignUp(email, pwd) {
     const { data, error } = await supabase.auth.signUp(
       {
         email: email,
-        password: pwd
+        password: pwd,
       }
-    )
+    );
+    return error;
   }
-
+  /**
+   * Do the Logout of the User
+   */
   async function logOut() {
     await supabase.auth.signOut();
   }

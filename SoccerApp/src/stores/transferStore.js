@@ -31,7 +31,7 @@ export const transferStore = defineStore('transferStore', () => {
             clubDestination: teams!clubDestination (name),
             id,
             transferDate,
-            marketValue`);
+            marketValue`).order('transferDate', {ascending: false});
         if (error) {
             console.error(error);
         }
@@ -43,31 +43,20 @@ export const transferStore = defineStore('transferStore', () => {
             clubID: clubID,
             market_value: value
         };
-        console.log("playerID: " + playerID + " clubID: ", clubID + " marketValue: " + value + "M€");
         const { data } = await supabase.from("player").update(obj).eq("id", playerID).select();
-        console.table(data);
     }
 
-    async function getTransfer(id) {
-        const { data } = await supabase.from(tableName).select(`
-            firstName: player!playerID (firstName),
-            lastName: player!playerID (lastName),
-            clubOrigin: teams!clubOrigin (name),
-            clubDestination: teams!clubDestination (name),
-            id,
-            transferDate,
-            marketValue`).eq("id", id);
-        data.forEach(transfer => {
-            console.table(transfer);
-            transferList.value.push(transfer);
-        })
-    }
-
+    /** 
+     * @description This function will add a new Transfer in Database  
+     * 1 - will insert the data passed by transfer  
+     * 2 - Update the player, in this case the field clubID and 
+     * @param {object} transferObj Object where the data is stored
+     * transferObj:  playerID, clubOrigin, clubDestination, transferDate, marketValue.
+     */
     async function addNewTransfer(transferObj) {
-        // console.table(transferObj);
         const { data, error } = await supabase.from(tableName).insert(transferObj).select();
         updatePlayer(data[0].playerID, data[0].clubDestination, data[0].marketValue);
-        transferList.value.push(data);
+        loadTransfers();
     }
     return { transferList, getAllTransfers, loadTransfers, addNewTransfer };
 })

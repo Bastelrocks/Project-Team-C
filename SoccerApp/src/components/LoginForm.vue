@@ -10,9 +10,9 @@ let session = sessionStore();
     <div class="loginForm">
         <form v-if="session.isAutenticated === false"
             v-on:submit.prevent="session.logIn(session.loginData.email, session.loginData.password)">
-            <label for="email">E-mail</label>
+            <!-- <label for="email">E-mail</label> -->
             <input name="email" type="email" v-model=session.loginData.email placeholder="E-mail" required />
-            <label for="password">Password</label>
+            <!-- <label for="password">Password</label> -->
             <input name="password" type="password" v-model=session.loginData.password placeholder="Password" required />
             <button type="submit">Log me in</button>
         </form>
@@ -22,9 +22,7 @@ let session = sessionStore();
 
 <style scoped>
 .loginForm {
-    padding: 20px;
-    gap: 20px; /* Not Working */
-
+    padding: 15px;
     /* To positioning on the right corner */
     position: absolute;
     right: 0;
@@ -53,5 +51,8 @@ let session = sessionStore();
 
 .loginForm button:hover {
     background-color: #006800;
+}
+input {
+    margin-right: 3px;
 }
 </style>

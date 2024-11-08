@@ -14,8 +14,9 @@ const newPlayer = reactive({
     market_value:''
 
 });
-
-
+/**
+ * Load the Teams
+ */
 async function getTeams() {
     const { data } = await supabase.from('teams').select();
     teams.value = data;
@@ -25,7 +26,10 @@ onMounted(() => {
     getTeams()
 })
 
-
+/**
+ * It will insert a new Player in the Database
+ * @param newPlayer 
+ */
 async function addPlayer(newPlayer){
     console.log("Button add Player clicked")
     console.log(newPlayer);

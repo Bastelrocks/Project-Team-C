@@ -7,83 +7,117 @@ import AddNewTransfer from '@/components/AddNewTransfer.vue';
 let session = sessionStore();
 let transfer = transferStore();
 
-const quantityPerSite = 15;
+let quantityPerSite = ref(15);
 let page = 1;
-let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite - 1);
+let firstTransfer = ref(0), lastTransfer = ref(quantityPerSite.value);
 
-onMounted(() => {
-    transfer.loadTransfers();
-    if (transfer.transferList.length < quantityPerSite)
-        lastTransfer.value = transfer.transferList.length;
-
-    });
-
-function viewTransfer(){
-    if (page !== 0){
-        firstTransfer.value = (page-1)*quantityPerSite;
-        lastTransfer.value = (page*quantityPerSite) - 1;
-        console.log("Page: " + page)
-        console.log("First Element: " + firstTransfer.value);
-        console.log("Last Element: " + lastTransfer.value);
-    }
+function maxPages(){
+    return parseInt(transfer.transferList.length/quantityPerSite.value) + 1;
 }
 
-</script>
+transfer.loadTransfers();
 
+if (transfer.transferList.length > quantityPerSite)
+    lastTransfer.value = transfer.transferList.length;
+
+function viewTransfer() {
+    if (page !== 0) {
+        firstTransfer.value = (page - 1) * quantityPerSite.value;
+        lastTransfer.value = (page * quantityPerSite.value);
+    }
+    viewLogs();
+}
+
+function onchangeQuant(){
+    firstTransfer.value = (page - 1) * quantityPerSite.value;
+        if (transfer.transferList.length > quantityPerSite)
+            lastTransfer.value = transfer.transferList.length;
+        lastTransfer.value = (page * quantityPerSite.value);
+}
+</script>
 <template>
-    <table>
-        <thead>
+    <div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
-                <th>Club origin</th>
                 <th>Name</th>
+                <th>Club origin</th>
                 <th>Club Destination</th>
                 <th>Transfer Date</th>
                 <th>Transfer Value<br />In Millions €</th>
-                <th v-if="session.isAutenticated">Actions</th>
             </tr>
         </thead>
         <tbody>
             <AddNewTransfer v-if="session.isAutenticated" />
             <tr v-if="transfer.transferList.length === 0">
-                <td colspan="6">No Transfer available</td>
+                <td colspan="5">No Transfer available</td>
             </tr>
-            <tr v-for="transfer in transfer.transferList.slice(firstTransfer.value, lastTransfer.value)" v-bind:key="transfer.id">
-                <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
+            <tr v-for="(transfer, index) in transfer.transferList.slice(firstTransfer, lastTransfer)"
+                v-bind:key="transfer.id">
                 <td>{{ transfer.firstName.firstName + " " + transfer.lastName.lastName }}</td>
+                <td>{{ transfer.clubOrigin.name || "loading..." }}</td>
                 <td>{{ transfer.clubDestination.name || "loading..." }}</td>
                 <td>{{ transfer.transferDate }}</td>
-                <td>{{ transfer.marketValue }}M €</td>
-                <td v-if="session.isAutenticated">
-                    <button>Edit 1</button>
-                    <button>Edit 2</button>
-                </td>
+                <td class="marketValue">{{ transfer.marketValue }}M €</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td v-if="page > 1" v-on:click="viewTransfer(page--)">back</td>
-                <td v-if="page > 1" colspan="3"></td>
-                <td v-if="page === 1" colspan="4"></td>
-                <td v-on:click="viewTransfer(page++)">next</td>
+                <td>
+                    <button v-if="page > 1" v-on:click="viewTransfer(page--)" class="navPage">Back</button>
+                </td>
+
+                <td class="no-border" colspan="3">
+                    Quantity per page    
+                    <select v-model="quantityPerSite" v-on:change="onchangeQuant()">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </td>
+                <td>
+                    <button v-if="maxPages() > 1 && page < maxPages()" v-on:click="viewTransfer(page++)" class="navPage">Next</button>
+                </td>
             </tr>
-        </tfoot> 
+        </tfoot>
     </table>
+    </div>
 </template>
 <style scoped>
-
-input{
-    min-width: 150px;
+div{
+    margin-left: auto;
+    margin-right: auto;
 }
 
-table{
-    border: 1px solid black;
-    border-radius: 4px;
-}
-
-td{
+button.navPage {
     border: 1px solid black;
     border-radius: 4px;
     text-align: center;
     padding: 3px;
+    min-height: 28px;
+    min-width: 120px;
+    height: auto;
+}
+
+button.navPage:hover {
+    background-color: hsla(160, 100%, 37%, 1);
+    cursor: pointer;
+}
+
+table {
+    margin-top: 10vh;
+}
+
+td.no-border {
+    text-align: center;
+}
+
+td.marketValue {
+    padding-left: 8px;
+    text-align: left;
+}
+
+input {
+    min-width: 150px;
 }
 </style>

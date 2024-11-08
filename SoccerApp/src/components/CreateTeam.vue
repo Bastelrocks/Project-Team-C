@@ -9,7 +9,9 @@ const newTeam = reactive({
     countrie_id: '',
   });
 
-
+/**
+ * get countries
+ */
 async function getCountries() {
     const { data } = await supabase.from('countries').select();
     countries.value = data;
@@ -27,8 +29,7 @@ async function addTeam(newTeam){
     .from('teams')
     .insert({ name: newTeam.name, foundationYear: newTeam.foundationYear, countrie_id: newTeam.countrie_id })
 }
-    
-    
+
 </script>
 
 <template>
