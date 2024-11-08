@@ -9,7 +9,6 @@ let contactRequest = {
 }
 
 async function sendRequest(){
-    console.table(contactRequest);
     const { data, error } = await supabase.from("contact_requests").insert(contactRequest);
     contactRequest.full_name = "";
     contactRequest.email = "";

@@ -19,12 +19,13 @@ export const sessionStore = defineStore('sessionStore', () => {
       if (session) isAutenticated.value = true;
       else isAutenticated.value = false;
     }
-    else if (event === 'SIGNED_IN')  {
-      isAutenticated.value = true; }
+    else if (event === 'SIGNED_IN') {
+      isAutenticated.value = true;
+    }
     else if (event === 'SIGNED_OUT') { isAutenticated.value = false; }
- // else if (event === 'PASSWORD_RECOVERY') { console.log(event, session) } 
- // else if (event === 'TOKEN_REFRESHED')   { console.log(event, session) }
- // else if (event === 'USER_UPDATED')      { console.log(event, session) }
+    // else if (event === 'PASSWORD_RECOVERY') { console.log(event, session) } 
+    // else if (event === 'TOKEN_REFRESHED')   { console.log(event, session) }
+    // else if (event === 'USER_UPDATED')      { console.log(event, session) }
   })
   // call unsubscribe to remove the callback
   //  sessionData.subscription.unsubscribe();
@@ -35,14 +36,12 @@ export const sessionStore = defineStore('sessionStore', () => {
    * @returns {error} it will return a error in case if is not possible do the Login
   */
   async function logIn(email, password) {
-    if (isAutenticated.value === false) {
-      const { data, error } = await supabase.auth.signInWithPassword(
-        {
-          email: email,
-          password: password
-        }
-      )
-    }
+    const { data, error } = await supabase.auth.signInWithPassword(
+      {
+        email: email,
+        password: password
+      }
+    )
     return error;
   }
 
@@ -51,6 +50,7 @@ export const sessionStore = defineStore('sessionStore', () => {
    * It will return a error case something happen wrong.
    */
   async function doSignUp(email, pwd) {
+    // console.log("Email: " + email + " Password: " + pwd);
     const { data, error } = await supabase.auth.signUp(
       {
         email: email,
