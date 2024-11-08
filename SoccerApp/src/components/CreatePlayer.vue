@@ -31,9 +31,7 @@ onMounted(() => {
  * @param newPlayer 
  */
 async function addPlayer(newPlayer){
-    console.log("Button add Player clicked")
-    console.log(newPlayer);
-    const { error } = await supabase
+        const { error } = await supabase
     .from('player')
     .insert({ firstName: newPlayer.firstName, backNumber: newPlayer.backNumber, lastName: newPlayer.lastName, clubID: newPlayer.clubID, birthDate: newPlayer.birthDate, position: newPlayer.position, image: newPlayer.image })
 }

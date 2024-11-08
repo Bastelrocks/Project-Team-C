@@ -23,9 +23,7 @@ onMounted(() => {
 
 
 async function addTeam(newTeam){
-    console.log("Button add Player clicked")
-    console.log(newTeam);
-    const { error } = await supabase
+       const { error } = await supabase
     .from('teams')
     .insert({ name: newTeam.name, foundationYear: newTeam.foundationYear, countrie_id: newTeam.countrie_id })
 }
