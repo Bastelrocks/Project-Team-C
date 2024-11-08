@@ -1,6 +1,3 @@
-# Project-Team-C
-
-
 # Soccer Player Database Application
 
 Welcome to the Soccer Player Database Application! This web application provides a comprehensive database of soccer players from around the world. Explore detailed player profiles, statistics, and much more in a user-friendly interface.
