@@ -30,6 +30,7 @@ Welcome to the Soccer Player Database Application! This web application provides
 - **Registerview:** This view is only shown if the user is not authenticated. Through a form the user can create an account and create a team.
 - **Aboutview:** This view contains a brief description of the project.
 - **Contactview:** Displays a form where the user can send a message providing his name and emailadress. By clicking the button "Send message" a new row is inserted in the contact_requests table of the database.
+- **NotFound:** Displays a "404"-image and a message if the user enters a non existing path in the the adress bar of the browser.
 
 ## Getting Started
 
