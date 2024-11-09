@@ -133,10 +133,10 @@ header {
     display: flex;
     flex-direction: column;
     position: absolute; 
-    margin-left: 10vw;
+    /* margin-left: 10vw; */
     margin-top: 12.5vh;
     margin-top: 100px;
-    width: 80vw;
+    width: 100vw;
 
     min-height: 90vh;
     height: max-content;
