@@ -10,6 +10,7 @@ const player = playerStore();
 async function getTeams() {
   const { data } = await supabase.from("teams").select();
   teams.value = data;
+  
 }
 
 onMounted(() => {
@@ -20,6 +21,7 @@ async function deletePlayer(id) {
   console.log("Button delete Player clicked");
   console.log(id);
   const response = await supabase.from("player").delete().eq("id", id);
+  alert('The player with the id '+id+' has been deleted from the database.')
   // const { data } = await supabase.from("player").select();
   // player.playerList.value = data;
 }
