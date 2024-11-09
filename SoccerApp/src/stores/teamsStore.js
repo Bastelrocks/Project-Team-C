@@ -76,7 +76,16 @@ export const teamsStore = defineStore('teamsStore', () => {
      */
     async function addNewTeam(newTeam) {
         const { data, error } = await supabase.from(tableName).insert(newTeam).select();
+        await getAllTeams(); // Re-fetch the teams to refresh the list
     }
 
-    return { teamsList, teamDestinationList, getAllTeams, getTeams, getTeamName, addNewTeam, getTeamsWithout };
+    async function addTeam(newTeam){
+        const { error } = await supabase
+     .from('teams')
+     .insert({ name: newTeam.name, foundationYear: newTeam.foundationYear, countrie_id: newTeam.countrie_id })
+     alert('The new team '+newTeam.name+' has been added to the database.')
+     await getAllTeams(); // Re-fetch the teams to refresh the list
+ }
+
+    return { teamsList, teamDestinationList, getAllTeams, getTeams, getTeamName, addNewTeam, getTeamsWithout, addTeam };
 })

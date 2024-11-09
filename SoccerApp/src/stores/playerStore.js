@@ -85,6 +85,13 @@ export const playerStore = defineStore("playerStore", () => {
       });
     await getPlayers(); // Re-fetch the players to refresh the list
   }
+  async function deletePlayer(id) {
+    const response = await supabase.from("player").delete().eq("id", id);
+    alert('The player with the id '+id+' has been deleted from the database.')
+    // const { data } = await supabase.from("player").select();
+    // player.playerList.value = data;
+    await getPlayers(); // Re-fetch the players to refresh the list
+  }
   return {
     getPlayers,
     getPlayersByClub,
@@ -93,5 +100,6 @@ export const playerStore = defineStore("playerStore", () => {
     setActive,
     setRetired,
     addPlayer,
+    deletePlayer
   };
 });

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { supabase } from '@/lib/supabaseClient.js'
+import { teamsStore } from '@/stores/teamsStore';
 const countries = ref([])
 const newTeam = reactive({
     id: '',
@@ -8,6 +9,7 @@ const newTeam = reactive({
     foundationYear: '1',
     countrie_id: '',
   });
+  const team=teamsStore()
 
 /**
  * get countries
@@ -22,12 +24,7 @@ onMounted(() => {
 })
 
 
-async function addTeam(newTeam){
-       const { error } = await supabase
-    .from('teams')
-    .insert({ name: newTeam.name, foundationYear: newTeam.foundationYear, countrie_id: newTeam.countrie_id })
-    alert('The new team '+newTeam.name+' has been added to the database.')
-}
+
 
 </script>
 
@@ -43,7 +40,7 @@ async function addTeam(newTeam){
             <option value="" selected>Select country</option>
             <option v-for="item in countries" :value="item.id">{{ item.name }}</option>
         </select> 
-        <button type="submit" @click="addTeam(newTeam)">Add Team to database</button>
+        <button type="submit" @click="team.addTeam(newTeam)">Add Team to database</button>
     </form>
 </template>
 
