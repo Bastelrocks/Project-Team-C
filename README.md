@@ -1,5 +1,7 @@
 # Soccer Player Database Application
 
+![alt text](image.png)
+
 Welcome to the Soccer Player Database Application! This web application provides a comprehensive database of soccer players from around the world. Explore detailed player profiles, statistics, and much more in a user-friendly interface. This web application is the final project for the Front End Bootcamp @Ironhack from Aug 20th to Nov 9th 2024 from Victor Fernandes Martins, Tim Rabisch and Raed Tarawneh.
 
 ## Features
