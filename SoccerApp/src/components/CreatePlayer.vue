@@ -34,7 +34,8 @@ async function addPlayer(newPlayer){
         const { error } = await supabase
     .from('player')
     .insert({ firstName: newPlayer.firstName, backNumber: newPlayer.backNumber, lastName: newPlayer.lastName, clubID: newPlayer.clubID, birthDate: newPlayer.birthDate, position: newPlayer.position, image: newPlayer.image })
-}
+    alert('The new player '+newPlayer.firstName+' '+newPlayer.lastName+' has been added to the database.')
+  }
     
     
 </script>
