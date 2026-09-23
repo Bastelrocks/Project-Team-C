@@ -82,10 +82,10 @@ function onchangeQuant() {
             <td v-if="item.active">Active</td>
             <td v-else>Retired</td>
             <td v-if="session.isAutenticated & item.active">
-              <button class="statusBtn" @click="player.setRetired(item.id)">Set retired</button>
+              <button class="statusBtn navPage" @click="player.setRetired(item.id)">Set retired</button>
             </td>
             <td v-if="session.isAutenticated & !item.active">
-              <button class="statusBtn" @click="player.setActive(item.id)">Set active</button>
+              <button class="statusBtn navPage" @click="player.setActive(item.id)">Set active</button>
             </td>
           </tr>
         </tbody>
@@ -94,7 +94,15 @@ function onchangeQuant() {
             <td>
               <button v-if="page > 1" v-on:click="viewPlayer(page--)" class="navPage">Back</button>
             </td>
-            <td class="quantPage" colspan="5">
+            <td v-if="session.isAutenticated" class="quantPage" colspan="6">
+              Quantity per page
+              <select v-model="quantityPerSite" v-on:change="onchangeQuant()">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+            <td v-else class="quantPage" colspan="5">
               Quantity per page
               <select v-model="quantityPerSite" v-on:change="onchangeQuant()">
                 <option value="10">10</option>

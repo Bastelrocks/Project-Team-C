@@ -30,8 +30,12 @@
   display: block;
   margin: 0 auto 2rem;
 }
-p{font-size: 2em;}
+p{
+  font-size: 2em;
+  color:black;
+}
 h1{
   font-size: 3em;
+  color: black;
 }
 </style>

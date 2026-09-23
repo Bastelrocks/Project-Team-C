@@ -1,0 +1,24 @@
+{
+    "pgsql.connections": [
+        {
+            "id": "C8D9AEFE-8A71-4B1C-BAB4-2AC07EA9A1E5",
+            "groupId": "B3A5122D-0F09-47F4-B055-82E4D2DCAAD9",
+            "authenticationType": "SqlLogin",
+            "connectTimeout": 15,
+            "applicationName": "vscode-pgsql",
+            "clientEncoding": "utf8",
+            "sslmode": "require",
+            "sshSavePassword": true,
+            "savePassword": true,
+            "sslRootCertMode": "none",
+            "server": "db.vjzsbndpakprqxecyexe.supabase.co",
+            "password": "",
+            "database": "postgres",
+            "profileName": "FrontEndDB",
+            "user": "postgres",
+            "port": "5432",
+            "expiresOn": 0,
+            "sshPassword": ""
+        }
+    ]
+}

@@ -39,6 +39,7 @@
 .about {
   display: flex;
   flex-direction: column;
+  color:black;
 }
 
  h1{

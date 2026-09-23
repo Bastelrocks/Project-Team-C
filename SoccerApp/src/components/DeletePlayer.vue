@@ -10,19 +10,14 @@ const player = playerStore();
 async function getTeams() {
   const { data } = await supabase.from("teams").select();
   teams.value = data;
+  
 }
 
 onMounted(() => {
   getTeams();
 });
 
-async function deletePlayer(id) {
-  console.log("Button delete Player clicked");
-  console.log(id);
-  const response = await supabase.from("player").delete().eq("id", id);
-  // const { data } = await supabase.from("player").select();
-  // player.playerList.value = data;
-}
+
 </script>
 
 <template>
@@ -34,7 +29,7 @@ async function deletePlayer(id) {
         {{ item.firstName }} {{ item.lastName }}
       </option>
     </select>
-    <button type="submit" @click="deletePlayer(player.id)">
+    <button type="submit" @click="player.deletePlayer(player.id)">
       Delete player
     </button>
   </form>
