@@ -48,7 +48,7 @@ To get a local copy up and running follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Bastelrocks/Project-Team-C
-   cd soccerapp
+   git clone https://github.com/Bastelrocks/Project-Team-C SoccerApp
+   cd SoccerApp
    npm install
-   npm run dev
+   npm run dev or npm run build
