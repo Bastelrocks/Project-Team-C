@@ -11,7 +11,7 @@ let countries = countriesStore();
 countries.getCountries();
 
 const registeredSucessfull = ref(false);
-let actualYear = new Date().getFullYear();
+let actualYear = new Date().getFullYear() - 50;
 
 let newClub = ref(
     {
