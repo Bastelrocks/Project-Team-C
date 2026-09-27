@@ -30,28 +30,30 @@ let session = sessionStore();
     border: 1px solid #006800;
     border-bottom-left-radius: 10px;
     background-color: #FFF;
-}
-.loginForm:hover{
-    box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
+    
+    :hover{
+        box-shadow: 0px 0px 10px 5px hsla(160, 100%, 37%, 1);
+    }
+
+    input {
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 8px 16px;
+        background-color: #008000;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #006800;
+    }
 }
 
-.loginForm input {
-    padding: 8px;
-    border-radius: 4px;
-}
-
-.loginForm button {
-    padding: 8px 16px;
-    background-color: #008000;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.loginForm button:hover {
-    background-color: #006800;
-}
 input {
     margin-right: 3px;
 }
