@@ -49,31 +49,45 @@ async function sendRequest(name, email, message){
     background: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.contact-us-section h2 {
-    text-align: center;
-    font-size: 24px;
-    color: #333;
-}
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+    }
 
-.contact-us-section p {
-    text-align: center;
-    font-size: 16px;
-    color: #666;
-}
+    p {
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+    }
 
-.contact-us-section form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-.contact-us-section label {
-    font-weight: bold;
-    color: #333;
-}
+    label {
+        font-weight: bold;
+        color: #333;
+    }
 
+    button {
+        padding: 12px;
+        font-size: 16px;
+        color: white;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+}
 .contact-us-section input,
 .contact-us-section textarea {
     padding: 10px;
@@ -82,18 +96,4 @@ async function sendRequest(name, email, message){
     border-radius: 5px;
 }
 
-.contact-us-section button {
-    padding: 12px;
-    font-size: 16px;
-    color: white;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.contact-us-section button:hover {
-    background-color: #218838;
-}
 </style>

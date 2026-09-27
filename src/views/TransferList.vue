@@ -89,34 +89,36 @@ div{
     margin-right: auto;
 }
 
-button.navPage {
-    border: 1px solid black;
-    border-radius: 4px;
-    text-align: center;
-    padding: 3px;
-    min-height: 28px;
-    min-width: 120px;
-    height: auto;
-}
+button{
+    .navPage {
+        border: 1px solid black;
+        border-radius: 4px;
+        text-align: center;
+        padding: 3px;
+        min-height: 28px;
+        min-width: 120px;
+        height: auto;
+    }
 
-button.navPage:hover {
-    background-color: hsla(160, 100%, 37%, 1);
-    cursor: pointer;
+    .navPage:hover {
+        background-color: hsla(160, 100%, 37%, 1);
+        cursor: pointer;
+    }
 }
-
 table {
     margin-top: 10vh;
 }
 
-td.no-border {
-    text-align: center;
-}
+td{
+    .no-border {
+        text-align: center;
+    }
 
-td.marketValue {
-    padding-left: 8px;
-    text-align: left;
+    .marketValue {
+        padding-left: 8px;
+        text-align: left;
+    }
 }
-
 input {
     min-width: 150px;
 }

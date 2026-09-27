@@ -173,7 +173,8 @@ h1 {
   padding: 0 5px;
 }
 
-button.navPage {
+button{
+.navPage {
   border: 1px solid black;
   border-radius: 4px;
   text-align: center;
@@ -183,17 +184,17 @@ button.navPage {
   height: auto;
 }
 
-button.navPage:hover {
+.navPage:hover {
   background-color: hsla(160, 100%, 37%, 1);
   cursor: pointer;
 }
-
-td.quantPage {
-  text-align: center;
-}
-
 .statusBtn:hover {
   background-color: hsla(160, 100%, 37%, 1);
   cursor: pointer;
 }
+}
+td.quantPage {
+  text-align: center;
+}
+
 </style>
